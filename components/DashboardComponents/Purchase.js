@@ -9,26 +9,26 @@ import {
 } from "react-native";
 import { purchase } from "../../dummy-data/dashboard";
 
-const renderItem = (itemData) => (
-  <TouchableNativeFeedback>
+const renderItem = (itemData, navigation) => (
+  <TouchableNativeFeedback onPress={() => navigation.navigate("Rateus")}>
     <View
       style={{ ...styles.item, ...{ backgroundColor: itemData.item.color } }}
     >
       <View>
         <Text style={styles.title}>{itemData.item.title}</Text>
-        <Text style={styles.title}>Sunscription</Text>
+        <Text style={styles.title}>Subscription</Text>
       </View>
       <Text style={styles.title}>{itemData.item.cost}</Text>
     </View>
   </TouchableNativeFeedback>
 );
 
-const Purchase = () => {
+const Purchase = ({ navigation }) => {
   return (
     <FlatList
       data={purchase}
       keyExtractor={(item) => item.title}
-      renderItem={renderItem}
+      renderItem={(itemData) => renderItem(itemData, navigation)}
     />
   );
 };

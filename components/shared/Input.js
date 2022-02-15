@@ -1,31 +1,70 @@
 import React from "react";
-import { StyleSheet, TextInput } from "react-native";
-import {} from "react-native-gesture-handler";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 
 const Input = (props) => {
   return (
-    <TextInput
-      style={{ ...styles.input, ...props.style }}
-      placeholder={props.holder}
-      onChangeText={() => {}}
-    />
+    <View
+      style={{
+        ...styles.container,
+        ...{
+          width: props.setWidth ? props.setWidth : "80%",
+        },
+      }}
+    >
+      <TextInput
+        {...props}
+        style={{
+          ...styles.input,
+          ...props.style,
+        }}
+        placeholder={props.holder}
+      />
+    </View>
   );
 };
 
 export default Input;
 
+export const DateInput = (props) => {
+  const { value } = props;
+  return (
+    <View
+      style={{
+        ...styles.container,
+        ...{
+          width: props.setWidth ? props.setWidth : "80%",
+        },
+      }}
+    >
+      <Text
+        style={{
+          ...styles.input,
+          color: value ? "black" : "gray",
+          paddingVertical: 10,
+        }}
+        onPress={props.onPress}
+      >
+        {value ? value : "Date of Birth"}
+      </Text>
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
+  container: {
+    borderRadius: 5,
+    marginBottom: 10,
+    overflow: "hidden",
+    shadowColor: "black",
+    elevation: 10,
+    shadowOffset: { width: 10, height: 10 },
+    shadowOpacity: 1,
+  },
   input: {
-    width: "80%",
+    width: "100%",
     backgroundColor: "white",
     paddingVertical: 8,
     paddingHorizontal: 20,
     fontSize: 17,
-    marginBottom: 15,
-    borderRadius: 5,
-    shadowColor: "black",
-    elevation: 2,
-    shadowOffset: { width: 2, height: 2 },
-    shadowOpacity: 0.5,
   },
 });

@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import Color from "../../constants/Color";
 
 const Heading = (props) => {
   return (
@@ -12,8 +13,7 @@ export default Heading;
 const styles = StyleSheet.create({
   message: {
     fontWeight: "bold",
-    marginTop: 50,
-    marginBottom: 25,
     fontSize: 21,
+    color: Color.green,
   },
 });

@@ -9,7 +9,9 @@ const MyQuiz = (props) => {
   const renderItem = ({ item }) => (
     <TouchableNativeFeedback
       onPress={() => {
-        navigation.navigate("Instructions");
+        navigation.navigate("Instructions", {
+          subject: item.subject,
+        });
       }}
     >
       <View style={{ ...styles.item, ...{ backgroundColor: item.color } }}>

@@ -1,48 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import CustomButton from "../components/shared/Button";
-import Timer from "./../components/shared/Timer";
 
-const QuestionsScreen = () => {
+import { dummyQuestions } from "./../dummy-data/questions";
+import Question from "./../components/DashboardComponents/questions/Question";
+
+const answersList = [];
+const QuestionsScreen = (props) => {
+  const [index, setIndex] = useState(0);
+  const [show, setShow] = useState(true);
+
+  const nextQuestion = (data) => {
+    if (index > dummyQuestions.length - 1) {
+      return;
+    }
+    answersList.push(data);
+    if (index === dummyQuestions.length - 1) {
+      props.navigation.replace("Result", { answers: answersList });
+      return;
+    }
+    setIndex((prev) => prev + 1);
+    setShow(false);
+  };
+  useEffect(() => {
+    setShow(true);
+  }, [index]);
+
   return (
     <View style={styles.container}>
-      <View style={styles.timer}>
-        <Timer duration={30} />
-      </View>
       <View>
         <CustomButton>go to list</CustomButton>
       </View>
-      <View style={styles.questionContainer}>
-        <Text style={styles.question}>1.</Text>
-        <Text style={styles.questionContent}>
-          United Arab Emirates is a federation of _________ emirates
-        </Text>
-      </View>
-      <View style={styles.options}>
-        <CustomButton style={styles.customButton} touchWidth="90%">
-          (A).4
-        </CustomButton>
-        <CustomButton style={styles.customButton} touchWidth="90%">
-          (B).5
-        </CustomButton>
-        <CustomButton style={styles.customButton} touchWidth="90%">
-          (C).7
-        </CustomButton>
-        <CustomButton style={styles.customButton} touchWidth="90%">
-          (D).8
-        </CustomButton>
-      </View>
-      <View style={styles.buttons}>
-        <CustomButton touchWidth="30%" mh={5}>
-          Prev
-        </CustomButton>
-        <CustomButton touchWidth="30%" mh={5}>
-          Skip
-        </CustomButton>
-        <CustomButton touchWidth="30%" mh={5}>
-          Next
-        </CustomButton>
-      </View>
+      <Question
+        index={index}
+        options={dummyQuestions[index].options}
+        question={dummyQuestions[index].question}
+        nextQuestion={nextQuestion}
+        show={show}
+      />
     </View>
   );
 };
@@ -51,41 +46,11 @@ export default QuestionsScreen;
 
 const styles = StyleSheet.create({
   container: {
+    position: "relative",
     marginTop: 10,
     width: "100%",
     alignItems: "center",
     justifyContent: "space-between",
-
     flex: 1,
-  },
-  customButton: { marginBottom: 10, alignItems: "flex-start" },
-  questionContainer: {
-    flexDirection: "row",
-    width: "90%",
-    padding: 10,
-    paddingTop: 40,
-  },
-  question: {
-    fontSize: 16,
-    marginRight: 10,
-  },
-  questionContent: {
-    flex: 1,
-    fontSize: 16,
-  },
-  timer: {
-    position: "absolute",
-    right: 15,
-  },
-  options: {
-    width: "100%",
-    alignItems: "center",
-    flex: 1,
-    justifyContent: "flex-end",
-  },
-  buttons: {
-    flexDirection: "row",
-    marginVertical: 10,
-    justifyContent: "space-around",
   },
 });

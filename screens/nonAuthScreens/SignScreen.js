@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 
 import Login from "../../components/SignComponents/Login";
 import SignUp from "../../components/SignComponents/SignUp";
@@ -14,41 +14,46 @@ const SignScreen = (props) => {
     });
   }, [login]);
   return (
-    <View style={globalStyles.container}>
-      <Text style={styles.welcome}>
-        {login ? "Welcome back! To quiz app." : "Welcome to Quiz App"}
-      </Text>
-      <Text style={styles.message}>
-        {login
-          ? "Want to play a quiz? Please log in to continue."
-          : "Please provide the following details for sign up and to create an account."}
-      </Text>
-      {login && <Login data={props} />}
-      {!login && <SignUp data={props} />}
+    <ScrollView>
+      <View style={{ ...globalStyles.container, ...styles.section }}>
+        <Text style={styles.welcome}>
+          {login ? "Welcome back! To quiz app." : "Welcome to Quiz App"}
+        </Text>
+        <Text style={styles.message}>
+          {login
+            ? "Want to play a quiz? Please log in to continue."
+            : "Please provide the following details for sign up and to create an account."}
+        </Text>
+        {login && <Login data={props} />}
+        {!login && <SignUp data={props} />}
 
-      {login && (
-        <View style={styles.container}>
-          <Text style={styles.sign}>Don't have an account ?</Text>
-          <Text style={styles.link} onPress={() => setLogin(false)}>
-            Sign up
-          </Text>
-        </View>
-      )}
-      {!login && (
-        <View style={styles.container}>
-          <Text style={styles.sign}>Already have an account?</Text>
-          <Text style={styles.link} onPress={() => setLogin(true)}>
-            Sign in
-          </Text>
-        </View>
-      )}
-    </View>
+        {login && (
+          <View style={styles.container}>
+            <Text style={styles.sign}>Don't have an account ?</Text>
+            <Text style={styles.link} onPress={() => setLogin(false)}>
+              Sign up
+            </Text>
+          </View>
+        )}
+        {!login && (
+          <View style={styles.container}>
+            <Text style={styles.sign}>Already have an account?</Text>
+            <Text style={styles.link} onPress={() => setLogin(true)}>
+              Sign in
+            </Text>
+          </View>
+        )}
+      </View>
+    </ScrollView>
   );
 };
 
 export default SignScreen;
 
 const styles = StyleSheet.create({
+  section: {
+    marginVertical: 20,
+  },
   welcome: {
     fontSize: 25,
     fontWeight: "bold",
