@@ -16,9 +16,9 @@ import {
 
 const defaultOptions = {
   headerStyle: {
-    backgroundColor: Colors.darkBlack,
+    backgroundColor: Colors.darkGreen,
   },
-  headerTintColor: "white",
+  headerTintColor: "black",
 };
 const MainStackNavigator = createStackNavigator();
 export default MainStack = () => (

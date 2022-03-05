@@ -26,12 +26,13 @@ export const signInOrUp = (values, route) => {
   return async (dispatch) => {
     dispatch(setLoading());
     const requestOptions = Headers(values);
-
+    console.log("data", requestOptions, config.api_url);
     try {
       const response = await fetch(
         config.api_url + "/" + route,
         requestOptions
       );
+
       if (!response.ok) {
         const error = await response.json();
         throw new Error(error.message);
@@ -107,7 +108,6 @@ export const resetPassword = (values, navigation, mode) => {
         },
       ]);
     } catch (e) {
-      console.log(e);
       ErrorModal(e);
     }
     dispatch(setLoading());
