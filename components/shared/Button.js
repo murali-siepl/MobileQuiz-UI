@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Color from "../../constants/Color";
 
 const CustomButton = (props) => {
   return (
@@ -10,10 +11,13 @@ const CustomButton = (props) => {
         width: props.touchWidth ? props.touchWidth : "80%",
         alignItems: "center",
         marginHorizontal: props.mh,
+        marginVertical: props.mv,
       }}
     >
       <View style={{ ...styles.container, ...props.style }}>
-        <Text style={styles.button}>{props.children}</Text>
+        <Text style={{ ...styles.button, ...props.button }}>
+          {props.children}
+        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -26,12 +30,12 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingVertical: 13,
     paddingHorizontal: 30,
-    backgroundColor: "#69DADB",
+    backgroundColor: Color.darkGreen,
     borderRadius: 5,
     alignItems: "center",
   },
   button: {
-    color: "white",
+    color: "black",
     fontWeight: "bold",
     fontSize: 16,
   },

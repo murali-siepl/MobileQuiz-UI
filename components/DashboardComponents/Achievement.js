@@ -2,7 +2,6 @@ import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import {
   FlatList,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableNativeFeedback,
@@ -10,8 +9,12 @@ import {
 } from "react-native";
 import { achiement } from "../../dummy-data/dashboard";
 
-const renderItem = (itemData) => (
-  <TouchableNativeFeedback>
+const renderItem = (itemData, navigation) => (
+  <TouchableNativeFeedback
+    onPress={() => {
+      navigation.navigate("Feedback");
+    }}
+  >
     <View
       style={{ ...styles.item, ...{ backgroundColor: itemData.item.color } }}
     >
@@ -34,12 +37,12 @@ const renderItem = (itemData) => (
   </TouchableNativeFeedback>
 );
 
-const Achievement = () => {
+const Achievement = ({ navigation }) => {
   return (
     <FlatList
       data={achiement}
       keyExtractor={(item) => item.title}
-      renderItem={renderItem}
+      renderItem={(itemData) => renderItem(itemData, navigation)}
     />
   );
 };

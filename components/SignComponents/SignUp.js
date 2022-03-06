@@ -1,27 +1,154 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import Input from "./../shared/Input";
+import React, { useState } from "react";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
+import Input, { DateInput } from "./../shared/Input";
 import CustomButton from "./../shared/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { Formik } from "formik";
+import signupValidationSchema from "../../validationSchema/singup";
+import { signInOrUp } from "./../../store/actions/Authenticate";
+import { ErrorMessage } from "../shared/ErrorModal";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import moment from "moment";
+import Eye from "./Eye";
 
-const SignUp = (props) => {
-  console.log(props.data);
+const SignUp = () => {
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.auth.loading);
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [showPass, setShowPass] = useState(false);
+  const [showConfPass, setShowConfPass] = useState(false);
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date, setFieldValue) => {
+    setFieldValue("dateOfBirth", moment(date).format("DD/MM/YYYY"));
+    hideDatePicker();
+  };
   return (
-    <View style={styles.contaier}>
-      <Input holder="Enter your full name" />
-      <Input holder="Enter your email" />
-      <Input holder="Enter your password" />
-      <Input holder="Confirm password" />
-      <Input holder="Your location" />
-      <CustomButton
-        touchWidth="80%"
-        style={{ marginVertical: 15 }}
-        onPress={() => {
-          props.data.navigation.navigate("DrawerStack");
-        }}
-      >
-        Register
-      </CustomButton>
-    </View>
+    <Formik
+      initialValues={{
+        fullName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        location: "",
+        dateOfBirth: "",
+      }}
+      validationSchema={signupValidationSchema}
+      onSubmit={(values) => {
+        dispatch(signInOrUp(values, "signup"));
+      }}
+    >
+      {({
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        values,
+        errors,
+        touched,
+        setFieldValue,
+      }) => (
+        <View style={styles.contaier}>
+          <Input
+            holder="Enter  full name"
+            name="fullName"
+            onChangeText={handleChange("fullName")}
+            onBlur={handleBlur("fullName")}
+            value={values.fullName}
+            label="Name"
+            error={errors.fullName}
+            touched={touched.fullName}
+          />
+
+          <Input
+            holder="Enter  email"
+            name="email"
+            onChangeText={handleChange("email")}
+            onBlur={handleBlur("email")}
+            value={values.email}
+            keyboardType="email-address"
+            label="Email Id"
+            error={errors.email}
+            touched={touched.email}
+          />
+
+          <View style={styles.password}>
+            <Input
+              name="password"
+              holder="Enter password"
+              onChangeText={handleChange("password")}
+              onBlur={handleBlur("password")}
+              value={values.password}
+              secureTextEntry={!showPass}
+              error={errors.password}
+              label="Password"
+              touched={touched.password}
+              paddingRight={45}
+            />
+            <Eye setShowPass={setShowPass} />
+          </View>
+
+          <View style={styles.password}>
+            <Input
+              name="confirmPassword"
+              holder="Confirm password"
+              onChangeText={handleChange("confirmPassword")}
+              onBlur={handleBlur("confirmPassword")}
+              value={values.confirmPassword}
+              error={errors.confirmPassword}
+              label="Confirm Password"
+              touched={touched.confirmPassword}
+              secureTextEntry={!showConfPass}
+              paddingRight={45}
+            />
+            <Eye setShowPass={setShowConfPass} />
+          </View>
+
+          <Input
+            name="location"
+            holder="Enter  location"
+            onChangeText={handleChange("location")}
+            onBlur={handleBlur("location")}
+            value={values.location}
+            error={errors.location}
+            label="Location"
+            touched={touched.location}
+          />
+
+          <DateInput
+            onPress={showDatePicker}
+            value={values.dateOfBirth}
+            label="Date of Birth"
+          />
+          <DateTimePickerModal
+            isVisible={isDatePickerVisible}
+            mode="date"
+            onConfirm={(date) => handleConfirm(date, setFieldValue)}
+            onCancel={hideDatePicker}
+          />
+          {errors.dateOfBirth && touched.dateOfBirth && (
+            <ErrorMessage error={errors.dateOfBirth} />
+          )}
+          {loading ? (
+            <ActivityIndicator color="red" size="large" />
+          ) : (
+            <CustomButton
+              touchWidth="90%"
+              style={{ marginTop: 20 }}
+              onPress={handleSubmit}
+            >
+              Register
+            </CustomButton>
+          )}
+        </View>
+      )}
+    </Formik>
   );
 };
 
@@ -32,5 +159,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
+  },
+  password: {
+    width: "100%",
+    alignItems: "center",
+    position: "relative",
   },
 });

@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "./../components/shared/CustomHeaderButton";
 import { Avatar } from "react-native-elements";
-import Colors from "./../constants/Color";
 import MyQuiz from "../components/DashboardComponents/MyQuiz";
 import Achievement from "../components/DashboardComponents/Achievement";
 import Purchase from "../components/DashboardComponents/Purchase";
