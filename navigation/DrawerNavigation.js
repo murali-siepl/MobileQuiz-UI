@@ -4,6 +4,7 @@ import DashboardScreen, {
 } from "./../screens/DashboardScreen";
 import Instructions from "./../screens/Instructions";
 import QuestionsScreen from "./../screens/QuestionsScreen";
+import Offers from "./../screens/Offers";
 import Colors from "./../constants/Color";
 
 import { DrawerHomeLabel } from "./DrawerLabel";
@@ -21,6 +22,10 @@ import GameRules from "./../screens/DrawerScreens/GameRules";
 import Settings from "./../screens/DrawerScreens/Settings";
 import CustomarCare from "./../screens/DrawerScreens/CustomarCare";
 import Logout from "./../screens/DrawerScreens/Logout";
+
+import Leadboard from "../components/SettingsComponents/Leadboard";
+import Ranking from "../components/SettingsComponents/Ranking";
+
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Text, View } from "react-native";
@@ -55,6 +60,11 @@ const MainStack = () => (
     />
     <MainStackNavigator.Screen name="Questions" component={QuestionsScreen} />
     <MainStackNavigator.Screen name="Instructions" component={Instructions} />
+    <MainStackNavigator.Screen name="Offers" component={Offers} />
+
+    <MainStackNavigator.Screen name="Ranking" component={Ranking} />
+    <MainStackNavigator.Screen name="Leadboard" component={Leadboard} />
+
   </MainStackNavigator.Navigator>
 );
 

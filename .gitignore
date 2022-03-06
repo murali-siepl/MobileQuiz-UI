@@ -23,3 +23,10 @@
 hs_err_pid*
 
 node_modules
+
+# expo related files
+.expo
+.expo/
+
+# idea
+.idea

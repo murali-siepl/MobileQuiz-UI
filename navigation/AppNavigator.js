@@ -6,8 +6,8 @@ import NonAuthStack from "./stacks/NonAuthStack";
 export default AppNavigator = () => {
   return (
     <NavigationContainer>
-      <NonAuthStack />
-      {/* <DrawerStack /> */}
+      {/* <NonAuthStack /> */}
+      <DrawerStack />
     </NavigationContainer>
   );
 };

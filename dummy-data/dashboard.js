@@ -3,43 +3,50 @@ export const myQuiz = [
     color: "#B42B51",
     subject: "Maths",
     number: 1,
+    img: require("../assets/images/dashboard-img/d-img-0.png"),
   },
   {
     color: "#B5FFD9",
     subject: "Physics",
     number: 2,
+    img: require("../assets/images/dashboard-img/d-img-1.png"),
   },
   {
     color: "#FDD2BF",
     subject: "Science",
     number: 3,
+    img: require("../assets/images/dashboard-img/d-img-2.png"),
   },
   {
     color: "#7FC8A9",
     subject: "History",
     number: 4,
+    img: require("../assets/images/dashboard-img/d-img-3.png"),
   },
   {
     color: "#B4B897",
     subject: "GK",
     number: 5,
+    img: require("../assets/images/dashboard-img/d-img-4.png"),
   },
 
   {
     color: "#EFB7B7",
     subject: "Chemistry",
     number: 6,
+    img: require("../assets/images/dashboard-img/d-img-5.png"),
   },
   {
     color: "#001E6C",
     subject: "Biology",
     number: 7,
+    img: require("../assets/images/dashboard-img/d-img-0.png"),
   },
-
   {
     color: "#7C83FD",
     subject: "Aptitude",
     number: 8,
+    img: require("../assets/images/dashboard-img/d-img-1.png"),
   },
 ];
 
