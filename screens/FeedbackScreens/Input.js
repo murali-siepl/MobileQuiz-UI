@@ -49,7 +49,7 @@ export const MessageInput = (props) => {
       />
       {props.value.length > 0 && (
         <Text style={styles.remaining}>
-          Remaining Characters {100 - props.value.length}
+          Remaining Characters : {100 - props.value.length}
         </Text>
       )}
 

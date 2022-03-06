@@ -84,7 +84,6 @@ const Forget = (props) => {
               setisValid(false);
             }
           } else {
-            console.log("email", values);
             dispatch(forgetPassword(values, props.navigation, mobile));
           }
         }}

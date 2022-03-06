@@ -18,12 +18,10 @@ export const ErrorMessage = ({ error, style }) => {
 };
 const styles = StyleSheet.create({
   error: {
-    width: "75%",
-    marginVertical: 2,
+    width: "85%",
   },
   message: {
     color: "red",
     fontSize: 12,
-    marginVertical: 3,
   },
 });

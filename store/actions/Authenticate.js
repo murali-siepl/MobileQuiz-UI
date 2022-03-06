@@ -26,7 +26,6 @@ export const signInOrUp = (values, route) => {
   return async (dispatch) => {
     dispatch(setLoading());
     const requestOptions = Headers(values);
-    console.log("data", requestOptions, config.api_url);
     try {
       const response = await fetch(
         config.api_url + "/" + route,
@@ -66,10 +65,8 @@ export const forgetPassword = (values, navigation, mobile) => {
         throw new Error(error.message);
       }
       const responseData = await response.json();
-      console.log(responseData);
       navigation.navigate("Reset", { email: values.email });
     } catch (e) {
-      console.log(e);
       ErrorModal(e);
     }
     dispatch(setLoading());

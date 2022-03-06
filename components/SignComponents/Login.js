@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Image } from "react-native";
 import Input from "./../shared/Input";
 import CustomButton from "./../shared/Button";
 import Colors from "../../constants/Color";
@@ -9,11 +9,12 @@ import { Formik } from "formik";
 import loginValidationSchema from "../../validationSchema/Login";
 import { ActivityIndicator } from "react-native";
 import { signInOrUp } from "./../../store/actions/Authenticate";
-import { ErrorMessage } from "../shared/ErrorModal";
+import Eye from "./Eye";
 
 const Login = (props) => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.auth.loading);
+  const [showPass, setShowPass] = useState(false);
 
   return (
     <Formik
@@ -41,31 +42,32 @@ const Login = (props) => {
             keyboardType="email-address"
             error={errors.email}
             autoComplete="email"
+            label="Email"
+            touched={touched.email}
           />
+          <View style={styles.password}>
+            <Input
+              name="password"
+              holder="Enter password"
+              onChangeText={handleChange("password")}
+              onBlur={handleBlur("password")}
+              value={values.password}
+              secureTextEntry={!showPass}
+              error={errors.password}
+              label="Password"
+              touched={touched.password}
+              paddingRight={45}
+            />
+            <Eye setShowPass={setShowPass} />
+          </View>
 
-          {errors.email && touched.email && (
-            <ErrorMessage error={errors.email} />
-          )}
-
-          <Input
-            name="password"
-            holder="Enter password"
-            onChangeText={handleChange("password")}
-            onBlur={handleBlur("password")}
-            value={values.password}
-            secureTextEntry
-            error={errors.password}
-          />
-          {errors.password && touched.password && (
-            <ErrorMessage error={errors.password} />
-          )}
           <Text
             style={styles.forget}
             onPress={() => {
               props.data.navigation.navigate("Forgot");
             }}
           >
-            Forgot password
+            Forgot Password ?
           </Text>
           {loading ? (
             <ActivityIndicator color="red" size="large" />
@@ -75,7 +77,7 @@ const Login = (props) => {
                 marginVertical: 30,
                 marginBottom: 50,
               }}
-              touchWidth="80%"
+              touchWidth="90%"
               onPress={handleSubmit}
             >
               Login
@@ -91,16 +93,20 @@ export default Login;
 
 const styles = StyleSheet.create({
   contaier: {
-    marginTop: 50,
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
   },
   forget: {
-    width: "75%",
-    color: Colors.blue,
+    width: "85%",
+    color: Colors.orange,
     textAlign: "left",
-    fontSize: 18,
+    fontSize: 14,
     marginBottom: 10,
+  },
+  password: {
+    width: "100%",
+    alignItems: "center",
+    position: "relative",
   },
 });

@@ -24,7 +24,11 @@ export default NonAuthStack = () => (
       component={StartScreen}
       options={{ headerShown: false }}
     />
-    <NonAuthStackNavigator.Screen name="SignIn" component={SignScreen} />
+    <NonAuthStackNavigator.Screen
+      name="SignIn"
+      component={SignScreen}
+      options={{ headerShown: false }}
+    />
     <NonAuthStackNavigator.Screen
       name="Slides"
       component={SlidesScreen}

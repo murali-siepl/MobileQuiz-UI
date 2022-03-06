@@ -9,11 +9,14 @@ import { signInOrUp } from "./../../store/actions/Authenticate";
 import { ErrorMessage } from "../shared/ErrorModal";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
+import Eye from "./Eye";
 
-const SignUp = (props) => {
+const SignUp = () => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.auth.loading);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [showPass, setShowPass] = useState(false);
+  const [showConfPass, setShowConfPass] = useState(false);
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -58,12 +61,11 @@ const SignUp = (props) => {
             onChangeText={handleChange("fullName")}
             onBlur={handleBlur("fullName")}
             value={values.fullName}
+            label="Name"
             error={errors.fullName}
+            touched={touched.fullName}
           />
-          {errors.fullName && touched.fullName && (
-            <ErrorMessage error={errors.fullName} />
-          )}
-          {console.log(values)}
+
           <Input
             holder="Enter  email"
             name="email"
@@ -71,34 +73,43 @@ const SignUp = (props) => {
             onBlur={handleBlur("email")}
             value={values.email}
             keyboardType="email-address"
+            label="Email Id"
             error={errors.email}
+            touched={touched.email}
           />
-          {errors.email && touched.email && (
-            <ErrorMessage error={errors.email} />
-          )}
-          <Input
-            name="password"
-            holder="Enter  password"
-            onChangeText={handleChange("password")}
-            onBlur={handleBlur("password")}
-            value={values.password}
-            secureTextEntry
-            error={errors.password}
-          />
-          {errors.password && touched.password && (
-            <ErrorMessage error={errors.password} />
-          )}
-          <Input
-            name="confirmPassword"
-            holder="Confirm password"
-            onChangeText={handleChange("confirmPassword")}
-            onBlur={handleBlur("confirmPassword")}
-            value={values.confirmPassword}
-            error={errors.confirmPassword}
-          />
-          {errors.confirmPassword && touched.confirmPassword && (
-            <ErrorMessage error={errors.confirmPassword} />
-          )}
+
+          <View style={styles.password}>
+            <Input
+              name="password"
+              holder="Enter password"
+              onChangeText={handleChange("password")}
+              onBlur={handleBlur("password")}
+              value={values.password}
+              secureTextEntry={!showPass}
+              error={errors.password}
+              label="Password"
+              touched={touched.password}
+              paddingRight={45}
+            />
+            <Eye setShowPass={setShowPass} />
+          </View>
+
+          <View style={styles.password}>
+            <Input
+              name="confirmPassword"
+              holder="Confirm password"
+              onChangeText={handleChange("confirmPassword")}
+              onBlur={handleBlur("confirmPassword")}
+              value={values.confirmPassword}
+              error={errors.confirmPassword}
+              label="Confirm Password"
+              touched={touched.confirmPassword}
+              secureTextEntry={!showConfPass}
+              paddingRight={45}
+            />
+            <Eye setShowPass={setShowConfPass} />
+          </View>
+
           <Input
             name="location"
             holder="Enter  location"
@@ -106,11 +117,15 @@ const SignUp = (props) => {
             onBlur={handleBlur("location")}
             value={values.location}
             error={errors.location}
+            label="Location"
+            touched={touched.location}
           />
-          {errors.location && touched.location && (
-            <ErrorMessage error={errors.location} />
-          )}
-          <DateInput onPress={showDatePicker} value={values.dateOfBirth} />
+
+          <DateInput
+            onPress={showDatePicker}
+            value={values.dateOfBirth}
+            label="Date of Birth"
+          />
           <DateTimePickerModal
             isVisible={isDatePickerVisible}
             mode="date"
@@ -124,8 +139,8 @@ const SignUp = (props) => {
             <ActivityIndicator color="red" size="large" />
           ) : (
             <CustomButton
-              touchWidth="80%"
-              style={{ marginVertical: 15 }}
+              touchWidth="90%"
+              style={{ marginTop: 20 }}
               onPress={handleSubmit}
             >
               Register
@@ -144,5 +159,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
+  },
+  password: {
+    width: "100%",
+    alignItems: "center",
+    position: "relative",
   },
 });

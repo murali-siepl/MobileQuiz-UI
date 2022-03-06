@@ -1,24 +1,29 @@
-import React from "react";
+import React, { useRef } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
+import Colors from "./../../constants/Color";
+import { ErrorMessage } from "./ErrorModal";
 
 const Input = (props) => {
+  const textInputReference = useRef(null);
   return (
-    <View
-      style={{
-        ...styles.container,
-        ...{
-          width: props.setWidth ? props.setWidth : "80%",
-        },
-      }}
-    >
+    <View style={styles.container}>
+      <Text style={styles.label}>{props.label}</Text>
       <TextInput
+        ref={textInputReference}
         {...props}
         style={{
           ...styles.input,
-          ...props.style,
+          borderColor: textInputReference.current?.isFocused()
+            ? Colors.green
+            : "#1B222A",
         }}
         placeholder={props.holder}
+        placeholderTextColor="#999999"
       />
+
+      {props.error && props.touched && (
+        <ErrorMessage style={{ marginLeft: 5 }} error={props.error} />
+      )}
     </View>
   );
 };
@@ -28,24 +33,21 @@ export default Input;
 export const DateInput = (props) => {
   const { value } = props;
   return (
-    <View
-      style={{
-        ...styles.container,
-        ...{
-          width: props.setWidth ? props.setWidth : "80%",
-        },
-      }}
-    >
+    <View style={{ ...styles.container, marginBottom: 0 }}>
+      <Text style={styles.label}>{props.label}</Text>
       <Text
         style={{
           ...styles.input,
-          color: value ? "black" : "gray",
-          paddingVertical: 10,
+          paddingVertical: 16,
         }}
         onPress={props.onPress}
       >
         {value ? value : "Date of Birth"}
       </Text>
+
+      {props.error && props.touched && (
+        <ErrorMessage style={{ marginLeft: 10 }} error={props.error} />
+      )}
     </View>
   );
 };
@@ -53,18 +55,27 @@ export const DateInput = (props) => {
 const styles = StyleSheet.create({
   container: {
     borderRadius: 5,
-    marginBottom: 10,
     overflow: "hidden",
-    shadowColor: "black",
-    elevation: 10,
-    shadowOffset: { width: 10, height: 10 },
-    shadowOpacity: 1,
+    marginBottom: 15,
+    overflow: "hidden",
+    width: "90%",
   },
   input: {
+    borderColor: "#1B222A",
+    borderWidth: 1,
     width: "100%",
-    backgroundColor: "white",
-    paddingVertical: 8,
-    paddingHorizontal: 20,
-    fontSize: 17,
+    fontSize: 12,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    backgroundColor: "#151B21",
+    borderRadius: 10,
+    color: "#999999",
+    marginBottom: 5,
+  },
+  label: {
+    color: "#BBBBBB",
+    fontWeight: "600",
+    marginBottom: 7,
+    fontWeight: "700",
   },
 });

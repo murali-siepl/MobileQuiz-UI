@@ -23,7 +23,14 @@ const StartScreen = ({ navigation }) => {
           style={styles.logo}
         />
 
-        <Heading style={{ marginTop: 20 }}>
+        <Heading
+          style={{
+            marginTop: 20,
+            width: "60%",
+            textAlign: "center",
+            lineHeight: 35,
+          }}
+        >
           Test Your Knowledge On The Go
         </Heading>
 
@@ -119,6 +126,6 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   privacyText: {
-    color: Colors.blue,
+    color: Colors.orange,
   },
 });

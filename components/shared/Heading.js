@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import Color from "../../constants/Color";
+import Colors from "../../constants/Color";
 
 const Heading = (props) => {
   return (
@@ -14,6 +14,6 @@ const styles = StyleSheet.create({
   message: {
     fontWeight: "bold",
     fontSize: 21,
-    color: Color.green,
+    color: Colors.darkGreen,
   },
 });

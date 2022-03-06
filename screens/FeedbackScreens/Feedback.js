@@ -150,7 +150,6 @@ export const Feedback = ({ navigation }) => {
                   style={{
                     paddingHorizontal: 10,
                     marginTop: 13.4,
-                    borderRadius: 5,
                     backgroundColor: "transparent",
                     borderColor: "#50C700",
                     borderWidth: 1,
