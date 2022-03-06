@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Text, View, StyleSheet, Animated, Button } from "react-native";
-import Constants from "expo-constants";
+import { StyleSheet, Animated, Button } from "react-native";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 
 export default function Timer(props) {
@@ -14,7 +13,10 @@ export default function Timer(props) {
         ["#F7B801", 0.4],
         ["#A30000", 0.2],
       ]}
-      onComplete={() => [true]}
+      onComplete={() => {
+        props.nextQuestion();
+        return [true];
+      }}
       size={40}
       strokeWidth={6}
     >

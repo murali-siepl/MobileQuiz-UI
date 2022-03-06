@@ -1,31 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "./../components/shared/CustomHeaderButton";
 import { Avatar } from "react-native-elements";
-import Colors from "./../constants/Color";
 import MyQuiz from "../components/DashboardComponents/MyQuiz";
 import Achievement from "../components/DashboardComponents/Achievement";
 import Purchase from "../components/DashboardComponents/Purchase";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { useSelector } from "react-redux";
+
 const Tab = createMaterialTopTabNavigator();
 
 const DashboardScreen = (props) => {
-  const [state, setState] = useState({
-    quiz: true,
-    achievement: false,
-    purchase: false,
-  });
-  const handleState = (type) => {
-    setState((prev) => {
-      return {
-        quiz: false,
-        achievement: false,
-        purchase: false,
-        [type]: true,
-      };
-    });
-  };
+  const { name } = useSelector((state) => state.auth);
+
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.avatar}>
@@ -38,7 +26,7 @@ const DashboardScreen = (props) => {
           }}
           containerStyle={styles.avatarContainer}
         />
-        <Text style={styles.name}>John Lee</Text>
+        <Text style={styles.name}>{name}</Text>
       </View>
 
       <Tab.Navigator
