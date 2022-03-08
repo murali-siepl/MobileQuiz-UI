@@ -13,6 +13,8 @@ import {
   RateUs,
   RateUsnavigationOptions,
 } from "../../screens/FeedbackScreens";
+import Leadboard from "../../components/SettingsComponents/Leadboard";
+import Ranking from "../../components/SettingsComponents/Ranking";
 
 const defaultOptions = {
   headerStyle: {
@@ -40,8 +42,15 @@ export default MainStack = () => (
       options={RateUsnavigationOptions}
     />
 
+    <MainStackNavigator.Screen
+      name="Leadboard"
+      component={Leadboard}
+      options={FeedbacknavigationOptions}
+    />
+
     <MainStackNavigator.Screen name="Questions" component={QuestionsScreen} />
     <MainStackNavigator.Screen name="Instructions" component={Instructions} />
     <MainStackNavigator.Screen name="Result" component={ResultScreen} />
+    <MainStackNavigator.Screen name="Ranking" component={Ranking} />
   </MainStackNavigator.Navigator>
 );
