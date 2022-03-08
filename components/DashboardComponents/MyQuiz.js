@@ -12,6 +12,9 @@ const MyQuiz = (props) => {
         navigation.navigate("Instructions", {
           subject: item.subject,
         });
+        // navigation.navigate("Result", {
+        //   subject: item.subject,
+        // });
       }}
     >
       <View style={{ ...styles.item,  }}>

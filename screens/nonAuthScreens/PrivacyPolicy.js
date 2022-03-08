@@ -1,66 +1,99 @@
 import React from "react";
-import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Dimensions,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import Heading from "./../../components/shared/Heading";
 import { globalStyles } from "./../../constants/GlobalStyles";
 
-import CustomButton from "./../../components/shared/Button";
+import CustomButton, { BackToHome } from "./../../components/shared/Button";
+import Color from "../../constants/Color";
+import { useRoute } from "@react-navigation/native";
 
 const PrivacyPolicy = (props) => {
+  const { params } = useRoute();
   return (
-    <View style={{ ...globalStyles.container, ...styles.container }}>
-      <Heading>Our Privacy Policy</Heading>
-      <View style={styles.content}>
-        <ScrollView>
-          <Text style={styles.contentText}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum. Lorem Ipsum is simply
-            dummy text of the printing and typesetting industry. Lorem Ipsum has
-            been the industry's standard dummy text ever since the 1500s, when
-            an unknown printer took a galley of type and scrambled it to make a
-            type specimen book. It has survived not only five centuries, but
-            also the leap into electronic typesetting, remaining essentially
-            unchanged. It was popularised in the 1960s with the release of
-            Letraset sheets containing Lorem Ipsum passages, and more recently
-            with desktop publishing software like Aldus PageMaker including
-            versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of the
-            printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, when an unknown
-            printer took a galley of type and scrambled it to make a type
-            specimen book. It has survived not only five centuries, but also the
-            leap into electronic typesetting, remaining essentially unchanged.
-            It was popularised in the 1960s with the release of Letraset sheets
-            containing Lorem Ipsum passages, and more recently with desktop
-            publishing software like Aldus PageMaker including versions of Lorem
-            Ipsum. Lorem Ipsum is simply dummy text of the printing and
-            typesetting industry. Lorem Ipsum has been the industry's standard
-            dummy text ever since the 1500s, when an unknown printer took a
-            galley of type and scrambled it to make a type specimen book. It has
-            survived not only five centuries, but also the leap into electronic
-            typesetting, remaining essentially unchanged. It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum
-            passages, and more recently with desktop publishing software like
-            Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum is
+    <ScrollView contentContainerStyle={{ ...globalStyles.scrollView }}>
+      <View style={{ ...globalStyles.container, ...styles.container }}>
+        <View style={{ ...styles.first, ...globalStyles.border }}>
+          <Heading
+            style={{
+              color: "white",
+              fontSize: 24,
+              width: "100%",
+              textAlign: "center",
+              marginTop: 10,
+            }}
+          >
+            Our Privacy Policy
+          </Heading>
+          <Heading
+            style={{
+              color: "white",
+              fontSize: 14,
+              marginTop: 15,
+              marginBottom: 15,
+            }}
+          >
+            Last Updated: November 21,2021
+          </Heading>
+          <Text
+            style={{
+              ...globalStyles.text,
+              marginBottom: 15,
+            }}
+          >
+            This Privacy Policy describes Our policies and procedures on the
+            collection , use and disclosure of Your information w hen You use
+            the Service and tells You abou t Your privacy rights and how the law
+            protects You.
           </Text>
-        </ScrollView>
+          <Text style={{ ...globalStyles.text }}>
+            We use Your Personal data to provide and improve the Service. By
+            using the Service, You agree to the collection and use of
+            information i n accordance with this Privacy Policy.
+          </Text>
+        </View>
+        <View style={{ ...styles.first, ...globalStyles.border }}>
+          <Heading style={{ color: "white", fontSize: 14 }}>
+            Intrepretations And Definitions
+          </Heading>
+          <Text
+            style={{
+              ...globalStyles.text,
+              marginBottom: 25,
+              marginTop: 10,
+            }}
+          >
+            he words of which the initial letter is capitalized have meanings
+            defined under the following conditions. The following definitions
+            shall have the same meaning regardless of whether they appear in
+            singular or in plural.
+          </Text>
+          <CustomButton
+            touchWidth="100%"
+            style={{ backgroundColor: "#fb4141" }}
+            onPress={() => {
+              params.setCheck1(false);
+              props.navigation.navigate("Start");
+            }}
+          >
+            I Disagree
+          </CustomButton>
+          <BackToHome
+            onPress={() => {
+              props.navigation.navigate("Start");
+              params.setCheck1(true);
+            }}
+            next={true}
+          />
+        </View>
       </View>
-
-      <CustomButton
-        onPress={() => {
-          props.navigation.goBack();
-        }}
-        style={{ marginVertical: 20 }}
-        touchWidth="30%"
-      >
-        Back
-      </CustomButton>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -68,14 +101,15 @@ export default PrivacyPolicy;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#d9d9d9",
+    backgroundColor: Color.SignBackground,
     padding: 20,
+    width: "100%",
+    paddingTop: StatusBar.currentHeight,
   },
-  content: {
-    padding: 10,
-    borderRadius: 10,
-    backgroundColor: "white",
-    height: Dimensions.get("window").height / 1.5,
+  first: {
+    width: "100%",
+    padding: 20,
+    flex: 1,
+    marginVertical: 5,
   },
-  contentText: { fontSize: 16 },
 });
