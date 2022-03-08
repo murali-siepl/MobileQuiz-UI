@@ -10,7 +10,6 @@ export default AppNavigator = () => {
   const didtry = useSelector((state) => state.auth.didTryLogin);
   return (
     <NavigationContainer>
-      <DrawerStack />
       {isAuth && <DrawerStack />}
       {!isAuth && didtry && <NonAuthStack />}
       {!isAuth && !didtry && <LoadingScreen />}
