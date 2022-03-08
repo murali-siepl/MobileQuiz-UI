@@ -5,7 +5,6 @@ import { globalStyles } from "./../../constants/GlobalStyles";
 import Input from "./../shared/Input";
 import CustomButton from "../shared/Button";
 import { Formik } from "formik";
-
 import { useDispatch, useSelector } from "react-redux";
 import { forgetPassword } from "../../store/actions/Authenticate";
 import { CheckBox } from "react-native-elements";
@@ -15,6 +14,7 @@ import {
   ForgetValidationSchemaForEmail,
 } from "./../../validationSchema/Login";
 import { ErrorMessage } from "../shared/ErrorModal";
+import Colors from "../../constants/Color";
 
 const Forget = (props) => {
   const dispatch = useDispatch();
@@ -25,11 +25,15 @@ const Forget = (props) => {
   const phoneInput = useRef(null);
 
   return (
-    <View style={globalStyles.container}>
+    <View
+      style={{
+        ...globalStyles.container,
+        backgroundColor: Colors.SignBackground,
+      }}
+    >
       <Heading
         style={{
-          marginTop: 0,
-          marginBottom: 0,
+          color: "white",
         }}
       >
         We need to verify your identity
@@ -51,6 +55,7 @@ const Forget = (props) => {
           }}
           checkedColor="green"
           containerStyle={styles.checkbox}
+          textStyle={{ color: "#fff" }}
         />
 
         <CheckBox
@@ -64,6 +69,7 @@ const Forget = (props) => {
           }}
           containerStyle={styles.checkbox}
           checkedColor="green"
+          textStyle={{ color: "#fff" }}
         />
       </View>
       <Formik
@@ -84,6 +90,7 @@ const Forget = (props) => {
               setisValid(false);
             }
           } else {
+            console.log("data", values);
             dispatch(forgetPassword(values, props.navigation, mobile));
           }
         }}
@@ -112,7 +119,21 @@ const Forget = (props) => {
                   onChangeFormattedText={handleChange("phone")}
                   withShadow
                   containerStyle={styles.phoneInput}
-                  textContainerStyle={{ borderRadius: 10 }}
+                  textContainerStyle={{
+                    borderRadius: 10,
+                    backgroundColor: Colors.inputBackGround,
+                  }}
+                  textInputStyle={{
+                    color: "#999999",
+                    fontSize: 14,
+                  }}
+                  codeTextStyle={{
+                    fontSize: 14,
+                    color: "#999999",
+                  }}
+                  textInputProps={{
+                    placeholderTextColor: "#999999",
+                  }}
                 />
 
                 {(!isValid || errors.phone) && (
@@ -128,24 +149,27 @@ const Forget = (props) => {
                 setWidth="90%"
                 holder={`Enter Email ID`}
                 name="email"
+                label="Email"
                 onChangeText={handleChange("email")}
                 onBlur={handleBlur("email")}
                 value={values.email}
                 keyboardType="email-address"
                 error={errors.email}
                 autoComplete="email"
+                touched={touched.email}
               />
             )}
-            {errors.email && touched.email && (
-              <ErrorMessage error={errors.email} />
-            )}
+
             {loading ? (
               <ActivityIndicator color="red" size="large" />
             ) : (
               <CustomButton
-                style={{ marginTop: 10 }}
+                style={{ marginTop: 40 }}
                 touchWidth="90%"
-                onPress={handleSubmit}
+                // onPress={handleSubmit}
+                onPress={() => {
+                  props.navigation.navigate("Reset");
+                }}
               >
                 Submit
               </CustomButton>
@@ -176,11 +200,19 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   checkbox: {
-    padding: 15,
+    paddingHorizontal: 15,
+    paddingVertical: 12,
     borderRadius: 10,
+    borderColor: "#1B222A",
+    borderWidth: 1,
+    backgroundColor: "#151B21",
   },
   phoneInput: {
     width: "90%",
     borderRadius: 10,
+    backgroundColor: Colors.inputBackGround,
+    color: "white",
+    borderColor: "#1B222A",
+    borderWidth: 1,
   },
 });

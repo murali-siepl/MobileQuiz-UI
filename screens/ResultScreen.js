@@ -1,8 +1,9 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View, Image } from "react-native";
 import { globalStyles } from "./../constants/GlobalStyles";
 import { useRoute } from "@react-navigation/native";
-import CustomButton from "../components/shared/Button";
+import CustomButton, { BackToHome } from "../components/shared/Button";
+import Color from "../constants/Color";
 
 const ResultScreen = (props) => {
   const route = useRoute();
@@ -22,53 +23,81 @@ const ResultScreen = (props) => {
   });
 
   return (
-    <View style={{ ...globalStyles.container, ...styles.container }}>
-      <Text style={styles.heading}>Result</Text>
-      <View style={styles.result}>
-        <DisplayItem label="Answered" text={answered} />
-        <DisplayItem label="Skip" text={skip} />
-        <DisplayItem label="Not Answered" text={notAnswered} />
+    <ScrollView contentContainerStyle={{ ...globalStyles.scrollView }}>
+      <View style={{ ...globalStyles.container, ...styles.container }}>
+        <View style={styles.imageContainer}>
+          <Image source={require("../assets/images/Results/result.png")} />
+        </View>
+        <View style={styles.result}>
+          <DisplayItem label="Total No. Of Questions :" text={answers.length} />
+          <DisplayItem label="Total No. Answered :" text={answered} />
+          <DisplayItem label="Total No.Unanswered :" text={skip} />
+          <DisplayItem label="Total No. Skiped :" text={notAnswered} />
+          <DisplayItem label="Total Time Taken :" text={notAnswered} />
+
+          <CustomButton
+            touchWidth="100%"
+            onPress={() => {
+              props.navigation.replace("Dashboard");
+            }}
+            style={{ marginTop: 20 }}
+          >
+            Overview
+          </CustomButton>
+          <BackToHome {...props} />
+        </View>
       </View>
-      <CustomButton
-        touchWidth="40%"
-        mh={5}
-        mv={10}
-        onPress={() => {
-          props.navigation.replace("Dashboard");
-        }}
-      >
-        Menu
-      </CustomButton>
-    </View>
+    </ScrollView>
   );
 };
 const DisplayItem = (props) => (
   <View style={styles.DisplayItem}>
     <Text style={styles.item}>{props.label}</Text>
-    <Text style={styles.item}>{props.text}</Text>
+    <Text style={{ ...styles.item, ...styles.text }}>{props.text}</Text>
   </View>
 );
 export default ResultScreen;
 
 const styles = StyleSheet.create({
-  container: { backgroundColor: "#CCD1E4" },
+  container: { backgroundColor: Color.darkBlack, width: "100%", padding: 20 },
   heading: {
     fontSize: 20,
     marginBottom: 10,
   },
-  result: {
-    width: "90%",
-    borderColor: "black",
+  imageContainer: {
     borderWidth: 1,
+    borderColor: Color.borderColor,
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 26,
+    borderRadius: 10,
+  },
+  result: {
+    marginTop: 10,
+    borderWidth: 1,
+    borderColor: Color.borderColor,
     borderRadius: 10,
     padding: 20,
+    width: "100%",
   },
   DisplayItem: {
     flexDirection: "row",
     justifyContent: "space-between",
   },
   item: {
-    fontSize: 16,
-    marginVertical: 5,
+    fontSize: 14,
+    marginVertical: 8,
+    color: "#BBBBBB",
+  },
+  text: {
+    backgroundColor: Color.lightGreen,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    color: "#000",
+    borderRadius: 50,
+    width: 84,
+    height: 27,
+    textAlign: "center",
   },
 });

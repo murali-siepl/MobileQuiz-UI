@@ -18,4 +18,20 @@ export const globalStyles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 16,
   },
+  scrollView: {
+    flexGrow: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  border: {
+    borderWidth: 1,
+    borderColor: Color.borderColor,
+    borderRadius: 10,
+  },
+  text: {
+    color: Color.textColor2,
+    fontSize: 14,
+    letterSpacing: 0.4,
+    lineHeight: 18,
+  },
 });

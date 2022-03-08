@@ -6,5 +6,9 @@ export default Colors = {
   green: "#87FB40",
   lightGreen: "#C0FF77",
   textColor: "#999999",
+  textColor2: "#BBBBBB",
   orange: "#FFC83D",
+  inputBackGround: "#151B21",
+  lightGrey: "#23313C",
+  borderColor: "#2E4150",
 };
