@@ -42,10 +42,15 @@ export default MainStack = () => (
       options={RateUsnavigationOptions}
     />
 
+    <MainStackNavigator.Screen
+      name="Leadboard"
+      component={Leadboard}
+      options={FeedbacknavigationOptions}
+    />
+
     <MainStackNavigator.Screen name="Questions" component={QuestionsScreen} />
     <MainStackNavigator.Screen name="Instructions" component={Instructions} />
     <MainStackNavigator.Screen name="Result" component={ResultScreen} />
     <MainStackNavigator.Screen name="Ranking" component={Ranking} />
-    <MainStackNavigator.Screen name="Leadboard" component={Leadboard} />
   </MainStackNavigator.Navigator>
 );

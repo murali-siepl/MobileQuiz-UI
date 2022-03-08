@@ -1,9 +1,86 @@
-import React from "react";
-import { StyleSheet, Text, View, ScrollView, Image, TouchableNativeFeedback, ImageBackground } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View, ScrollView, Image, TouchableNativeFeedback, ImageBackground, TouchableOpacity, Dimensions } from "react-native";
+import { BarChart } from "react-native-chart-kit";
 import { FlatList } from "react-native-gesture-handler";
+import DatePicker from 'react-native-neat-date-picker';
 import { ranking } from "../../dummy-data/ranking";
 
 const Ranking = () => {
+
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+
+  useEffect(() => {
+    let today = new Date();
+    let date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+    setStartDate(date);
+    setEndDate(date);
+  }, []);
+
+  const setDateFromString = (date) => {
+    let today = new Date(date);
+    let dateString = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+    return dateString;
+  }
+
+  const screenWidth = Dimensions.get("window").width;
+  const chartConfig = {
+    backgroundGradientFrom: "#2b3931",
+    backgroundGradientFromOpacity: 0.5,
+    backgroundGradientTo: "#2b3931",
+    backgroundGradientToOpacity: 0.8,
+    fillShadowGradient: "#79e80d",
+    color: (opacity = 1) => `rgba(82, 102, 62, ${opacity})`,
+    labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+    strokeWidth: 3, // optional, default 3
+    barPercentage: 0.5,
+    useShadowColorFromDataset: false,
+    propsForDots: {
+      r: "6",
+      strokeWidth: "2",
+      stroke: "#ffa726"
+    },
+    propsForDots: {
+      r: "6",
+      strokeWidth: "2",
+      stroke: "#ffa726"
+    }
+  };
+
+  const openDatePicker = () => {
+    setShowDatePicker(true)
+  }
+
+  const onCancel = () => {
+    // You should close the modal in here
+    setShowDatePicker(false)
+  }
+
+  const onConfirm = (output) => {
+    // You should close the modal in here
+    setShowDatePicker(false)
+
+    const { startDate, startDateString, endDate, endDateString } = output;
+
+    const startDateStringFormatted = setDateFromString(startDate);
+    setStartDate(startDateStringFormatted);
+    console.log(startDateStringFormatted);
+
+    const endDateStringFormatted = setDateFromString(endDate);
+    console.log(endDateStringFormatted);
+    setEndDate(endDateStringFormatted);
+    
+  }
+
+  const data = {
+    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    datasets: [
+      {
+        data: [57, 45, 28, 80, 99, 43, 55]
+      }
+    ]
+  };
 
   const renderItem = ({ item }) => (
     <TouchableNativeFeedback
@@ -15,7 +92,8 @@ const Ranking = () => {
       <View style={{ ...styles.item, }} style={styles.gridBoxes}>
         <ImageBackground
           style={styles.gbQuiz}
-          imageStyle={{ borderRadius: 10 }}
+          imageStyle={{ borderRadius: 1 }}
+          resizeMode={'stretch'}
           source={item.img}
         >
           <Text style={styles.number}>{item.number}</Text>
@@ -30,7 +108,7 @@ const Ranking = () => {
       <ScrollView >
         <View style={styles.profileInfo}>
           <View style={styles.spaceBetween}>
-            <Text style={styles.name}>Hello, Mohan</Text>
+            <Text style={styles.headName}>Hello, Mohan</Text>
             <Text style={styles.level}
               onPress={() => {
                 navigation.navigate("Offers");
@@ -41,7 +119,6 @@ const Ranking = () => {
           <View style={styles.spaceBetween}>
             <View>
               <FlatList
-                style={{ padding: 0, margin: 0 }}
                 numColumns={2}
                 data={ranking}
                 keyExtractor={(Item) => Item.subject}
@@ -53,29 +130,62 @@ const Ranking = () => {
 
         <View style={styles.profileInfo}>
           <View style={Object.assign({}, styles.spaceBetween, { marginBottom: 15 })}>
-            <Text style={styles.name}>Your Highest Score</Text>
-            <Text style={styles.name}>Date: 12-01-21</Text>
+            <Text style={styles.subName}>Your Highest Score</Text>
+            <Text style={styles.subName}>Date: 12-01-21</Text>
           </View>
           <View style={styles.spaceBetween}>
             <View style={styles.spaceBetweenH}>
-              <Text style={styles.headName}>99pts</Text>
-              <Text style={styles.name}>Best Score</Text>
+              <Text style={styles.hlName}>99pts</Text>
+              <Text style={styles.subName}>Best Score</Text>
             </View>
             <View style={styles.spaceBetweenH}>
-              <Text style={styles.headName}>2nd</Text>
-              <Text style={styles.name}>Position</Text>
+              <Text style={styles.hlName}>2nd</Text>
+              <Text style={styles.subName}>Position</Text>
             </View>
             <View style={styles.spaceBetweenH}>
-              <Text style={styles.headName}>3:22min</Text>
-              <Text style={styles.name}>Time taken</Text>
+              <Text style={styles.hlName}>3:22min</Text>
+              <Text style={styles.subName}>Time taken</Text>
             </View>
           </View>
         </View>
 
-        <View style={styles.spaceBetween}>
+        <View style={styles.profileInfo}>
+          <View>
+            <TouchableOpacity onPress={openDatePicker} style={styles.appButtonContainer}>
+              <Image
+                style={styles.imgScore}
+                source={require("../../assets/images/calendar-icon.png")}
+              />
+              <Text style={styles.appButtonText}>{startDate === "" && endDate === "" ? 'open' : `${startDate} - ${endDate}`}</Text>
+              <Image
+                style={styles.imageArrow}
+                source={require("../../assets/images/arrow-down.png")}
+              />
+            </TouchableOpacity>
+            <DatePicker
+              isVisible={showDatePicker}
+              mode={'range'}
+              onCancel={onCancel}
+              onConfirm={onConfirm}
+            />
+          </View>
+          <Text style={styles.subName}>Your Weekly Performance</Text>
+          <Text style={styles.subName}>Total No. Point Gain</Text>
+          <BarChart
+            style={styles.graphStyle}
+            data={data}
+            width={screenWidth - 50}
+            height={220}
+            chartConfig={chartConfig}
+            fromZero={true}
+            withInnerLines={true}
+          />
+        </View>
+
+        <View style={Object.assign({}, styles.spaceBetween, { marginBottom: 15 })}>
           <View style={styles.spaceBetweenH}>
-            <View style={styles.scoreAndTime}>
-              <Text style={styles.name}>Your Average Score</Text>
+            <View style={Object.assign({}, styles.scoreAndTime, { marginLeft: 15, marginRight: 0 })}>
+              <Text style={styles.subName}>Your Average Score</Text>
               <View style={styles.scoreBlock}>
                 <Text style={styles.score}>
                   +45
@@ -89,15 +199,15 @@ const Ranking = () => {
           </View>
 
           <View style={styles.spaceBetweenH}>
-            <View style={styles.scoreAndTime}>
-              <Text style={styles.name}>Your Average Time</Text>
+            <View style={Object.assign({}, styles.scoreAndTime, { marginRight: 15 })}>
+              <Text style={styles.subName}>Your Average Time</Text>
               <View style={styles.scoreBlock}>
                 <Text style={styles.score}>
                   4:34 min
                 </Text>
                 <Image
                   style={styles.imgScore}
-                  source={require("../../assets/images/feather-book.png")}
+                  source={require("../../assets/images/access-time.png")}
                 />
               </View>
             </View>
@@ -125,8 +235,7 @@ const styles = StyleSheet.create({
   scoreAndTime: {
     flexDirection: "column",
     justifyContent: 'space-between',
-    paddingVertical: 15,
-    margin: 15,
+    padding: 5,
     borderRadius: 8,
     alignItems: "flex-start",
     backgroundColor: "#23313C",
@@ -136,20 +245,26 @@ const styles = StyleSheet.create({
   gridBoxes: {
     flexDirection: "row",
     justifyContent: "flex-start",
-    paddingRight: 15,
+    paddingRight: 10,
     paddingBottom: 15,
-    marginRight: 0,
-    borderRadius: 8,
     alignItems: "flex-start",
+    padding: 0,
+    margin: 0,
   },
-  headName: {
-    fontSize: 24,
+  hlName: {
+    fontSize: 20,
     color: "green",
     marginVertical: 5,
     fontWeight: "bold",
   },
-  name: {
-    fontSize: 16,
+  headName: {
+    fontSize: 18,
+    color: "white",
+    marginVertical: 5,
+    fontWeight: "bold",
+  },
+  subName: {
+    fontSize: 14,
     color: "white",
     marginVertical: 5,
     fontWeight: "bold",
@@ -196,6 +311,13 @@ const styles = StyleSheet.create({
     textAlign: "left",
     color: "white",
   },
+  number: {
+    color: "white",
+    fontSize: 20,
+    paddingTop: 20,
+    paddingLeft: 16,
+    fontWeight: "bold",
+  },
   spaceBetween: {
     display: "flex",
     alignItems: "center",
@@ -216,5 +338,41 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "flex-start",
     flexDirection: "row",
+  },
+  graphStyle: {
+    marginTop: 10,
+  },
+  graphBtn: {
+    elevation: 8,
+    backgroundColor: "#009688",
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    width: "100%"
+  },
+  appButtonContainer: {
+    elevation: 8,
+    backgroundColor: "#1A232A",
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    borderWidth: 2,
+    borderColor: "#2E4150",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  appButtonText: {
+    fontSize: 16,
+    color: "#fff",
+    fontWeight: "bold",
+    alignSelf: "center",
+    textTransform: "uppercase",
+    paddingHorizontal: 10,
+  },
+  imageArrow: {
+    width: 15,
+    height: 15,
   },
 });

@@ -1,7 +1,7 @@
 export const ranking = [
   {
     subject: "Total No of Quiz played",
-    number: 1,
+    number: 10,
     img: require("../assets/images/ranking/r1.png"),
   },
   {
@@ -11,12 +11,12 @@ export const ranking = [
   },
   {
     subject: "Total No of Quiz won",
-    number: 3,
+    number: 31,
     img: require("../assets/images/ranking/r3.png"),
   },
   {
-    subject: "Total No of prize recived fdsfas",
-    number: 4,
+    subject: "Total No of prize recived",
+    number: 14,
     img: require("../assets/images/ranking/r4.png"),
   },
 ];
