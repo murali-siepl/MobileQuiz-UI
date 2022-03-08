@@ -11,9 +11,9 @@ export default AppNavigator = () => {
   return (
     <NavigationContainer>
       <DrawerStack />
-      {/* {isAuth && <DrawerStack />}
+      {isAuth && <DrawerStack />}
       {!isAuth && didtry && <NonAuthStack />}
-      {!isAuth && !didtry && <LoadingScreen />} */}
+      {!isAuth && !didtry && <LoadingScreen />}
     </NavigationContainer>
   );
 };
