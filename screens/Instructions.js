@@ -1,39 +1,49 @@
 import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
-import CustomButton from "../components/shared/Button";
+import { ScrollView, StyleSheet, Text, View, Image } from "react-native";
+import CustomButton, { BackToHome } from "../components/shared/Button";
 import Heading from "../components/shared/Heading";
+import Color from "../constants/Color";
+import { globalStyles } from "../constants/GlobalStyles";
+import Colors from "./../constants/Color";
 
 const Instructions = (props) => {
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Heading style={styles.heading}>Instructions</Heading>
-        <Text style={styles.text}>
-          The quizzes consists of questions carefully designed to help you
-          self-assess your comprehension of the information presented on the
-          topics covered in the module. No data will be collected on the website
-          regarding your responses or how many times you take the quiz. Each
-          question in the quiz is of multiple-choice or "true or false" format.
-          Read each question carefully, and click on the button next to your
-          response that is based on the information covered on the topic in the
-          module. Each correct or incorrect response will result in appropriate
-          feedback immediately at the bottom of the screen. After responding to
-          a question, click on the "Next Question" button at the bottom to go to
-          the next questino. After responding to the 8th question, click on
-          "Close" on the top of the window to exit the quiz. If you select an
-          incorrect response for a question, you can try again until you get the
-          correct response.
-        </Text>
-        <CustomButton
-          touchWidth="100%"
-          onPress={() => {
-            props.navigation.navigate("Questions");
+    <View style={styles.container}>
+      <View style={{ borderWidth: 1, borderColor: "#2E4150", borderRadius: 5 }}>
+        <ScrollView
+          contentContainerStyle={{
+            ...globalStyles.scrollView,
+            ...styles.scrollView,
           }}
         >
-          Start Quiz
-        </CustomButton>
+          <Heading style={styles.heading}>Instructions</Heading>
+          <Text style={styles.text}>
+            It is a logn established fact that a reader will be distracted by
+            the fresuele content of a page when looking at its layout. The oint
+            of using Lorem Ipsum is that it has a more-or less normal
+            distribution of letters, as opposed to using 'Content here, content
+            here', making it look like readable English.
+          </Text>
+          <Text style={styles.text}>
+            Many desktop publishing packages and web page editors now use Lorem
+            Ipsum as their default model text, and a search for 'lorem ipsum'
+            will uncover many web sites still in their infancy. Various versions
+            have evolved over the years, sometimes by accident, sometimes on
+            purpose (injected humour and the like).
+          </Text>
+
+          <CustomButton
+            touchWidth="100%"
+            onPress={() => {
+              props.navigation.navigate("Questions");
+            }}
+          >
+            Start
+          </CustomButton>
+          <BackToHome {...props} />
+        </ScrollView>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
@@ -43,18 +53,27 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
-    margin: 20,
+    backgroundColor: Color.inputBackGround,
+    flex: 1,
+    padding: 20,
+  },
+  scrollView: {
+    backgroundColor: Color.lightGrey,
+    padding: 20,
+    borderRadius: 5,
   },
   heading: {
     marginTop: 0,
     marginBottom: 10,
-    fontSize: 26,
+    fontSize: 24,
+    color: "white",
+    fontWeight: "300",
   },
   text: {
-    fontSize: 16.5,
+    fontSize: 14,
     lineHeight: 22,
     marginBottom: 20,
-
+    color: Colors.textColor,
     fontFamily: "roboto",
   },
 });

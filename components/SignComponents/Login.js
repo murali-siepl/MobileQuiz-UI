@@ -75,7 +75,7 @@ const Login = (props) => {
             <CustomButton
               style={{
                 marginVertical: 30,
-                marginBottom: 50,
+                marginBottom: 0,
               }}
               touchWidth="90%"
               onPress={handleSubmit}

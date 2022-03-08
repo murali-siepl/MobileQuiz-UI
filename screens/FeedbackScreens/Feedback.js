@@ -13,7 +13,7 @@ import Input, { MessageInput } from "./Input";
 import Heading from "./../../components/shared/Heading";
 import { Formik } from "formik";
 import { feedbackValidationSchema } from "../../validationSchema";
-import CustomButton from "./../../components/shared/Button";
+import CustomButton, { BackToHome } from "./../../components/shared/Button";
 import Colors from "./../../constants/Color";
 import Dropdown from "./../../components/shared/Dropdown";
 
@@ -94,15 +94,7 @@ export const Feedback = ({ navigation }) => {
                   touched={touched.email}
                   label="Email"
                 />
-                {/* <Input
-                  placeholder="Select Subject"
-                  onChangeText={handleChange("subject")}
-                  onBlur={handleBlur("subject")}
-                  value={values.subject}
-                  error={errors.subject}
-                  touched={touched.subject}
-                  label="Subject"
-                /> */}
+
                 <Dropdown
                   open={open}
                   value={value}
@@ -142,26 +134,7 @@ export const Feedback = ({ navigation }) => {
                 >
                   Submit
                 </CustomButton>
-                <CustomButton
-                  onPress={() => {
-                    navigation.navigate("Dashboard");
-                  }}
-                  touchWidth="100%"
-                  style={{
-                    paddingHorizontal: 10,
-                    marginTop: 13.4,
-                    backgroundColor: "transparent",
-                    borderColor: "#50C700",
-                    borderWidth: 1,
-                  }}
-                  button={{ color: "#50C700", fontWeight: "500" }}
-                >
-                  <Image
-                    source={require("../../assets/images/Feedback/arrow.png")}
-                    style={{ width: 14, height: 14 }}
-                  />
-                  {" Back To Home"}
-                </CustomButton>
+                <BackToHome />
               </View>
             </ScrollView>
           </View>

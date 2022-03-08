@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { ActivityIndicator, StyleSheet, View, Image } from "react-native";
 import Input, { DateInput } from "./../shared/Input";
 import CustomButton from "./../shared/Button";
 import { useDispatch, useSelector } from "react-redux";
@@ -97,7 +97,7 @@ const SignUp = () => {
           <View style={styles.password}>
             <Input
               name="confirmPassword"
-              holder="Confirm password"
+              holder="RE-Enter password"
               onChangeText={handleChange("confirmPassword")}
               onBlur={handleBlur("confirmPassword")}
               value={values.confirmPassword}
@@ -120,12 +120,14 @@ const SignUp = () => {
             label="Location"
             touched={touched.location}
           />
-
-          <DateInput
-            onPress={showDatePicker}
-            value={values.dateOfBirth}
-            label="Date of Birth"
-          />
+          <View style={styles.password}>
+            <DateInput
+              onPress={showDatePicker}
+              value={values.dateOfBirth}
+              label="Date of Birth"
+            />
+            <Eye calendar={true} setShowPass={showDatePicker} />
+          </View>
           <DateTimePickerModal
             isVisible={isDatePickerVisible}
             mode="date"

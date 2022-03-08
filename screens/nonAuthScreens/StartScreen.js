@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Image,
   StyleSheet,
@@ -11,7 +11,11 @@ import CustomButton from "../../components/shared/Button";
 import Heading from "../../components/shared/Heading";
 import Colors from "./../../constants/Color";
 import { Ionicons } from "@expo/vector-icons";
+import { CheckBox } from "react-native-elements";
+
 const StartScreen = ({ navigation }) => {
+  const [check1, setCheck1] = useState(false);
+  const [check2, setCheck2] = useState(false);
   return (
     <View style={styles.screen}>
       <ImageBackground
@@ -19,16 +23,16 @@ const StartScreen = ({ navigation }) => {
         style={styles.background}
       >
         <Image
-          source={require("../../assets/images/logo1.png")}
+          source={require("../../assets/images/Common/logo.png")}
           style={styles.logo}
         />
 
         <Heading
           style={{
-            marginTop: 20,
             width: "60%",
             textAlign: "center",
-            lineHeight: 35,
+            lineHeight: 30,
+            fontWeight: "500",
           }}
         >
           Test Your Knowledge On The Go
@@ -38,34 +42,58 @@ const StartScreen = ({ navigation }) => {
           onPress={() => {
             navigation.navigate("Slides");
           }}
-          style={{ marginTop: 40, backgroundColor: Colors.green }}
+          style={{ marginTop: 40 }}
           touchWidth="45%"
+          disabled={!(check1 && check2)}
         >
           Get Started
         </CustomButton>
         <View style={styles.conditions}>
           <View style={styles.checkbox}>
-            <Ionicons name="checkbox" size={24} color={Colors.green} />
-            <Text style={styles.read}>I have read and acknowledge </Text>
+            {/* <Ionicons name="checkbox" size={24} color={Colors.green} />
+             */}
+            <CheckBox
+              containerStyle={{ margin: 0, padding: 0 }}
+              center
+              title=""
+              checked={check1}
+              onPress={() => setCheck1(!check1)}
+              size={24}
+              checkedColor={Colors.green}
+            />
+            <Text style={styles.read}>{"I have read and acknowledge "} </Text>
             <TouchableOpacity
               activeOpacity={0.5}
               onPress={() => {
-                navigation.navigate("PrivacyPolicy");
+                navigation.navigate("PrivacyPolicy", {
+                  setCheck1: setCheck1,
+                });
               }}
             >
               <Text style={styles.privacyText}>PRIVACY POLICY</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.checkbox}>
-            <Ionicons name="checkbox" size={24} color={Colors.green} />
-            <Text style={styles.read}>I have read and agree </Text>
+            <CheckBox
+              containerStyle={{ margin: 0, padding: 0 }}
+              wrapperStyle={{ margin: 0, padding: 0 }}
+              center
+              title=""
+              checked={check2}
+              onPress={() => setCheck2(!check2)}
+              size={24}
+              checkedColor={Colors.green}
+            />
+            <Text style={styles.read}>{"I have read and agree"} </Text>
             <TouchableOpacity
               activeOpacity={0.5}
               onPress={() => {
-                navigation.navigate("TermsOfService");
+                navigation.navigate("TermsOfService", {
+                  setCheck2: setCheck2,
+                });
               }}
             >
-              <Text style={styles.privacyText}>TERMS OF SERVICE</Text>
+              <Text style={styles.privacyText}>{" TERMS OF SERVICE"}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -80,7 +108,6 @@ const styles = StyleSheet.create({
   screen: {
     width: "100%",
     flex: 1,
-    height: 100,
   },
   background: {
     flex: 1,
@@ -88,14 +115,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   logo: {
-    borderRadius: 20,
-    width: 200,
-    height: 200,
-    marginBottom: -60,
+    width: 130,
+    height: 130,
   },
-
+  conditions: {
+    marginVertical: 20,
+  },
   read: {
     color: Colors.green,
+    fontSize: 12,
   },
   quiz: {
     color: "rgba(0, 0, 0, 0.66)",
@@ -105,27 +133,12 @@ const styles = StyleSheet.create({
     marginVertical: 15,
   },
 
-  textContainer: {
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  text: {
-    width: "80%",
-    textAlign: "left",
-    lineHeight: 25,
-    fontSize: 17,
-  },
-  conditions: {
-    marginVertical: 20,
-  },
   checkbox: {
     flexDirection: "row",
-    alignItems: "center",
-
-    marginVertical: 5,
+    marginVertical: 10,
   },
   privacyText: {
     color: Colors.orange,
+    fontSize: 12,
   },
 });

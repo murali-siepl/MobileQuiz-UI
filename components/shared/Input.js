@@ -42,7 +42,7 @@ export const DateInput = (props) => {
         }}
         onPress={props.onPress}
       >
-        {value ? value : "Date of Birth"}
+        {value ? value : "dd/mm/yyyy"}
       </Text>
 
       {props.error && props.touched && (
@@ -63,11 +63,11 @@ const styles = StyleSheet.create({
   input: {
     borderColor: "#1B222A",
     borderWidth: 1,
+    backgroundColor: "#151B21",
     width: "100%",
     fontSize: 12,
     paddingVertical: 10,
     paddingHorizontal: 10,
-    backgroundColor: "#151B21",
     borderRadius: 10,
     color: "#999999",
     marginBottom: 5,
