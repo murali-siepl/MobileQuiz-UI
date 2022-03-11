@@ -9,6 +9,7 @@ import Purchase from "../components/DashboardComponents/Purchase";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { block } from "react-native-reanimated";
 import { useNavigation } from "@react-navigation/native";
+import { TouchableHighlight } from "react-native-gesture-handler";
 const Tab = createMaterialTopTabNavigator();
 
 const DashboardScreen = (props) => {
@@ -63,10 +64,12 @@ const DashboardScreen = (props) => {
               />
             </View>
           </View>
-          <Image
-            style={styles.imgQuiz}
-            source={require("../assets/images/quiz.png")}
-          />
+          <TouchableHighlight onPress={() => navigation.navigate("FaqAndContact")}>
+            <Image
+              style={styles.imgQuiz}
+              source={require("../assets/images/quiz.png")}
+            />
+          </TouchableHighlight>
         </View>
 
       </View>
