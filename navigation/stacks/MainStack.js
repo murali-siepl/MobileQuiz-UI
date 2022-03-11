@@ -15,6 +15,8 @@ import {
 } from "../../screens/FeedbackScreens";
 import Leadboard from "../../components/SettingsComponents/Leadboard";
 import Ranking from "../../components/SettingsComponents/Ranking";
+import Offers from "../../components/Offers";
+import FaqAndContact from "../../components/DashboardComponents/FaqAndContact";
 
 const defaultOptions = {
   headerStyle: {
@@ -51,6 +53,8 @@ export default MainStack = () => (
     <MainStackNavigator.Screen name="Questions" component={QuestionsScreen} />
     <MainStackNavigator.Screen name="Instructions" component={Instructions} />
     <MainStackNavigator.Screen name="Result" component={ResultScreen} />
+    <MainStackNavigator.Screen name="FaqAndContact" component={FaqAndContact} />
     <MainStackNavigator.Screen name="Ranking" component={Ranking} />
+    <MainStackNavigator.Screen name="Offers" component={Offers} />
   </MainStackNavigator.Navigator>
 );
