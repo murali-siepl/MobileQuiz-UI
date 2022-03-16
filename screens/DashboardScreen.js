@@ -50,7 +50,7 @@ const DashboardScreen = (props) => {
             }}
           >Level 02</Text>
         </View>
-        <Text style={styles.welcomeText}>Welcome To Quarts Quizz App</Text>
+        <Text style={styles.welcomeText}>Welcome To Quarts Quiz App</Text>
         <View style={styles.spaceBetween}>
           <View>
             <Text style={styles.scoreText}>Your Average score</Text>
