@@ -1,14 +1,23 @@
+
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { Settings, SettingsNavigationOptions } from "./../../screens/SettingsScreen";
+import Colors from "./../../constants/Color";
 
-const Settings = () => {
-  return (
-    <View>
-      <Text>Settings Settings</Text>
-    </View>
-  );
+const defaultOptions = {
+    headerStyle: {
+        backgroundColor: Colors.darkGreen,
+    },
+    headerTintColor: "black",
 };
+const SettingsStackNavigator = createStackNavigator();
+export default SettingsStack = () => (
+    <SettingsStackNavigator.Navigator screenOptions={defaultOptions}>
+        <SettingsStackNavigator.Screen
+            name="Settings"
+            component={Settings}
+            options={SettingsNavigationOptions}
+        />
 
-export default Settings;
-
-const styles = StyleSheet.create({});
+    </SettingsStackNavigator.Navigator>
+);
