@@ -7,6 +7,7 @@ import Achievement from "../components/DashboardComponents/Achievement";
 import Purchase from "../components/DashboardComponents/Purchase";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useNavigation } from "@react-navigation/native";
+import { TouchableHighlight } from "react-native-gesture-handler";
 const Tab = createMaterialTopTabNavigator();
 
 const DashboardScreen = (props) => {
@@ -26,7 +27,7 @@ const DashboardScreen = (props) => {
             Level 02
           </Text>
         </View>
-        <Text style={styles.welcomeText}>Welcome To Quarts Quizz App</Text>
+        <Text style={styles.welcomeText}>Welcome To Quarts Quiz App</Text>
         <View style={styles.spaceBetween}>
           <View>
             <Text style={styles.scoreText}>Your Average score</Text>
@@ -38,10 +39,12 @@ const DashboardScreen = (props) => {
               />
             </View>
           </View>
-          <Image
-            style={styles.imgQuiz}
-            source={require("../assets/images/quiz.png")}
-          />
+          <TouchableHighlight onPress={() => navigation.navigate("FaqAndContact")}>
+            <Image
+              style={styles.imgQuiz}
+              source={require("../assets/images/quiz.png")}
+            />
+          </TouchableHighlight>
         </View>
       </View>
 

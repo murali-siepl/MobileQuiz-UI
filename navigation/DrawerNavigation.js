@@ -11,6 +11,7 @@ import {
 } from "@expo/vector-icons";
 import MyAccount from "./../screens/DrawerScreens/MyAccount";
 import MyRewards from "./../screens/DrawerScreens/MyRewards";
+import Notification from "./../screens/DrawerScreens/Notification";
 import GameRules from "./../screens/DrawerScreens/GameRules";
 import Settings from "./../screens/DrawerScreens/Settings";
 import CustomarCare from "./../screens/DrawerScreens/CustomarCare";
@@ -106,6 +107,16 @@ const DrawerStack = () => {
               size={26}
               color={config.tintColor}
             />
+          ),
+        }}
+      />
+      <DrawerStackNavigator.Screen
+        name="Notification"
+        component={Notification}
+        options={{
+          title: "Notification",
+          drawerIcon: (config) => (
+            <Entypo name="edit" size={26} color={config.color} />
           ),
         }}
       />

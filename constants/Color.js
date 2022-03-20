@@ -7,6 +7,7 @@ export default Colors = {
   lightGreen: "#C0FF77",
   textColor: "#999999",
   textColor2: "#BBBBBB",
+  textWhite: "#fff",
   orange: "#FFC83D",
   inputBackGround: "#151B21",
   lightGrey: "#23313C",
