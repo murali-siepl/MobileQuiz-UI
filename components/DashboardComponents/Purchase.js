@@ -10,7 +10,7 @@ import {
 import { purchase } from "../../dummy-data/dashboard";
 
 const renderItem = (itemData, navigation) => (
-  <TouchableNativeFeedback onPress={() => navigation.navigate("Rateus")}>
+  <TouchableNativeFeedback onPress={() => navigation.navigate("Leadboard")}>
     <View
       style={{ ...styles.item, ...{ backgroundColor: itemData.item.color } }}
     >

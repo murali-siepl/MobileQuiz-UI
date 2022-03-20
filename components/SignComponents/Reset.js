@@ -126,7 +126,7 @@ const Reset = (props) => {
                   touched={touched.password}
                   paddingRight={45}
                 />
-                <Eye setShowPass={setShowPass} />
+                <Eye showpassword={showPass} setShowPass={setShowPass} />
               </View>
               <View style={styles.password}>
                 <Input
@@ -141,7 +141,10 @@ const Reset = (props) => {
                   secureTextEntry={!showConfPass}
                   paddingRight={45}
                 />
-                <Eye setShowPass={setShowConfPass} />
+                <Eye
+                  showpassword={showConfPass}
+                  setShowPass={setShowConfPass}
+                />
               </View>
 
               {loading ? (

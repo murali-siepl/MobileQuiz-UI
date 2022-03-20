@@ -58,7 +58,7 @@ const Login = (props) => {
               touched={touched.password}
               paddingRight={45}
             />
-            <Eye setShowPass={setShowPass} />
+            <Eye showpassword={showPass} setShowPass={setShowPass} />
           </View>
 
           <Text
