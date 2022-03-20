@@ -4,6 +4,8 @@ import AppIntroSlider from "react-native-app-intro-slider";
 import Colors from "./../../constants/Color";
 import Heading from "./../../components/shared/Heading";
 import CustomButton from "./../../components/shared/Button";
+import Color from "./../../constants/Color";
+import { globalStyles } from "../../constants/GlobalStyles";
 
 const slides = [
   {
@@ -42,12 +44,22 @@ export default class SlidesSCreen extends React.Component {
   _onDone = () => {
     this.props.navigation.navigate("SignIn");
   };
-
+  _renderNextButton = () => (
+    <View style={{ width: "100%", alignItems: "center" }}>
+      <Text style={{ ...globalStyles.button, ...styles.button }}>Next</Text>
+    </View>
+  );
   _renderButton = (type) => {
     return (
-      <CustomButton touchWidth="100%" onPress={this._onDone}>
-        {type}
-      </CustomButton>
+      <View style={{ width: "100%", alignItems: "center" }}>
+        <CustomButton
+          touchWidth="50%"
+          onPress={this._onDone}
+          style={{ borderRadius: 15 }}
+        >
+          {type}
+        </CustomButton>
+      </View>
     );
   };
 
@@ -56,12 +68,14 @@ export default class SlidesSCreen extends React.Component {
       <AppIntroSlider
         renderItem={this._renderItem}
         data={slides}
-        showNextButton={false}
-        showSkipButton={true}
+        showNextButton={true}
+        showSkipButton={false}
         renderDoneButton={() => this._renderButton("Done")}
-        renderSkipButton={() => this._renderButton("Skip")}
+        // renderSkipButton={() => this._renderButton("Skip")}
+        renderNextButton={this._renderNextButton}
         dotStyle={{ backgroundColor: "grey" }}
         activeDotStyle={{ backgroundColor: Colors.green }}
+        bottomButton
       />
     );
   }
@@ -89,5 +103,10 @@ const styles = StyleSheet.create({
   },
   next: {
     backgroundColor: Colors.green,
+  },
+  button: {
+    textAlign: "center",
+    width: "50%",
+    borderRadius: 15,
   },
 });

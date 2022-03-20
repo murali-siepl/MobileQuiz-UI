@@ -1,63 +1,38 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "./../components/shared/CustomHeaderButton";
-import { Avatar } from "react-native-elements";
 import MyQuiz from "../components/DashboardComponents/MyQuiz";
 import Achievement from "../components/DashboardComponents/Achievement";
 import Purchase from "../components/DashboardComponents/Purchase";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { block } from "react-native-reanimated";
 import { useNavigation } from "@react-navigation/native";
 import { TouchableHighlight } from "react-native-gesture-handler";
 const Tab = createMaterialTopTabNavigator();
 
 const DashboardScreen = (props) => {
-  const [state, setState] = useState({
-    quiz: true,
-    achievement: false,
-    purchase: false,
-  });
   const navigation = useNavigation();
 
-  const handleState = (type) => {
-    setState((prev) => {
-      return {
-        quiz: false,
-        achievement: false,
-        purchase: false,
-        [type]: true,
-      };
-    });
-  };
   return (
     <View style={{ flex: 1, backgroundColor: "#1a232a" }}>
       <View style={styles.profileInfo}>
-        {/* <Avatar
-          size={100}
-          rounded
-          onPress={() => console.log("Works!")}
-          source={{
-            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS76AN3AAetgum2ydIslWPm1PyuwYL1Kw6lsw&usqp=CAU",
-          }}
-          containerStyle={styles.avatarContainer}
-        /> */}
         <View style={styles.spaceBetween}>
           <Text style={styles.name}>Hello, Mohan</Text>
-          <Text style={styles.level}
+          <Text
+            style={styles.level}
             onPress={() => {
               navigation.navigate("Offers");
             }}
-          >Level 02</Text>
+          >
+            Level 02
+          </Text>
         </View>
         <Text style={styles.welcomeText}>Welcome To Quarts Quiz App</Text>
         <View style={styles.spaceBetween}>
           <View>
             <Text style={styles.scoreText}>Your Average score</Text>
             <View style={styles.scoreBlock}>
-              <Text style={styles.score}>
-                +45
-              </Text>
+              <Text style={styles.score}>+45</Text>
               <Image
                 style={styles.imgScore}
                 source={require("../assets/images/feather-book.png")}
@@ -71,31 +46,25 @@ const DashboardScreen = (props) => {
             />
           </TouchableHighlight>
         </View>
-
       </View>
 
       <Tab.Navigator
-        // screenOptions={{
-        //   tabBarLabelStyle: { fontSize: 12, fontWeight: "bold" },
-        //   tabBarContentContainerStyle: {
-        //     backgroundColor: "#1a232a",
-        //   },
-        //   tabBarActiveTintColor: 'white',
-        //   tabBarStyle: { backgroundColor: 'green' },
-        // }}
         screenOptions={{
-          tabBarActiveTintColor: 'white',
+          tabBarActiveTintColor: "white",
           tabBarLabelStyle: { fontSize: 10, fontWeight: "bold" },
-          tabBarIndicatorStyle: { borderBottomWidth: 3, borderBottomColor: 'green' },
+          tabBarIndicatorStyle: {
+            borderBottomWidth: 3,
+            borderBottomColor: "green",
+          },
           tabBarStyle: {
-            backgroundColor: 'transparent',
-            shadowColor: '#1a232a',
+            backgroundColor: "transparent",
+            shadowColor: "#1a232a",
             borderBottomWidth: 1,
-            borderBottomColor: 'black',
+            borderBottomColor: "black",
             paddingBottom: 1,
             marginHorizontal: 15,
             marginVertical: 15,
-          }
+          },
         }}
       >
         <Tab.Screen name="My Quiz" component={MyQuiz} />
@@ -109,8 +78,11 @@ const DashboardScreen = (props) => {
 export default DashboardScreen;
 export const DashboardnavigationOptions = (navData) => {
   return {
-    headerTitle: "Welcome to Quiz App",
+    headerTitle: "",
     headerLeft: () => (
+      <Image source={require("../assets/images/Common/HeaderLogo.png")} />
+    ),
+    headerRight: () => (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
           iconName="ios-menu"
@@ -118,7 +90,7 @@ export const DashboardnavigationOptions = (navData) => {
             navData.navigation.toggleDrawer();
           }}
           title="menu"
-          color="white"
+          color="black"
         />
       </HeaderButtons>
     ),
@@ -133,10 +105,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     backgroundColor: "#23313C",
   },
-  avatarContainer: {
-    padding: 4,
-    backgroundColor: "white",
-  },
+
   name: {
     fontSize: 16,
     color: "white",

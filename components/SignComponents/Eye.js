@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet, Image } from "react-native";
 
-const Eye = ({ setShowPass, calendar }) => {
+const Eye = ({ setShowPass, calendar, showpassword }) => {
   return (
     <TouchableOpacity
       style={styles.icon}
@@ -11,14 +11,17 @@ const Eye = ({ setShowPass, calendar }) => {
       }}
     >
       {!calendar ? (
-        <Image source={require("../../assets/images/SignUp/openEye.png")} />
+        showpassword ? (
+          <Image source={require("../../assets/images/Common/closeEye.png")} />
+        ) : (
+          <Image source={require("../../assets/images/Common/openEye.png")} />
+        )
       ) : (
-        <Image source={require("../../assets/images/SignUp/calendar.png")} />
+        <Image source={require("../../assets/images/Common/calendar.png")} />
       )}
     </TouchableOpacity>
   );
 };
-
 export default Eye;
 
 const styles = StyleSheet.create({

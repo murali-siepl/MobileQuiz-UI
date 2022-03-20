@@ -1,35 +1,37 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableNativeFeedback } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { globalStyles } from "./../../constants/GlobalStyles";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-const EditProfile = () => {
-  const navigation = useNavigation();
-
+const EditProfile = ({ navigation }) => {
   return (
-    <View>
+    <View style={{ ...globalStyles.container }}>
       <Text>edit profile</Text>
       <Text>-----</Text>
-      <Text
-        style={styles.forget}
+      <TouchableOpacity
         onPress={() => {
           navigation.navigate("Ranking");
         }}
       >
-        Ranking
-      </Text>
+        <Text style={styles.forget}> Ranking</Text>
+      </TouchableOpacity>
+
       <Text>-----</Text>
-      <Text
-        style={styles.forget}
+      <TouchableOpacity
         onPress={() => {
           navigation.navigate("Leadboard");
         }}
       >
-        Leadboard
-      </Text>
+        <Text style={styles.forget}>Leadboard</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
 export default EditProfile;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  forget: {
+    marginVertical: 50,
+  },
+});

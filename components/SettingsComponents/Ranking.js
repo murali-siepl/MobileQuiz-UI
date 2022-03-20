@@ -1,28 +1,47 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, ScrollView, Image, TouchableNativeFeedback, ImageBackground, TouchableOpacity, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Image,
+  TouchableNativeFeedback,
+  ImageBackground,
+  TouchableOpacity,
+  Dimensions,
+  FlatList,
+} from "react-native";
 import { BarChart } from "react-native-chart-kit";
-import { FlatList } from "react-native-gesture-handler";
-import DatePicker from 'react-native-neat-date-picker';
+import DatePicker from "react-native-neat-date-picker";
 import { ranking } from "../../dummy-data/ranking";
 
-const Ranking = () => {
-
+const Ranking = ({ navigation }) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   useEffect(() => {
     let today = new Date();
-    let date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+    let date =
+      today.getDate() +
+      "/" +
+      (today.getMonth() + 1) +
+      "/" +
+      today.getFullYear();
     setStartDate(date);
     setEndDate(date);
   }, []);
 
   const setDateFromString = (date) => {
     let today = new Date(date);
-    let dateString = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+    let dateString =
+      today.getDate() +
+      "/" +
+      (today.getMonth() + 1) +
+      "/" +
+      today.getFullYear();
     return dateString;
-  }
+  };
 
   const screenWidth = Dimensions.get("window").width;
   const chartConfig = {
@@ -39,27 +58,27 @@ const Ranking = () => {
     propsForDots: {
       r: "6",
       strokeWidth: "2",
-      stroke: "#ffa726"
+      stroke: "#ffa726",
     },
     propsForDots: {
       r: "6",
       strokeWidth: "2",
-      stroke: "#ffa726"
-    }
+      stroke: "#ffa726",
+    },
   };
 
   const openDatePicker = () => {
-    setShowDatePicker(true)
-  }
+    setShowDatePicker(true);
+  };
 
   const onCancel = () => {
     // You should close the modal in here
-    setShowDatePicker(false)
-  }
+    setShowDatePicker(false);
+  };
 
   const onConfirm = (output) => {
     // You should close the modal in here
-    setShowDatePicker(false)
+    setShowDatePicker(false);
 
     const { startDate, startDateString, endDate, endDateString } = output;
 
@@ -70,66 +89,102 @@ const Ranking = () => {
     const endDateStringFormatted = setDateFromString(endDate);
     console.log(endDateStringFormatted);
     setEndDate(endDateStringFormatted);
-    
-  }
+  };
 
   const data = {
     labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     datasets: [
       {
-        data: [57, 45, 28, 80, 99, 43, 55]
-      }
-    ]
+        data: [57, 45, 28, 80, 99, 43, 55],
+      },
+    ],
   };
-
-  const renderItem = ({ item }) => (
-    <TouchableNativeFeedback
-      key={item.subject}
-      onPress={() => {
-        navigation.navigate("Instructions");
-      }}
-    >
-      <View style={{ ...styles.item, }} style={styles.gridBoxes}>
-        <ImageBackground
-          style={styles.gbQuiz}
-          imageStyle={{ borderRadius: 1 }}
-          resizeMode={'stretch'}
-          source={item.img}
-        >
-          <Text style={styles.number}>{item.number}</Text>
-          <Text style={styles.text}>{item.subject}</Text>
-        </ImageBackground>
-      </View>
-    </TouchableNativeFeedback>
-  );
 
   return (
     <View style={{ flex: 1, backgroundColor: "#1a232a" }}>
-      <ScrollView >
+      <ScrollView>
         <View style={styles.profileInfo}>
           <View style={styles.spaceBetween}>
             <Text style={styles.headName}>Hello, Mohan</Text>
-            <Text style={styles.level}
+            <Text
+              style={styles.level}
               onPress={() => {
                 navigation.navigate("Offers");
               }}
-            >Level 02</Text>
+            >
+              Level 02
+            </Text>
           </View>
           <Text style={styles.welcomeText}>let's Start Learning</Text>
           <View style={styles.spaceBetween}>
-            <View>
-              <FlatList
-                numColumns={2}
-                data={ranking}
-                keyExtractor={(Item) => Item.subject}
-                renderItem={renderItem}
-              />
+            <View style={styles.cards}>
+              {ranking.map((item, i) => (
+                <TouchableNativeFeedback
+                  key={item.subject}
+                  onPress={() => {
+                    navigation.navigate("Instructions");
+                  }}
+                >
+                  <View style={{ ...styles.card }}>
+                    <ImageBackground
+                      style={styles.gbQuiz}
+                      imageStyle={{ borderRadius: 1 }}
+                      resizeMode={"stretch"}
+                      source={item.img}
+                    >
+                      <Text style={styles.number}>{item.number}</Text>
+                      <Text style={styles.text}>{item.subject}</Text>
+                    </ImageBackground>
+                  </View>
+                </TouchableNativeFeedback>
+              ))}
             </View>
           </View>
         </View>
 
         <View style={styles.profileInfo}>
-          <View style={Object.assign({}, styles.spaceBetween, { marginBottom: 15 })}>
+          <View>
+            <TouchableOpacity
+              onPress={openDatePicker}
+              style={styles.appButtonContainer}
+            >
+              <Image
+                style={styles.imgScore}
+                source={require("../../assets/images/calendar-icon.png")}
+              />
+              <Text style={styles.appButtonText}>
+                {startDate === "" && endDate === ""
+                  ? "open"
+                  : `${startDate} - ${endDate}`}
+              </Text>
+              <Image
+                style={styles.imageArrow}
+                source={require("../../assets/images/arrow-down.png")}
+              />
+            </TouchableOpacity>
+            <DatePicker
+              isVisible={showDatePicker}
+              mode={"range"}
+              onCancel={onCancel}
+              onConfirm={onConfirm}
+            />
+          </View>
+          <Text style={styles.subName}>Your Weekly Performance</Text>
+          <Text style={styles.subName}>Total No. Point Gain</Text>
+          <BarChart
+            style={styles.graphStyle}
+            data={data}
+            width={screenWidth - 50}
+            height={220}
+            chartConfig={chartConfig}
+            fromZero={true}
+            withInnerLines={true}
+          />
+        </View>
+        <View style={styles.profileInfo}>
+          <View
+            style={Object.assign({}, styles.spaceBetween, { marginBottom: 15 })}
+          >
             <Text style={styles.subName}>Your Highest Score</Text>
             <Text style={styles.subName}>Date: 12-01-21</Text>
           </View>
@@ -148,48 +203,19 @@ const Ranking = () => {
             </View>
           </View>
         </View>
-
-        <View style={styles.profileInfo}>
-          <View>
-            <TouchableOpacity onPress={openDatePicker} style={styles.appButtonContainer}>
-              <Image
-                style={styles.imgScore}
-                source={require("../../assets/images/calendar-icon.png")}
-              />
-              <Text style={styles.appButtonText}>{startDate === "" && endDate === "" ? 'open' : `${startDate} - ${endDate}`}</Text>
-              <Image
-                style={styles.imageArrow}
-                source={require("../../assets/images/arrow-down.png")}
-              />
-            </TouchableOpacity>
-            <DatePicker
-              isVisible={showDatePicker}
-              mode={'range'}
-              onCancel={onCancel}
-              onConfirm={onConfirm}
-            />
-          </View>
-          <Text style={styles.subName}>Your Weekly Performance</Text>
-          <Text style={styles.subName}>Total No. Point Gain</Text>
-          <BarChart
-            style={styles.graphStyle}
-            data={data}
-            width={screenWidth - 50}
-            height={220}
-            chartConfig={chartConfig}
-            fromZero={true}
-            withInnerLines={true}
-          />
-        </View>
-
-        <View style={Object.assign({}, styles.spaceBetween, { marginBottom: 15 })}>
+        <View
+          style={Object.assign({}, styles.spaceBetween, { marginBottom: 15 })}
+        >
           <View style={styles.spaceBetweenH}>
-            <View style={Object.assign({}, styles.scoreAndTime, { marginLeft: 15, marginRight: 0 })}>
+            <View
+              style={Object.assign({}, styles.scoreAndTime, {
+                marginLeft: 15,
+                marginRight: 0,
+              })}
+            >
               <Text style={styles.subName}>Your Average Score</Text>
               <View style={styles.scoreBlock}>
-                <Text style={styles.score}>
-                  +45
-                </Text>
+                <Text style={styles.score}>+45</Text>
                 <Image
                   style={styles.imgScore}
                   source={require("../../assets/images/feather-book.png")}
@@ -199,12 +225,14 @@ const Ranking = () => {
           </View>
 
           <View style={styles.spaceBetweenH}>
-            <View style={Object.assign({}, styles.scoreAndTime, { marginRight: 15 })}>
+            <View
+              style={Object.assign({}, styles.scoreAndTime, {
+                marginRight: 15,
+              })}
+            >
               <Text style={styles.subName}>Your Average Time</Text>
               <View style={styles.scoreBlock}>
-                <Text style={styles.score}>
-                  4:34 min
-                </Text>
+                <Text style={styles.score}>4:34 min</Text>
                 <Image
                   style={styles.imgScore}
                   source={require("../../assets/images/access-time.png")}
@@ -213,7 +241,6 @@ const Ranking = () => {
             </View>
           </View>
         </View>
-
       </ScrollView>
     </View>
   );
@@ -234,7 +261,7 @@ const styles = StyleSheet.create({
   },
   scoreAndTime: {
     flexDirection: "column",
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     padding: 5,
     borderRadius: 8,
     alignItems: "flex-start",
@@ -275,6 +302,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     fontWeight: "bold",
   },
+
   scoreBlock: {
     display: "flex",
     alignItems: "center",
@@ -301,7 +329,7 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
   },
   text: {
-    position: 'absolute',
+    position: "absolute",
     paddingLeft: 8,
     bottom: 12,
     fontSize: 12,
@@ -331,13 +359,16 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexDirection: "column",
   },
-  gbQuiz: {
-    width: 160,
-    height: 100,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
+  cards: {
     flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+  },
+
+  gbQuiz: {
+    width: 150,
+    height: 100,
+    marginBottom: 5,
   },
   graphStyle: {
     marginTop: 10,
@@ -348,7 +379,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 12,
-    width: "100%"
+    width: "100%",
   },
   appButtonContainer: {
     elevation: 8,
