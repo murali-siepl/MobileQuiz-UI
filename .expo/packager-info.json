@@ -1,8 +1,10 @@
 {
-  "expoServerPort": 19000,
+  "expoServerPort": null,
   "devToolsPort": 19002,
-  "packagerPort": 19000,
-  "expoServerNgrokUrl": "https://m9-d8e.maheshguna.mobilequiz-ui.exp.direct",
-  "packagerNgrokUrl": "https://m9-d8e.maheshguna.mobilequiz-ui.exp.direct",
-  "ngrokPid": 1380
+  "packagerPort": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
+  "packagerPid": null,
+  "webpackServerPort": null
 }
