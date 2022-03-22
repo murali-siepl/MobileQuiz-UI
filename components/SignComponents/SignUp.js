@@ -42,6 +42,8 @@ const SignUp = () => {
       }}
       validationSchema={signupValidationSchema}
       onSubmit={(values) => {
+        delete values.confirmPassword;
+        console.log(values);
         dispatch(signInOrUp(values, "signup"));
       }}
     >

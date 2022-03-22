@@ -9,7 +9,7 @@ import Colors from "./../../constants/Color";
 import Heading from "./../../components/shared/Heading";
 
 const SignScreen = (props) => {
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState(true);
   useEffect(() => {
     props.navigation.setOptions({
       headerTitle: login ? "Sign In" : "Sign Up",

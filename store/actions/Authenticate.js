@@ -4,6 +4,7 @@ import { DID_TRY_LOGIN } from "./../constants/Authenticate";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ErrorModal from "./../../components/shared/ErrorModal";
 import { Alert } from "react-native";
+import { Headers } from "../../helpers";
 
 export const didTryLogin = () => {
   return { type: DID_TRY_LOGIN };
@@ -111,19 +112,9 @@ export const resetPassword = (values, navigation, mode) => {
   };
 };
 //////////////    HELPER FUNCTIONS   //////////////////////////////
-const Headers = (values) => {
-  return {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-    },
-    body: JSON.stringify(values),
-  };
-};
 
-const saveDataToStorage = (token, userId, email, name) => {
-  AsyncStorage.setItem(
+const saveDataToStorage = async (token, userId, email, name) => {
+  await AsyncStorage.setItem(
     "userData",
     JSON.stringify({
       token,

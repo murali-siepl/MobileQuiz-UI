@@ -1,15 +1,21 @@
 import React, { useState } from "react";
-import { ScrollView, StyleSheet, Text, View, ImageBackground, Image } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  Image,
+} from "react-native";
 import Heading from "./shared/Heading";
-import { LinearGradient } from "expo-linear-gradient";
-import Accordion from 'react-native-collapsible/Accordion';
+import Accordion from "react-native-collapsible/Accordion";
 
 const SECTIONS = [
   {
-    id: '1',
-    name: 'First',
-    img: '',
-    pts: '11',
+    id: "1",
+    name: "First",
+    img: "",
+    pts: "11",
     img: require("../assets/images/ava.png"),
     content: {
       question: "10",
@@ -18,10 +24,10 @@ const SECTIONS = [
     },
   },
   {
-    id: '2',
-    name: 'Second',
-    img: '',
-    pts: '22',
+    id: "2",
+    name: "Second",
+    img: "",
+    pts: "22",
     img: require("../assets/images/ava.png"),
     content: {
       question: "10",
@@ -30,10 +36,10 @@ const SECTIONS = [
     },
   },
   {
-    id: '1',
-    name: 'First',
-    img: '',
-    pts: '11',
+    id: "1",
+    name: "First",
+    img: "",
+    pts: "11",
     img: require("../assets/images/ava.png"),
     content: {
       question: "10",
@@ -41,11 +47,9 @@ const SECTIONS = [
       type: "free",
     },
   },
-
 ];
 
 const Offers = (props) => {
-
   const [activeSections, setActiveSections] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
 
@@ -60,21 +64,19 @@ const Offers = (props) => {
   const _renderHeader = (section, index, isActive, sections) => {
     return (
       <View style={isActive ? styles.headerActive : styles.header}>
-        <Image
-          style={styles.pImg}
-          source={section.img}
-        />
+        <Image style={styles.pImg} source={section.img} />
         <Text style={styles.headerText}>{section.name}</Text>
-        {isActive ?
+        {isActive ? (
           <Image
             style={styles.arrowDown}
             source={require("../assets/images/arrow-up.png")}
-          /> :
+          />
+        ) : (
           <Image
             style={styles.arrowDown}
             source={require("../assets/images/arrow-down.png")}
-          />}
-
+          />
+        )}
       </View>
     );
   };
@@ -115,10 +117,12 @@ const Offers = (props) => {
         <Heading style={styles.heading}>Latest Quiz Offers</Heading>
         <ImageBackground
           imageStyle={{ borderRadius: 10 }}
-          source={require('../assets/images/quiz-bg-img.png')}
+          source={require("../assets/images/quiz-bg-img.png")}
           style={styles.imgBackground}
         >
-          <Text style={styles.text}>Lets Play Quiz And Win Exciting Prizes !!</Text>
+          <Text style={styles.text}>
+            Lets Play Quiz And Win Exciting Prizes !!
+          </Text>
         </ImageBackground>
         <Heading style={styles.heading}>Recently Played Quiz</Heading>
         <Accordion
@@ -129,7 +133,6 @@ const Offers = (props) => {
           renderContent={_renderContent}
           onChange={_updateSections}
         />
-
       </ScrollView>
     </View>
   );
@@ -178,8 +181,8 @@ const styles = StyleSheet.create({
   },
   accordion: {
     width: "100%",
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     flex: 1,
   },
   header: {
@@ -208,7 +211,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   headerText: {
-    textAlign: 'left',
+    textAlign: "left",
     fontSize: 16,
     fontWeight: "bold",
     color: "white",
