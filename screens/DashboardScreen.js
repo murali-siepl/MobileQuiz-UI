@@ -8,16 +8,18 @@ import Purchase from "../components/DashboardComponents/Purchase";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useNavigation } from "@react-navigation/native";
 import { TouchableHighlight } from "react-native-gesture-handler";
+import { useSelector } from "react-redux";
 const Tab = createMaterialTopTabNavigator();
 
 const DashboardScreen = (props) => {
   const navigation = useNavigation();
+  const { name } = useSelector((state) => state.auth);
 
   return (
     <View style={{ flex: 1, backgroundColor: "#1a232a" }}>
       <View style={styles.profileInfo}>
         <View style={styles.spaceBetween}>
-          <Text style={styles.name}>Hello, Mohan</Text>
+          <Text style={styles.name}>Hello, {name}</Text>
           <Text
             style={styles.level}
             onPress={() => {
@@ -39,7 +41,9 @@ const DashboardScreen = (props) => {
               />
             </View>
           </View>
-          <TouchableHighlight onPress={() => navigation.navigate("FaqAndContact")}>
+          <TouchableHighlight
+            onPress={() => navigation.navigate("FaqAndContact")}
+          >
             <Image
               style={styles.imgQuiz}
               source={require("../assets/images/quiz.png")}
