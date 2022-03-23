@@ -1,6 +1,7 @@
 import React from "react";
-
+import { View, Text, Image } from "react-native";
 import { DrawerHomeLabel } from "./DrawerLabel";
+import { DrawerCustomLabel } from "./DrawerCustomLabel";
 import EditProfile from "./../screens/DrawerScreens/EditProfile";
 import {
   AntDesign,
@@ -9,11 +10,7 @@ import {
   Ionicons,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
-import MyAccount from "./../screens/DrawerScreens/MyAccount";
-import MyRewards from "./../screens/DrawerScreens/MyRewards";
-import Notification from "./../screens/DrawerScreens/Notification";
 import GameRules from "./../screens/DrawerScreens/GameRules";
-import Settings from "./../screens/DrawerScreens/Settings";
 import CustomarCare from "./../screens/DrawerScreens/CustomarCare";
 import {
   createDrawerNavigator,
@@ -22,6 +19,10 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 import MainStack from "./stacks/MainStack";
+import LeadboardStack from "./stacks/LeadboardStack";
+import SettingsStack from "./stacks/SettingsStack";
+import helpFaqStack from "./stacks/HelpFaqStack";
+import RateusStack from "./stacks/RateusStack";
 import { useDispatch } from "react-redux";
 import { logout } from "./../store/actions/Authenticate";
 
@@ -31,29 +32,67 @@ const drawerDefaultStyles = {
     backgroundColor: "rgba(225, 220, 220, 1)",
   },
   drawerLabelStyle: {
-    fontSize: 17,
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 16,
   },
   drawerItemStyle: {
-    borderBottomColor: "#F2F1F1",
-    borderBottomWidth: 1,
+    backgroundColor: "#23313C",
+    marginBottom: 10,
+    borderColor: "#2E4150",
+    borderWidth: 2,
+    borderRadius: 8,
+    marginLeft: 10,
+    marginRight: 10,
+    width: "85%",
+    alignSelf: "center",
+  },
+  drawerStyle: {
+    width: '100%',
+    padding: 0,
+    margin: 0,
+    backgroundColor: '#1A232A',
   },
 };
 
 const DrawerStackNavigator = createDrawerNavigator();
 
-const DrawerStack = () => {
+const DrawerStack = (props, navigation) => {
   const dispatch = useDispatch();
   return (
     <DrawerStackNavigator.Navigator
+      drawerContentOptions={{
+        activeTintColor: '#e91e63',
+        itemStyle: { marginVertical: 5 },
+      }}
       screenOptions={drawerDefaultStyles}
       drawerContent={(props) => (
         <DrawerContentScrollView {...props}>
           <DrawerItemList {...props} />
           <DrawerItem
             label="Logout"
-            labelStyle={{ fontSize: 17 }}
+            labelStyle={{
+              color: "white",
+              fontWeight: "bold",
+              fontSize: 16,
+            }}
+            style={{
+              backgroundColor: "#23313C",
+              marginBottom: 10,
+              borderColor: "#2E4150",
+              borderWidth: 2,
+              borderRadius: 8,
+              marginLeft: 10,
+              marginRight: 10,
+              width: "85%",
+              alignSelf: "center",
+            }}
             icon={(config) => (
-              <Feather name="external-link" size={26} color={config.color} />
+              <Image
+                source={require('../assets/images/left-menu/logout.png')}
+                fadeDuration={0}
+                style={{ width: 25, height: 25 }}
+              />
             )}
             onPress={() => {
               dispatch(logout());
@@ -66,8 +105,18 @@ const DrawerStack = () => {
         name="Home"
         component={MainStack}
         options={{
+          headerLeft: () =>
+            <NavigationDrawerStructure
+              navigationProps={navigation}
+            />,
           drawerItemStyle: {
-            backgroundColor: "#A9E4D7",
+            backgroundColor: "#89FB41",
+            padding: 0,
+            margin: 0,
+            marginBottom: 10,
+            width: "100%",
+            alignSelf: "center",
+            borderRadius: 0,
           },
           drawerLabel: DrawerHomeLabel,
         }}
@@ -76,88 +125,90 @@ const DrawerStack = () => {
         name="EditProfile"
         component={EditProfile}
         options={{
-          title: "Edit Profile",
+          title: "Profile",
+          headerLeft: () =>
+            <NavigationDrawerStructure
+              navigationProps={navigation}
+            />,
           drawerIcon: (config) => (
-            <Entypo name="edit" size={26} color={config.color} />
-          ),
-        }}
-      />
-      <DrawerStackNavigator.Screen
-        name="MyAccount"
-        component={MyAccount}
-        options={{
-          title: "My account",
-          drawerIcon: (config) => (
-            <MaterialCommunityIcons
-              name="account-circle"
-              size={26}
-              color={config.color}
+            <Image
+              source={require('../assets/images/left-menu/profile.png')}
+              fadeDuration={0}
+              style={{ width: 25, height: 25 }}
             />
           ),
         }}
       />
       <DrawerStackNavigator.Screen
-        name="MyRewards"
-        component={MyRewards}
+        name="Leadboard"
+        component={LeadboardStack}
         options={{
-          title: "My rewards",
+          title: "Leadershipboard",
+          headerLeft: () =>
+            <NavigationDrawerStructure
+              navigationProps={navigation}
+            />,
           drawerIcon: (config) => (
-            <Ionicons
-              name="md-gift-outline"
-              size={26}
-              color={config.tintColor}
-            />
-          ),
-        }}
-      />
-      <DrawerStackNavigator.Screen
-        name="Notification"
-        component={Notification}
-        options={{
-          title: "Notification",
-          drawerIcon: (config) => (
-            <Entypo name="edit" size={26} color={config.color} />
-          ),
-        }}
-      />
-      <DrawerStackNavigator.Screen
-        name="GameRules"
-        component={GameRules}
-        options={{
-          title: "Game rules",
-          drawerIcon: (config) => (
-            <Ionicons
-              name="warning-outline"
-              size={26}
-              color={config.tintColor}
+            <Image
+              source={require('../assets/images/left-menu/lb.png')}
+              fadeDuration={0}
+              style={{ width: 25, height: 25 }}
             />
           ),
         }}
       />
       <DrawerStackNavigator.Screen
         name="Settings"
-        component={Settings}
+        component={SettingsStack}
         options={{
           title: "Settings",
           drawerIcon: (config) => (
-            <Ionicons
-              name="ios-settings-sharp"
-              size={26}
-              color={config.tintColor}
+            <Image
+              source={require('../assets/images/left-menu/settings.png')}
+              fadeDuration={0}
+              style={{ width: 25, height: 25 }}
             />
           ),
         }}
       />
       <DrawerStackNavigator.Screen
-        name="Customar"
-        component={CustomarCare}
+        name="FaqAndContact"
+        component={helpFaqStack}
         options={{
-          title: " Customar care",
+          title: "Help & FAQ",
           drawerIcon: (config) => (
-            <AntDesign
-              name="customerservice"
-              size={26}
-              color={config.tintColor}
+            <Image
+              source={require('../assets/images/left-menu/help-faq.png')}
+              fadeDuration={0}
+              style={{ width: 25, height: 25 }}
+            />
+          ),
+        }}
+      />
+      <DrawerStackNavigator.Screen
+        name="Aboutus"
+        component={GameRules}
+        options={{
+          title: "About us",
+          drawerIcon: (config) => (
+            <Image
+              source={require('../assets/images/left-menu/about.png')}
+              fadeDuration={0}
+              style={{ width: 25, height: 25 }}
+            />
+          ),
+        }}
+      />
+      <DrawerStackNavigator.Screen
+        name="Rateus"
+        component={RateusStack}
+        options={{
+          title: "Rate us",
+          drawerIcon: (config) => (
+            <Image
+              source={require('../assets/images/left-menu/rateus.png')}
+              fadeDuration={0}
+              style={{ width: 25, height: 25 }}
             />
           ),
         }}

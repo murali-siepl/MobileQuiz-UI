@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { ScrollView, StyleSheet, Text, View, ImageBackground, Image } from "react-native";
 import Heading from "./shared/Heading";
-import { LinearGradient } from "expo-linear-gradient";
 import Accordion from 'react-native-collapsible/Accordion';
 
 const SECTIONS = [
