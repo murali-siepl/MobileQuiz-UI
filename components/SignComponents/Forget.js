@@ -166,10 +166,10 @@ const Forget = (props) => {
               <CustomButton
                 style={{ marginTop: 40 }}
                 touchWidth="90%"
-                // onPress={handleSubmit}
-                onPress={() => {
-                  props.navigation.navigate("Reset");
-                }}
+                onPress={handleSubmit}
+                // onPress={() => {
+                //   props.navigation.navigate("Reset");
+                // }}
               >
                 Submit
               </CustomButton>
