@@ -10,8 +10,6 @@ import ResultScreen from "./../../screens/ResultScreen";
 import {
   Feedback,
   FeedbacknavigationOptions,
-  RateUs,
-  RateUsnavigationOptions,
 } from "../../screens/FeedbackScreens";
 import Leadboard, {
   LeaderBoardnavigationOptions,
@@ -38,18 +36,6 @@ export default MainStack = () => (
       name="Feedback"
       component={Feedback}
       options={FeedbacknavigationOptions}
-    />
-
-    <MainStackNavigator.Screen
-      name="Rateus"
-      component={RateUs}
-      options={RateUsnavigationOptions}
-    />
-
-    <MainStackNavigator.Screen
-      name="Leadboard"
-      component={Leadboard}
-      options={LeaderBoardnavigationOptions}
     />
 
     <MainStackNavigator.Screen name="Questions" component={QuestionsScreen} />

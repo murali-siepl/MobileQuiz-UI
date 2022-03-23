@@ -8,7 +8,7 @@ import {
   Image,
 } from "react-native";
 import Heading from "./shared/Heading";
-import Accordion from "react-native-collapsible/Accordion";
+import Accordion from 'react-native-collapsible/Accordion';
 
 const SECTIONS = [
   {
