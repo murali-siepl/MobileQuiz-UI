@@ -48,16 +48,16 @@ const Ranking = ({ navigation }) => {
     backgroundGradientFrom: "#2b3931",
     backgroundGradientFromOpacity: 0.5,
     backgroundGradientTo: "#2b3931",
-    backgroundGradientToOpacity: 0.8,
-    fillShadowGradient: "#79e80d",
-    color: (opacity = 1) => `rgba(82, 102, 62, ${opacity})`,
+    backgroundGradientToOpacity: 0.6,
+    fillShadowGradient: "#c0ff77",
+    color: (opacity = 1) => `rgba(137, 251, 65, ${opacity})`,
     labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
     strokeWidth: 3, // optional, default 3
     barPercentage: 0.5,
     useShadowColorFromDataset: false,
     propsForDots: {
-      r: "6",
-      strokeWidth: "2",
+      r: "3",
+      strokeWidth: "3",
       stroke: "#ffa726",
     },
     propsForDots: {
@@ -106,14 +106,14 @@ const Ranking = ({ navigation }) => {
         <View style={styles.profileInfo}>
           <View style={styles.spaceBetween}>
             <Text style={styles.headName}>Hello, Mohan</Text>
-            <Text
+            {/* <Text
               style={styles.level}
               onPress={() => {
                 navigation.navigate("Offers");
               }}
             >
               Level 02
-            </Text>
+            </Text> */}
           </View>
           <Text style={styles.welcomeText}>let's Start Learning</Text>
           <View style={styles.spaceBetween}>
@@ -169,8 +169,8 @@ const Ranking = ({ navigation }) => {
               onConfirm={onConfirm}
             />
           </View>
-          <Text style={styles.subName}>Your Weekly Performance</Text>
-          <Text style={styles.subName}>Total No. Point Gain</Text>
+          <Text style={styles.subNameText}>Your Weekly Performance</Text>
+          <Text style={styles.subNameText}>Total No. Point Gain</Text>
           <BarChart
             style={styles.graphStyle}
             data={data}
@@ -280,7 +280,7 @@ const styles = StyleSheet.create({
   },
   hlName: {
     fontSize: 20,
-    color: "green",
+    color: "#89FB41",
     marginVertical: 5,
     fontWeight: "bold",
   },
@@ -295,6 +295,11 @@ const styles = StyleSheet.create({
     color: "white",
     marginVertical: 5,
     fontWeight: "bold",
+  },
+  subNameText: {
+    fontSize: 14,
+    color: "white",
+    marginVertical: 5,
   },
   level: {
     fontSize: 16,
@@ -312,7 +317,7 @@ const styles = StyleSheet.create({
   score: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#6ec43f",
+    color: "#89FB41",
     marginRight: 5,
     display: "flex",
     justifyContent: "flex-start",

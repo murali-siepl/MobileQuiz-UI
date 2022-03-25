@@ -25,11 +25,14 @@ const renderItem = (itemData, navigation) => (
 
 const Purchase = ({ navigation }) => {
   return (
-    <FlatList
-      data={purchase}
-      keyExtractor={(item) => item.title}
-      renderItem={(itemData) => renderItem(itemData, navigation)}
-    />
+    <View>
+      <Text>Under Development</Text>
+    </View>
+    // <FlatList
+    //   data={purchase}
+    //   keyExtractor={(item) => item.title}
+    //   renderItem={(itemData) => renderItem(itemData, navigation)}
+    // />
   );
 };
 

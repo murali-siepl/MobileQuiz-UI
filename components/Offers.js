@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import Heading from "./shared/Heading";
 import Accordion from 'react-native-collapsible/Accordion';
+import CustomButton from "./../components/shared/Button";
 
 const SECTIONS = [
   {
@@ -20,7 +21,7 @@ const SECTIONS = [
     content: {
       question: "10",
       time: "10",
-      type: "free",
+      type: "Free",
     },
   },
   {
@@ -32,7 +33,7 @@ const SECTIONS = [
     content: {
       question: "10",
       time: "10",
-      type: "free",
+      type: "Free",
     },
   },
   {
@@ -44,7 +45,7 @@ const SECTIONS = [
     content: {
       question: "10",
       time: "10",
-      type: "free",
+      type: "Free",
     },
   },
 ];
@@ -84,7 +85,19 @@ const Offers = (props) => {
   const _renderContent = (section) => {
     return (
       <View style={styles.content}>
-        <Text style={styles.contentTitle}>Top 10 Quiz</Text>
+        <View style={styles.spaceBetween}>
+          <Text style={styles.contentTitle}>Top 10 Quiz</Text>
+          <CustomButton
+            onPress={() => {
+              navigation.navigate("");
+            }}
+            touchWidth="30%"
+            button={{ fontSize: 14 }}
+            style={{ paddingHorizontal: 10, marginBottom: 18 }}
+          >
+            Play Now
+          </CustomButton>
+        </View>
         <View style={styles.spaceBetween}>
           <View style={styles.spaceBetweenH}>
             <Text style={styles.contentHead}>{section.content.question}</Text>
@@ -123,6 +136,16 @@ const Offers = (props) => {
           <Text style={styles.text}>
             Lets Play Quiz And Win Exciting Prizes !!
           </Text>
+          <CustomButton
+            onPress={() => {
+              navigation.navigate("");
+            }}
+            touchWidth="30%"
+            button={{ fontSize: 15 }}
+            style={{ paddingHorizontal: 10 }}
+          >
+            Start Now
+          </CustomButton>
         </ImageBackground>
         <Heading style={styles.heading}>Recently Played Quiz</Heading>
         <Accordion
@@ -161,16 +184,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#000",
     width: "60%",
-    marginLeft: 20,
+    marginLeft: 2,
   },
   imgBackground: {
     height: 180,
     opacity: 0.9,
     borderRadius: 10,
     display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "flex-start",
+    paddingLeft: 30,
   },
   heading: {
     fontSize: 24,

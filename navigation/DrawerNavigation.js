@@ -23,8 +23,10 @@ import LeadboardStack from "./stacks/LeadboardStack";
 import SettingsStack from "./stacks/SettingsStack";
 import helpFaqStack from "./stacks/HelpFaqStack";
 import RateusStack from "./stacks/RateusStack";
+import AboutStack from "./stacks/AboutStack";
 import { useDispatch } from "react-redux";
 import { logout } from "./../store/actions/Authenticate";
+
 
 const drawerDefaultStyles = {
   headerShown: false,
@@ -121,7 +123,7 @@ const DrawerStack = (props, navigation) => {
           drawerLabel: DrawerHomeLabel,
         }}
       />
-      <DrawerStackNavigator.Screen
+      {/* <DrawerStackNavigator.Screen
         name="EditProfile"
         component={EditProfile}
         options={{
@@ -138,12 +140,12 @@ const DrawerStack = (props, navigation) => {
             />
           ),
         }}
-      />
+      /> */}
       <DrawerStackNavigator.Screen
         name="Leadboard"
         component={LeadboardStack}
         options={{
-          title: "Leadershipboard",
+          title: "Ranking",
           headerLeft: () =>
             <NavigationDrawerStructure
               navigationProps={navigation}
@@ -187,7 +189,7 @@ const DrawerStack = (props, navigation) => {
       />
       <DrawerStackNavigator.Screen
         name="Aboutus"
-        component={GameRules}
+        component={AboutStack}
         options={{
           title: "About us",
           drawerIcon: (config) => (

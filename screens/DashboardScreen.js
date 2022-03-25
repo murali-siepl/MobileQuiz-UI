@@ -16,18 +16,18 @@ const DashboardScreen = (props) => {
   const { name } = useSelector((state) => state.auth);
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#1a232a" }}>
+    <View style={{ flex: 1, backgroundColor: "#1a232a", paddingBottom: 20 }}>
       <View style={styles.profileInfo}>
         <View style={styles.spaceBetween}>
-          <Text style={styles.name}>Hello, {name}</Text>
-          <Text
+          <Text style={styles.name}>Hello {name ? name : "Mohan"},</Text>
+          {/* <Text
             style={styles.level}
             onPress={() => {
               navigation.navigate("Offers");
             }}
           >
             Level 02
-          </Text>
+          </Text> */}
         </View>
         <Text style={styles.welcomeText}>Welcome To Quarts Quiz App</Text>
         <View style={styles.spaceBetween}>
@@ -42,7 +42,7 @@ const DashboardScreen = (props) => {
             </View>
           </View>
           <TouchableHighlight
-            onPress={() => navigation.navigate("FaqAndContact")}
+            onPress={() => navigation.navigate("Overview")}
           >
             <Image
               style={styles.imgQuiz}
@@ -72,7 +72,7 @@ const DashboardScreen = (props) => {
         }}
       >
         <Tab.Screen name="My Quiz" component={MyQuiz} />
-        <Tab.Screen name="Achievement" component={Achievement} />
+        {/* <Tab.Screen name="Achievement" component={Achievement} /> */}
         <Tab.Screen name="My Purchase" component={Purchase} />
       </Tab.Navigator>
     </View>
