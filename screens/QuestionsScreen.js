@@ -37,6 +37,7 @@ const QuestionsScreen = (props) => {
           question={dummyQuestions[index].question}
           nextQuestion={nextQuestion}
           show={show}
+          answer={dummyQuestions[index].answer}
           totalQuestions={dummyQuestions.length}
         />
       </View>

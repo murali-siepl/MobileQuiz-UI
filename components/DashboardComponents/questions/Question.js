@@ -54,8 +54,22 @@ const Question = (props) => {
           {props.options.map((opt, i) => (
             <Option
               key={i}
-              style={selectedOption === opt && styles.selected}
+              style={
+                selectedOption === props.answer &&
+                opt === props.answer &&
+                styles.correct
+              }
+              styleWrong={
+                selectedOption === opt && opt !== props.answer && styles.wrong
+              }
+              styleCorrect={
+                selectedOption && opt === props.answer && styles.correct
+              }
+              selectedOption={selectedOption}
               styleText={selectedOption === opt && styles.selectedText}
+              styledTextCorrect={
+                selectedOption && opt === props.answer && styles.selectedText
+              }
               index={i}
               onPress={() => {
                 setOption(opt);
@@ -118,9 +132,13 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     marginVertical: 15,
   },
-  selected: {
-    borderColor: "orange",
-    backgroundColor: "orange",
+  correct: {
+    borderColor: "#0BFD63",
+    backgroundColor: "#0BFD63",
+  },
+  wrong: {
+    borderColor: "#FF4949",
+    backgroundColor: "#FF4949",
   },
   selectedText: {
     color: "#000",

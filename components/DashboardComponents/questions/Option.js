@@ -1,12 +1,24 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  ProgressViewIOSComponent,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Color from "../../../constants/Color";
 
 const Option = (props) => {
   return (
     <TouchableOpacity
       onPress={props.onPress}
-      style={{ ...styles.option, ...props.style }}
+      style={{
+        ...styles.option,
+        ...props.style,
+        ...props.styleWrong,
+        ...props.styleCorrect,
+      }}
+      disabled={props.selectedOption}
       activeOpacity={0.3}
     >
       <Text style={{ ...styles.type, ...props.styleText }}>
@@ -15,7 +27,13 @@ const Option = (props) => {
         {props.index === 2 && "C."}
         {props.index === 3 && "D."}
       </Text>
-      <Text style={{ ...styles.text, ...props.styleText }}>
+      <Text
+        style={{
+          ...styles.text,
+          ...props.styleText,
+          ...props.styledTextCorrect,
+        }}
+      >
         {props.children}
       </Text>
     </TouchableOpacity>

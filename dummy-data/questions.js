@@ -5,16 +5,16 @@ export const dummyQuestions = [
     answer: "Kalpana Chawla",
     options: [
       "Kalpana Chawla",
-      " Sunita Williams",
+      "Sunita Williams",
       "Koneru Humpy",
       " None of the above",
     ],
   },
   {
     question: " Who was the first Indian to go to space?",
-    answer: " Rakesh Sharma",
+    answer: "Rakesh Sharma",
     options: [
-      " Vikram Ambalal",
+      "Vikram Ambalal",
       "Ravish Malhotra",
       "Rakesh Sharma",
       "Nagapathi Bhat",
