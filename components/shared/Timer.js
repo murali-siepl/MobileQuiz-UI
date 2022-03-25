@@ -13,9 +13,12 @@ export default function Timer(props) {
         ["#F7B801", 0.4],
         ["#A30000", 0.2],
       ]}
-      onComplete={() => {
-        props.nextQuestion();
+      onComplete={(time) => {
+        props.nextQuestion(time);
         return [true];
+      }}
+      children={(remainingTime) => {
+        console.log(remainingTime);
       }}
       size={40}
       strokeWidth={6}

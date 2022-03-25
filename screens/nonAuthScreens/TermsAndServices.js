@@ -75,19 +75,31 @@ const TermsAndServices = (props) => {
             shall have the same meaning regardless of whether they appear in
             singular or in plural.
           </Text>
-          <CustomButton
-            touchWidth="100%"
-            style={{ backgroundColor: "#fb4141" }}
-            onPress={() => {
-              params.setCheck2(false);
-              props.navigation.navigate("Start");
-            }}
-          >
-            I Disagree
-          </CustomButton>
+          {params.check2 ? (
+            <CustomButton
+              touchWidth="100%"
+              style={{ backgroundColor: "#fb4141" }}
+              onPress={() => {
+                params.setCheck2(false);
+                props.navigation.navigate("Start");
+              }}
+            >
+              I Disagree
+            </CustomButton>
+          ) : (
+            <CustomButton
+              touchWidth="100%"
+              onPress={() => {
+                params.setCheck2(true);
+                props.navigation.navigate("Start");
+              }}
+            >
+              I Agree
+            </CustomButton>
+          )}
           <BackToHome
             onPress={() => {
-              params.setCheck2(true);
+              // params.setCheck2(true);
               props.navigation.navigate("Start");
             }}
             next={true}

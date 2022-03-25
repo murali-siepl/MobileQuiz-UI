@@ -39,7 +39,11 @@ export default MainStack = () => (
       options={FeedbacknavigationOptions}
     />
 
-    <MainStackNavigator.Screen name="Questions" component={QuestionsScreen} />
+    <MainStackNavigator.Screen
+      name="Questions"
+      component={QuestionsScreen}
+      options={{ headerTitle: "Questionaire" }}
+    />
     <MainStackNavigator.Screen
       name="Instructions"
       component={Instructions}
