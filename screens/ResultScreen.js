@@ -33,7 +33,7 @@ const ResultScreen = (props) => {
           <DisplayItem label="Total No. Answered :" text={answered} />
           <DisplayItem label="Total No.Unanswered :" text={skip} />
           <DisplayItem label="Total No. Skiped :" text={notAnswered} />
-          <DisplayItem label="Total Time Taken :" text={notAnswered} />
+          <DisplayItem label="Total Time Taken :" text="3.15Sec" />
 
           <CustomButton
             touchWidth="100%"
