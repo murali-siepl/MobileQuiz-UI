@@ -7,6 +7,7 @@ import {
   ImageBackground,
   Image,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import Heading from "./shared/Heading";
 import Accordion from 'react-native-collapsible/Accordion';
 import CustomButton from "./../components/shared/Button";
@@ -51,6 +52,8 @@ const SECTIONS = [
 ];
 
 const Offers = (props) => {
+  const navigation = useNavigation();
+
   const [activeSections, setActiveSections] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
 
@@ -89,7 +92,7 @@ const Offers = (props) => {
           <Text style={styles.contentTitle}>Top 10 Quiz</Text>
           <CustomButton
             onPress={() => {
-              navigation.navigate("");
+              navigation.navigate("Instructions");
             }}
             touchWidth="30%"
             button={{ fontSize: 14 }}
@@ -138,7 +141,7 @@ const Offers = (props) => {
           </Text>
           <CustomButton
             onPress={() => {
-              navigation.navigate("");
+              navigation.navigate("Instructions");
             }}
             touchWidth="30%"
             button={{ fontSize: 15 }}

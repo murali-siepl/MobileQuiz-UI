@@ -38,7 +38,7 @@ const ResultScreen = (props) => {
           <CustomButton
             touchWidth="100%"
             onPress={() => {
-              props.navigation.replace("Dashboard");
+              props.navigation.navigate("Overview");
             }}
             style={{ marginTop: 20 }}
           >

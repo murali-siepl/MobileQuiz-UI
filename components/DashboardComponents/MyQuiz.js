@@ -9,7 +9,7 @@ const MyQuiz = (props) => {
   const renderItem = ({ item }) => (
     <TouchableNativeFeedback
       onPress={() => {
-        navigation.navigate("Instructions", {
+        navigation.navigate("Quiz Categories", {
           subject: item.subject,
         });
         // navigation.navigate("Result", {
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "white",
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
     margin: 10,
     width: 0,
