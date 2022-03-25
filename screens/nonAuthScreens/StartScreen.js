@@ -67,6 +67,7 @@ const StartScreen = ({ navigation }) => {
               onPress={() => {
                 navigation.navigate("PrivacyPolicy", {
                   setCheck1: setCheck1,
+                  check1: check1,
                 });
               }}
             >
@@ -90,6 +91,7 @@ const StartScreen = ({ navigation }) => {
               onPress={() => {
                 navigation.navigate("TermsOfService", {
                   setCheck2: setCheck2,
+                  check2: check2,
                 });
               }}
             >

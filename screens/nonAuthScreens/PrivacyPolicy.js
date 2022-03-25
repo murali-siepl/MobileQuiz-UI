@@ -74,20 +74,32 @@ const PrivacyPolicy = (props) => {
             shall have the same meaning regardless of whether they appear in
             singular or in plural.
           </Text>
-          <CustomButton
-            touchWidth="100%"
-            style={{ backgroundColor: "#fb4141" }}
-            onPress={() => {
-              params.setCheck1(false);
-              props.navigation.navigate("Start");
-            }}
-          >
-            I Disagree
-          </CustomButton>
+          {params.check1 ? (
+            <CustomButton
+              touchWidth="100%"
+              style={{ backgroundColor: "#fb4141" }}
+              onPress={() => {
+                params.setCheck1(false);
+                props.navigation.navigate("Start");
+              }}
+            >
+              I Disagree
+            </CustomButton>
+          ) : (
+            <CustomButton
+              touchWidth="100%"
+              onPress={() => {
+                params.setCheck1(true);
+                props.navigation.navigate("Start");
+              }}
+            >
+              I Agree
+            </CustomButton>
+          )}
           <BackToHome
             onPress={() => {
               props.navigation.navigate("Start");
-              params.setCheck1(true);
+              // params.setCheck1(true);
             }}
             next={true}
           />

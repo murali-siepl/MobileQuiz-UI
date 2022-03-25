@@ -4,7 +4,6 @@ import Input from "./../shared/Input";
 import CustomButton from "./../shared/Button";
 import Colors from "../../constants/Color";
 import { useDispatch, useSelector } from "react-redux";
-
 import { Formik } from "formik";
 import loginValidationSchema from "../../validationSchema/Login";
 import { ActivityIndicator } from "react-native";
