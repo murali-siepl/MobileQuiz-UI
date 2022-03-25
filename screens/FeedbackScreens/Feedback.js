@@ -16,10 +16,18 @@ import { feedbackValidationSchema } from "../../validationSchema";
 import CustomButton, { BackToHome } from "./../../components/shared/Button";
 import Colors from "./../../constants/Color";
 import Dropdown from "./../../components/shared/Dropdown";
+import { ActivityIndicator } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { userFeedback } from "./../../store/actions/Feedback";
+import { log } from "react-native-reanimated";
 
 export const Feedback = ({ navigation }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
+  const dispatch = useDispatch();
+  const { loading, token } = useSelector((state) => state.auth);
+
+  console.log(loading);
   const [items, setItems] = useState([
     { label: "Maths", value: "Maths" },
     { label: "GK", value: "GK" },
@@ -39,7 +47,10 @@ export const Feedback = ({ navigation }) => {
           message: "",
         }}
         validationSchema={feedbackValidationSchema}
-        onSubmit={(values) => {}}
+        onSubmit={(values) => {
+          console.log(values);
+          dispatch(userFeedback(values, token));
+        }}
         style={{ width: "100%", flex: 1 }}
       >
         {({
@@ -122,19 +133,24 @@ export const Feedback = ({ navigation }) => {
                 />
               </View>
               <View style={styles.buttons}>
-                <CustomButton
-                  onPress={handleSubmit}
-                  touchWidth="100%"
-                  button={{ fontSize: 15 }}
-                  style={{
-                    paddingHorizontal: 10,
-                    borderRadius: 5,
-                    backgroundColor: Colors.darkGreen,
-                  }}
-                >
-                  Submit
-                </CustomButton>
-                <BackToHome />
+                {loading ? (
+                  <ActivityIndicator color="red" size="large" />
+                ) : (
+                  <CustomButton
+                    onPress={handleSubmit}
+                    touchWidth="100%"
+                    button={{ fontSize: 15 }}
+                    style={{
+                      paddingHorizontal: 10,
+                      borderRadius: 5,
+                      backgroundColor: Colors.darkGreen,
+                    }}
+                  >
+                    Submit
+                  </CustomButton>
+                )}
+
+                <BackToHome navigation={navigation} />
               </View>
             </ScrollView>
           </View>

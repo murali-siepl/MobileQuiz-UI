@@ -1,7 +1,4 @@
-import { useSelector } from "react-redux";
-
-export function authHeader() {
-  const { token } = useSelector((state) => state.auth);
+export function authHeader(token) {
   if (token) {
     return {
       Authorization: "Bearer " + token,
