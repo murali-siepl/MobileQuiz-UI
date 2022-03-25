@@ -16,6 +16,7 @@ import Leadboard, {
 } from "../../components/SettingsComponents/Leadboard";
 import Ranking from "../../components/SettingsComponents/Ranking";
 import Offers from "../../components/Offers";
+import Welcome from "../../components/Welcome";
 import FaqAndContact from "../../components/DashboardComponents/FaqAndContact";
 
 const defaultOptions = {
@@ -50,7 +51,8 @@ export default MainStack = () => (
     />
     <MainStackNavigator.Screen name="Result" component={ResultScreen} />
     <MainStackNavigator.Screen name="FaqAndContact" component={FaqAndContact} />
-    <MainStackNavigator.Screen name="Ranking" component={Ranking} />
-    <MainStackNavigator.Screen name="Offers" component={Offers} />
+    <MainStackNavigator.Screen name="Overview" component={Ranking} />
+    <MainStackNavigator.Screen name="Quiz Categories" component={Offers} />
+    <MainStackNavigator.Screen name="About" component={Welcome} />
   </MainStackNavigator.Navigator>
 );

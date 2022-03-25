@@ -1,52 +1,52 @@
 export const myQuiz = [
   {
     color: "#B42B51",
-    subject: "Maths",
+    subject: "GK",
     number: 1,
-    img: require("../assets/images/dashboard-img/d-img-0.png"),
-  },
-  {
-    color: "#B5FFD9",
-    subject: "Physics",
-    number: 2,
-    img: require("../assets/images/dashboard-img/d-img-1.png"),
-  },
-  {
-    color: "#FDD2BF",
-    subject: "Science",
-    number: 3,
     img: require("../assets/images/dashboard-img/d-img-2.png"),
   },
   {
+    color: "#B5FFD9",
+    subject: "Sport",
+    number: 2,
+    img: require("../assets/images/dashboard-img/d-img-5.png"),
+  },
+  {
+    color: "#FDD2BF",
+    subject: "Entertainment",
+    number: 3,
+    img: require("../assets/images/dashboard-img/d-img-1.png"),
+  },
+  {
     color: "#7FC8A9",
-    subject: "History",
+    subject: "Maths",
     number: 4,
-    img: require("../assets/images/dashboard-img/d-img-3.png"),
+    img: require("../assets/images/dashboard-img/d-img-4.png"),
   },
   {
     color: "#B4B897",
-    subject: "GK",
+    subject: "Science",
     number: 5,
-    img: require("../assets/images/dashboard-img/d-img-4.png"),
+    img: require("../assets/images/dashboard-img/d-img-0.png"),
   },
 
   {
     color: "#EFB7B7",
-    subject: "Chemistry",
+    subject: "Social Studies",
     number: 6,
-    img: require("../assets/images/dashboard-img/d-img-5.png"),
+    img: require("../assets/images/dashboard-img/d-img-3.png"),
   },
   {
     color: "#001E6C",
-    subject: "Biology",
+    subject: "Arts and Literature",
     number: 7,
-    img: require("../assets/images/dashboard-img/d-img-0.png"),
+    img: require("../assets/images/dashboard-img/d-img-3.png"),
   },
   {
     color: "#7C83FD",
-    subject: "Aptitude",
+    subject: "Nature and Wildlife",
     number: 8,
-    img: require("../assets/images/dashboard-img/d-img-1.png"),
+    img: require("../assets/images/dashboard-img/d-img-3.png"),
   },
 ];
 
