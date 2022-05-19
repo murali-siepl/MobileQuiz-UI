@@ -15,7 +15,7 @@ const Input = (props) => {
           ...styles.input,
           borderColor: textInputReference.current?.isFocused()
             ? Colors.green
-            : "#1B222A",
+            : "#BBBBBB82",
         }}
         placeholder={props.holder}
         placeholderTextColor="#999999"
@@ -61,11 +61,11 @@ const styles = StyleSheet.create({
     width: "90%",
   },
   input: {
-    borderColor: "#1B222A",
+    borderColor: "#BBBBBB82",
     borderWidth: 1,
     backgroundColor: "#151B21",
     width: "100%",
-    fontSize: 12,
+    fontSize: 15,
     paddingVertical: 10,
     paddingHorizontal: 10,
     borderRadius: 10,

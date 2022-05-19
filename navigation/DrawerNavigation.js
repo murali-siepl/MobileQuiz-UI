@@ -21,6 +21,7 @@ import {
 import MainStack from "./stacks/MainStack";
 import LeadboardStack from "./stacks/LeadboardStack";
 import SettingsStack from "./stacks/SettingsStack";
+import SubscriptionStack from "./stacks/SubscriptionStack";
 import helpFaqStack from "./stacks/HelpFaqStack";
 import RateusStack from "./stacks/RateusStack";
 import AboutStack from "./stacks/AboutStack";
@@ -164,6 +165,20 @@ const DrawerStack = (props, navigation) => {
         component={SettingsStack}
         options={{
           title: "Settings",
+          drawerIcon: (config) => (
+            <Image
+              source={require('../assets/images/left-menu/settings.png')}
+              fadeDuration={0}
+              style={{ width: 25, height: 25 }}
+            />
+          ),
+        }}
+      />
+      <DrawerStackNavigator.Screen
+        name="Subscription"
+        component={SubscriptionStack}
+        options={{
+          title: "Subscription",
           drawerIcon: (config) => (
             <Image
               source={require('../assets/images/left-menu/settings.png')}
