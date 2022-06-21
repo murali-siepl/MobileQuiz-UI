@@ -1,10 +1,10 @@
 {
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
-  "expoServerPort": null,
+  "expoServerNgrokUrl": "https://m9-d8e.anonymous.mobilequiz.exp.direct",
+  "packagerNgrokUrl": "https://m9-d8e.anonymous.mobilequiz.exp.direct",
+  "ngrokPid": 18736,
+  "expoServerPort": 19000,
   "devToolsPort": 19002,
-  "packagerPort": null,
+  "packagerPort": 19000,
   "packagerPid": null,
   "webpackServerPort": null
 }

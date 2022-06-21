@@ -2,7 +2,8 @@ import { authHeader } from "./../../helpers";
 import { setLoading } from "./Authenticate";
 import SuccessModal from "./../../components/shared/SuccessModal";
 import ErrorModal from "./../../components/shared/ErrorModal";
-import { config } from "./../../helpers/config";
+// import { config } from "./../../helpers/config";
+import { config } from "./../../helpers/api";
 
 export const userFeedback = (values, token) => {
   return async (dispatch) => {

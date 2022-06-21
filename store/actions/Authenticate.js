@@ -1,5 +1,5 @@
 import { AUTHENTICATE, LOGOUT, SET_LOADING } from "../constants/Authenticate";
-import { config } from "./../../helpers/config";
+import Auth from '../../helpers/routes';
 import { DID_TRY_LOGIN } from "./../constants/Authenticate";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ErrorModal from "./../../components/shared/ErrorModal";
@@ -23,28 +23,43 @@ export const logout = () => {
   return { type: LOGOUT };
 };
 
-export const signInOrUp = (values, route) => {
+export const signInOrUp = (values, path) => {
   return async (dispatch) => {
     dispatch(setLoading());
-    const requestOptions = Headers(values);
-    try {
-      const response = await fetch(
-        config.api_url + "/" + route,
-        requestOptions
-      );
+    const params = values;
+    console.log(params, path);
 
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message);
-      }
-      const responseData = await response.json();
-      const { token, userId, email, name } = responseData;
-      saveDataToStorage(token, userId, email, name);
-      dispatch(authenticate(token, userId, email, name));
-    } catch (e) {
-      ErrorModal(e);
+    if (path === "login") {
+      Auth.login(params).then(({ data, error }) => {
+        if (error) {
+          dispatch(setLoading());
+          console.log("error: " + JSON.stringify(error));
+          ErrorModal(error?.data?.message || "Error");
+        } else {
+          dispatch(setLoading());
+          console.log("data: " + JSON.stringify(data));
+          if(data.code == 200){
+            saveDataToStorage(data.results.token);
+          }
+          const { token, userId, email, name } = data.results;
+          saveDataToStorage(token, userId, email, name);
+          dispatch(authenticate(token, userId, email, name));
+        }
+      });
+    } else {
+      Auth.signup(params).then(({ data, error }) => {
+        if (error) {
+          dispatch(setLoading());
+          console.log("error: " + JSON.stringify(error));
+          ErrorModal(error?.data?.message || "Error");
+        } else {
+          dispatch(setLoading());
+          const { token, userId, email, name } = data;
+          saveDataToStorage(token, userId, email, name);
+          dispatch(authenticate(token, userId, email, name));
+        }
+      });
     }
-    dispatch(setLoading());
   };
 };
 
