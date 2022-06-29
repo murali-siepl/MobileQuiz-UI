@@ -3,6 +3,7 @@ import { View, Text, Image } from "react-native";
 import { DrawerHomeLabel } from "./DrawerLabel";
 import { DrawerCustomLabel } from "./DrawerCustomLabel";
 import EditProfile from "./../screens/DrawerScreens/EditProfile";
+// import Profile from "./../screens/DrawerScreens/Profile";
 import {
   AntDesign,
   Entypo,
@@ -26,6 +27,7 @@ import SubscriptionStack from "./stacks/SubscriptionStack";
 import helpFaqStack from "./stacks/HelpFaqStack";
 import RateusStack from "./stacks/RateusStack";
 import AboutStack from "./stacks/AboutStack";
+import ProfileStack from "./stacks/ProfileStack";
 import { useDispatch } from "react-redux";
 import { logout } from "./../store/actions/Authenticate";
 
