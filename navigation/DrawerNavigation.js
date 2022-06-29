@@ -21,6 +21,7 @@ import {
 } from "@react-navigation/drawer";
 import MainStack from "./stacks/MainStack";
 import LeadboardStack from "./stacks/LeadboardStack";
+import MyProfile from "./stacks/MyProfile";
 import SettingsStack from "./stacks/SettingsStack";
 import SubscriptionStack from "./stacks/SubscriptionStack";
 import helpFaqStack from "./stacks/HelpFaqStack";
@@ -127,12 +128,10 @@ const DrawerStack = (props, navigation) => {
         }}
       />
       <DrawerStackNavigator.Screen
-        // name="EditProfile"
-        name="Profile"
-        // component={EditProfile}
-        component={ProfileStack}
+        name="MyProfile"
+        component={MyProfile}
         options={{
-          title: "Profile",
+          title: "My Profile",
           headerLeft: () =>
             <NavigationDrawerStructure
               navigationProps={navigation}
