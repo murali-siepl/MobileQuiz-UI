@@ -54,5 +54,6 @@ export default MainStack = () => (
     <MainStackNavigator.Screen name="Overview" component={Ranking} />
     <MainStackNavigator.Screen name="Quiz Categories" component={Offers} />
     <MainStackNavigator.Screen name="About" component={Welcome} />
+
   </MainStackNavigator.Navigator>
 );

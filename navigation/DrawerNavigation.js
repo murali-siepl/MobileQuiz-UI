@@ -3,6 +3,7 @@ import { View, Text, Image } from "react-native";
 import { DrawerHomeLabel } from "./DrawerLabel";
 import { DrawerCustomLabel } from "./DrawerCustomLabel";
 import EditProfile from "./../screens/DrawerScreens/EditProfile";
+// import Profile from "./../screens/DrawerScreens/Profile";
 import {
   AntDesign,
   Entypo,
@@ -25,6 +26,7 @@ import SubscriptionStack from "./stacks/SubscriptionStack";
 import helpFaqStack from "./stacks/HelpFaqStack";
 import RateusStack from "./stacks/RateusStack";
 import AboutStack from "./stacks/AboutStack";
+import ProfileStack from "./stacks/ProfileStack";
 import { useDispatch } from "react-redux";
 import { logout } from "./../store/actions/Authenticate";
 
@@ -124,9 +126,11 @@ const DrawerStack = (props, navigation) => {
           drawerLabel: DrawerHomeLabel,
         }}
       />
-      {/* <DrawerStackNavigator.Screen
-        name="EditProfile"
-        component={EditProfile}
+      <DrawerStackNavigator.Screen
+        // name="EditProfile"
+        name="Profile"
+        // component={EditProfile}
+        component={ProfileStack}
         options={{
           title: "Profile",
           headerLeft: () =>
@@ -141,7 +145,7 @@ const DrawerStack = (props, navigation) => {
             />
           ),
         }}
-      /> */}
+      />
       <DrawerStackNavigator.Screen
         name="Leadboard"
         component={LeadboardStack}

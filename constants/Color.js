@@ -12,4 +12,5 @@ export default Colors = {
   inputBackGround: "#151B21",
   lightGrey: "#23313C",
   borderColor: "#2E4150",
+  darkGray:'#161E25'
 };
