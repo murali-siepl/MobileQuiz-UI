@@ -48,7 +48,6 @@ export const Feedback = ({ navigation }) => {
         }}
         validationSchema={feedbackValidationSchema}
         onSubmit={(values) => {
-          console.log(values);
           dispatch(userFeedback(values, token));
         }}
         style={{ width: "100%", flex: 1 }}
