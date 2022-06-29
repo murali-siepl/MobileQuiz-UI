@@ -42,7 +42,7 @@ const DashboardScreen = (props) => {
             </View>
           </View>
           <TouchableHighlight
-            onPress={() => navigation.navigate("Overview")}
+            onPress={() => navigation.navigate("Feedback")}
           >
             <Image
               style={styles.imgQuiz}

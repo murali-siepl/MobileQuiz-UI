@@ -71,21 +71,33 @@ export const forgetPassword = (values, navigation, mobile) => {
       mobile ? { type: "mobile", mobile: values.phone } : values
     );
 
-    try {
-      const response = await fetch(
-        config.api_url + "/forgetPassword",
-        requestOptions
-      );
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message);
+    const params = requestOptions;
+
+    Auth.forgetPassword(params).then(({ data, error }) => {
+      if (error) {
+        dispatch(setLoading());
+        console.log("error: " + JSON.stringify(error));
+        ErrorModal(error?.data?.message || "Error");
+      } else {
+        dispatch(setLoading());
+        navigation.navigate("Reset", { email: values.email });
       }
-      const responseData = await response.json();
-      navigation.navigate("Reset", { email: values.email });
-    } catch (e) {
-      ErrorModal(e);
-    }
-    dispatch(setLoading());
+    });
+
+    // try {
+    //   const response = await fetch(
+    //     config.api_url + "/forgetPassword",
+    //     requestOptions
+    //   );
+    //   if (!response.ok) {
+    //     const error = await response.json();
+    //     throw new Error(error.message);
+    //   }
+    //   const responseData = await response.json();
+    //   navigation.navigate("Reset", { email: values.email });
+    // } catch (e) {
+    //   ErrorModal(e);
+    // }
   };
 };
 export const resetPassword = (values, navigation, mode) => {
