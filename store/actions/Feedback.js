@@ -2,17 +2,18 @@ import { authHeader } from "./../../helpers";
 import { setLoading } from "./Authenticate";
 import SuccessModal from "./../../components/shared/SuccessModal";
 import ErrorModal from "./../../components/shared/ErrorModal";
-// import { config } from "./../../helpers/config";
-import { config } from "./../../helpers/api";
+import { config } from "./../../helpers/config";
+// import { config } from "./../../helpers/api";
 
 export const userFeedback = (values, token) => {
+  console.log(token)
   return async (dispatch) => {
     dispatch(setLoading());
-
     const requestOptions = {
       method: "POST",
       headers: authHeader(token),
       body: JSON.stringify(values),
+      redirect: 'follow'
     };
     console.log(requestOptions);
     try {
