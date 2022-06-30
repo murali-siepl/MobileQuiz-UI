@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "react-native";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
-
+import { useDispatch, useSelector } from "react-redux";
 import Login from "../../components/SignComponents/Login";
 import SignUp from "../../components/SignComponents/SignUp";
 import { globalStyles } from "../../constants/GlobalStyles";
@@ -10,6 +10,12 @@ import Heading from "./../../components/shared/Heading";
 
 const SignScreen = (props) => {
   const [login, setLogin] = useState(true);
+  const isAuth = useSelector((state) => state.auth.token);
+  useEffect(() => {
+    props.navigation.setOptions({
+      headerTitle: isAuth ? "Sign In" : "Sign Up",
+    });
+  }, [isAuth]);
   useEffect(() => {
     props.navigation.setOptions({
       headerTitle: login ? "Sign In" : "Sign Up",

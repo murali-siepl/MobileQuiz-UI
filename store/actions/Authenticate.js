@@ -5,6 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import ErrorModal from "./../../components/shared/ErrorModal";
 import { Alert } from "react-native";
 import { Headers } from "../../helpers";
+import SuccessModal from "../../components/shared/SuccessModal";
 
 export const didTryLogin = () => {
   return { type: DID_TRY_LOGIN };
@@ -27,7 +28,6 @@ export const signInOrUp = (values, path) => {
   return async (dispatch) => {
     dispatch(setLoading());
     const params = values;
-    console.log(params, path);
 
     if (path === "login") {
       Auth.login(params).then(({ data, error }) => {
@@ -54,7 +54,8 @@ export const signInOrUp = (values, path) => {
           ErrorModal(error?.data?.message || "Error");
         } else {
           dispatch(setLoading());
-          const { token, userId, email, name } = data;
+          const { token, userId, email, name } = data.results;
+          SuccessModal(`${email} is Success register with us`)
           saveDataToStorage(token, userId, email, name);
           dispatch(authenticate(token, userId, email, name));
         }

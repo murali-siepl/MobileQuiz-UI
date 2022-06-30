@@ -76,6 +76,7 @@ const SignUp = () => {
             value={values.email}
             keyboardType="email-address"
             label="Email Id"
+            autoCapitalize="none"
             error={errors.email}
             touched={touched.email}
           />
