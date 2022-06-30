@@ -41,10 +41,11 @@ export const Feedback = ({ navigation }) => {
     <View style={styles.container}>
       <Formik
         initialValues={{
-          name: "",
+          fullName: "",
           email: "",
           subject: "",
           message: "",
+          description: ""
         }}
         validationSchema={feedbackValidationSchema}
         onSubmit={(values) => {
@@ -86,13 +87,13 @@ export const Feedback = ({ navigation }) => {
               />
               <View style={{ width: "100%" }}>
                 <Input
-                  placeholder="Write your name"
-                  onChangeText={handleChange("name")}
-                  onBlur={handleBlur("name")}
-                  value={values.name}
-                  error={errors.name}
-                  touched={touched.name}
-                  label="Name"
+                  placeholder="Write your full name"
+                  onChangeText={handleChange("fullName")}
+                  onBlur={handleBlur("fullName")}
+                  value={values.fullName}
+                  error={errors.fullName}
+                  touched={touched.fullName}
+                  label="Full Name"
                 />
                 <Input
                   placeholder="Write your email"

@@ -8,26 +8,19 @@ import { config } from "./../../helpers/api";
 
 export const userFeedback = (values, token) => {
   return async (dispatch) => {
-    // dispatch(setLoading());
+    dispatch(setLoading());
     const params = values;
-    console.log(params, token);
 
     Auth.userFeedback(params).then(({ data, error }) => {
       if (error) {
-        // dispatch(setLoading());
+        dispatch(setLoading());
+        ErrorModal(error || "Error");
         console.log("error: " + JSON.stringify(error));
-        ErrorModal(error || "Errorrrr");
       } else {
-        // dispatch(setLoading());
+        dispatch(setLoading());
+        SuccessModal("Thank you for your feedback");
         console.log("data: " + JSON.stringify(data));
-        // if(data.code == 200){
-        //   saveDataToStorage(data.results.token);
-        // }
-        // const { token, userId, email, name } = data.results;
-        // saveDataToStorage(token, userId, email, name);
-        // dispatch(authenticate(token, userId, email, name));
       }
-      // dispatch(setLoading());
     });
 
     // const requestOptions = {
