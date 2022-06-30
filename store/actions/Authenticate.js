@@ -6,6 +6,7 @@ import ErrorModal from "./../../components/shared/ErrorModal";
 import { Alert } from "react-native";
 import { Headers } from "../../helpers";
 import SuccessModal from "../../components/shared/SuccessModal";
+import { config } from "../../helpers/config"; 
 
 export const didTryLogin = () => {
   return { type: DID_TRY_LOGIN };
@@ -67,7 +68,7 @@ export const signInOrUp = (values, path) => {
 export const forgetPassword = (values, navigation, mobile) => {
   return async (dispatch) => {
     dispatch(setLoading());
-
+  
     const requestOptions = Headers(
       mobile ? { type: "mobile", mobile: values.phone } : values
     );
@@ -82,7 +83,7 @@ export const forgetPassword = (values, navigation, mobile) => {
         throw new Error(error.message);
       }
       const responseData = await response.json();
-      navigation.navigate("Reset", { email: values.email });
+      navigation.navigate("Reset", { email: values.email,mobile:mobile});
     } catch (e) {
       ErrorModal(e);
     }

@@ -30,7 +30,6 @@ const Reset = (props) => {
   const [showConfPass, setShowConfPass] = useState(false);
 
   const route = useRoute();
-
   return (
     <View style={{ ...globalStyles.container, ...styles.container }}>
       <ScrollView
@@ -69,7 +68,7 @@ const Reset = (props) => {
               style={{ width: 100, paddingVertical: 5, marginLeft: 5 }}
               onPress={() => {
                 dispatch(
-                  forgetPassword(route.params, props.navigation, "resend")
+                  forgetPassword(route?.params, props.navigation, route?.params?.mobile)
                 );
               }}
             >
