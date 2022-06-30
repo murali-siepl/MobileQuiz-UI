@@ -129,7 +129,7 @@ const DrawerStack = (props, navigation) => {
       />
       <DrawerStackNavigator.Screen
         name="MyProfile"
-        component={MyProfile}
+        component={ProfileStack}
         options={{
           title: "My Profile",
           headerLeft: () =>
