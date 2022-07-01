@@ -10,27 +10,35 @@ import Accordion from "react-native-collapsible/Accordion";
 const SECTIONS = [
     {
         id: '01',
-        name: 'Question 01',
+        name: 'What is QUARTS MOBILE?',
         img: '',
         pts: '11',
         img: require("../../assets/images/ava.png"),
-        content: ";laskdfjasdl;kf sdlfkj aslkfj aslfkj aslfkj sadlfkjsflksadj adslkf",
+        content: "QUARTS MOBILE is the latest knowledge-based fun learning and gaming app in India containing number of questions from different branches of studies, languages and exciting formats on the platform. QUARTS MOBILE is only available for people who are above 18 years of age and below the age of 26 years.",
     },
     {
         id: '02',
-        name: 'Question 02',
+        name: 'Is QUARTS MOBILE a safe quiz gaming platform?',
         img: '',
         pts: '22',
         img: require("../../assets/images/ava.png"),
-        content: ";laskdfjasdl;kf sdlfkj aslkfj aslfkj aslfkj sadlfkjsflksadj adslkf",
+        content: "QUARTS MOBILE is an absolutely safe and secure quiz gaming platform which ensures that all the games listed on the platform are fair. We have enhanced levels of fraud detection mechanisms to restrict fraudulent play and/or players thereby making QUARTS MOBILE a fair and safe platform for playing quiz games.",
     },
     {
         id: '03',
-        name: 'Question 03',
+        name: 'Is QUARTS MOBILE available for Android as well as iOS devices?',
         img: '',
         pts: '33',
         img: require("../../assets/images/ava.png"),
-        content: ";laskdfjasdl;kf sdlfkj aslkfj aslfkj aslfkj sadlfkjsflksadj adslkf",
+        content: "The QUARTS MOBILE app is available for both Android and iOS users.",
+    },
+    {
+        id: '04',
+        name: 'DO I have to subscribe before playing the quiz?',
+        img: '',
+        pts: '44',
+        img: require("../../assets/images/ava.png"),
+        content: "Subscription is not necessary for playing the game however if you subscribe you have a more chances of winning the prize as you will have more contest and events for participation",
     },
 
 ];
@@ -117,7 +125,7 @@ const FaqAndContact = (props) => {
                             style={styles.imgLeft}
                             source={require("../../assets/images/contact-web.png")}
                         />
-                        <Text style={styles.subName}>https://www.quizcompany.com</Text>
+                        <Text style={styles.subName}>https://www.quartsworld.com </Text>
                     </View>
                     <View style={styles.spaceBetween}>
                         <Image
@@ -131,14 +139,14 @@ const FaqAndContact = (props) => {
                             style={styles.imgLeft}
                             source={require("../../assets/images/contact-mail.png")}
                         />
-                        <Text style={styles.subName}>test@mail.com</Text>
+                        <Text style={styles.subName}>support@quartsworld.com</Text>
                     </View>
                     <View style={styles.spaceBetween}>
                         <Image
                             style={styles.imgLeft}
                             source={require("../../assets/images/contact-loc.png")}
                         />
-                        <Text style={styles.subName}>location</Text>
+                        <Text style={styles.subName}>Bangalore Karnataka</Text>
                     </View>
 
                     <View>

@@ -294,7 +294,8 @@ const Profile = ({ navigation }) => {
             style={styles.arrowDown}
           />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.myPaymentProfile} onPress={() => {
+        {/* ////////////////////My privacy///////////////////  */}
+        {/* <TouchableOpacity style={styles.myPaymentProfile} onPress={() => {
           // props.data.navigation.navigate("");
           console.log("button pressed")
         }}>
@@ -311,7 +312,8 @@ const Profile = ({ navigation }) => {
             fadeDuration={0}
             style={styles.arrowDown}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        {/* ////////////////////My privacy///////////////////  */}
       </View>
       {/* rewards container */}
 
