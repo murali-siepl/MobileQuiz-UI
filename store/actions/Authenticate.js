@@ -3,6 +3,7 @@ import Auth from '../../helpers/routes';
 import { DID_TRY_LOGIN } from "./../constants/Authenticate";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ErrorModal from "./../../components/shared/ErrorModal";
+import SuccessModal from "./../../components/shared/SuccessModal";
 import { Alert } from "react-native";
 import { Headers } from "../../helpers";
 
@@ -42,7 +43,6 @@ export const signInOrUp = (values, path) => {
             saveDataToStorage(data.results.token);
           }
           const { token, userId, email, name } = data.results;
-          saveDataToStorage(token, userId, email, name);
           dispatch(authenticate(token, userId, email, name));
         }
       });
@@ -55,8 +55,9 @@ export const signInOrUp = (values, path) => {
         } else {
           dispatch(setLoading());
           const { token, userId, email, name } = data;
-          saveDataToStorage(token, userId, email, name);
+          saveDataToStorage(userId, email, name);
           dispatch(authenticate(token, userId, email, name));
+          SuccessModal("SignIn is successful, Please login");
         }
       });
     }
@@ -84,20 +85,6 @@ export const forgetPassword = (values, navigation, mobile) => {
       }
     });
 
-    // try {
-    //   const response = await fetch(
-    //     config.api_url + "/forgetPassword",
-    //     requestOptions
-    //   );
-    //   if (!response.ok) {
-    //     const error = await response.json();
-    //     throw new Error(error.message);
-    //   }
-    //   const responseData = await response.json();
-    //   navigation.navigate("Reset", { email: values.email });
-    // } catch (e) {
-    //   ErrorModal(e);
-    // }
   };
 };
 export const resetPassword = (values, navigation, mode) => {

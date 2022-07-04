@@ -5,38 +5,38 @@ const logError = (error) => {
   console.log('system error: ', error);
 };
 
-webfox.interceptors.request.use(
-  async (config) => {
-    const userJson = await AsyncStorage.getItem("userData");
-    const transformedData = JSON.parse(userJson);
-    const { token } = transformedData;
+// webfox.interceptors.request.use(
+//   async (config) => {
+//     const userJson = await AsyncStorage.getItem("userData");
+//     const transformedData = JSON.parse(userJson);
+//     const { token } = transformedData;
 
-    webfox.defaults.headers.common['Authorization'] = token ? `Bearer ${token}` : '';
-    config.headers['Content-Type'] = "application/json";
-    config.headers['Authorization'] = token ? `Bearer ${token}` : '';
-    // config.headers.Authorization = token ? `Bearer ${token}` : '';
+//     webfox.defaults.headers.common['Authorization'] = token ? `Bearer ${token}` : '';
+//     config.headers['Content-Type'] = "application/json";
+//     config.headers['Authorization'] = token ? `Bearer ${token}` : '';
+//     // config.headers.Authorization = token ? `Bearer ${token}` : '';
 
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+//     return config;
+//   },
+//   (error) => Promise.reject(error)
+// );
 
-webfox.interceptors.response.use(
-  async (response) => {
-    return response;
-  },
-  (error) => {
-    if (error.response && error.response.status === 403) {
-      console.log("Error: " + JSON.stringify(error));
-      return Promise.reject(error);
-    } else if (error.response && error.response.status === 401) {
-      AsyncStorage.clear;
-      return Promise.reject(error);
-    } else {
-      return Promise.reject(error);
-    }
-  }
-);
+// webfox.interceptors.response.use(
+//   async (response) => {
+//     return response;
+//   },
+//   (error) => {
+//     if (error.response && error.response.status === 403) {
+//       console.log("Error: " + JSON.stringify(error));
+//       return Promise.reject(error);
+//     } else if (error.response && error.response.status === 401) {
+//       AsyncStorage.clear;
+//       return Promise.reject(error);
+//     } else {
+//       return Promise.reject(error);
+//     }
+//   }
+// );
 
 const exec = async (fn, params = null, error = null) => {
   const res = {

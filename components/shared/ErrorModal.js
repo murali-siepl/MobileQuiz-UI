@@ -2,9 +2,7 @@ import React from "react";
 import { Alert, StyleSheet, Text, View } from "react-native";
 
 const ErrorModal = (error) => {
-  Alert.alert("An Error Occured", error.message, [
-    { text: "ok", style: "cancel" },
-  ]);
+  Alert.alert("An Error Occured ! ", error, [{ text: "ok", style: "cancel" }]);
 };
 
 export default ErrorModal;
