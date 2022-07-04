@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "react-native";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
-
+import { useDispatch, useSelector } from "react-redux";
 import Login from "../../components/SignComponents/Login";
 import SignUp from "../../components/SignComponents/SignUp";
 import { globalStyles } from "../../constants/GlobalStyles";

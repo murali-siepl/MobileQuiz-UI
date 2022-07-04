@@ -38,11 +38,11 @@ const ResultScreen = (props) => {
           <CustomButton
             touchWidth="100%"
             onPress={() => {
-              props.navigation.replace("Overview");
+              props.navigation.replace("Feedback");
             }}
             style={{ marginTop: 20 }}
           >
-            Overview
+            Feedback
           </CustomButton>
           <BackToHome {...props} />
         </View>

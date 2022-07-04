@@ -42,6 +42,7 @@ const Login = (props) => {
             error={errors.email}
             autoComplete="email"
             label="Email"
+            autoCapitalize="none"
             touched={touched.email}
           />
           <View style={styles.password}>

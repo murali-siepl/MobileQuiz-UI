@@ -5,6 +5,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import ErrorModal from "./../../components/shared/ErrorModal";
 import { Alert } from "react-native";
 import { Headers } from "../../helpers";
+import SuccessModal from "../../components/shared/SuccessModal";
+import { config } from "../../helpers/config"; 
 
 export const didTryLogin = () => {
   return { type: DID_TRY_LOGIN };
@@ -27,7 +29,6 @@ export const signInOrUp = (values, path) => {
   return async (dispatch) => {
     dispatch(setLoading());
     const params = values;
-    console.log(params, path);
 
     if (path === "login") {
       Auth.login(params).then(({ data, error }) => {
@@ -54,7 +55,7 @@ export const signInOrUp = (values, path) => {
           ErrorModal(error?.data?.message || "Error");
         } else {
           dispatch(setLoading());
-          const { token, userId, email, name } = data;
+          const { token, userId, email, name } = data.results;
           saveDataToStorage(token, userId, email, name);
           dispatch(authenticate(token, userId, email, name));
         }
@@ -66,38 +67,26 @@ export const signInOrUp = (values, path) => {
 export const forgetPassword = (values, navigation, mobile) => {
   return async (dispatch) => {
     dispatch(setLoading());
-
+  
     const requestOptions = Headers(
       mobile ? { type: "mobile", mobile: values.phone } : values
     );
 
-    const params = requestOptions;
-
-    Auth.forgetPassword(params).then(({ data, error }) => {
-      if (error) {
-        dispatch(setLoading());
-        console.log("error: " + JSON.stringify(error));
-        ErrorModal(error?.data?.message || "Error");
-      } else {
-        dispatch(setLoading());
-        navigation.navigate("Reset", { email: values.email });
+    try {
+      const response = await fetch(
+        config.api_url + "/forgetPassword",
+        requestOptions
+      );
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message);
       }
-    });
-
-    // try {
-    //   const response = await fetch(
-    //     config.api_url + "/forgetPassword",
-    //     requestOptions
-    //   );
-    //   if (!response.ok) {
-    //     const error = await response.json();
-    //     throw new Error(error.message);
-    //   }
-    //   const responseData = await response.json();
-    //   navigation.navigate("Reset", { email: values.email });
-    // } catch (e) {
-    //   ErrorModal(e);
-    // }
+      const responseData = await response.json();
+      navigation.navigate("Reset", { email: values.email,mobile:mobile});
+    } catch (e) {
+      ErrorModal(e);
+    }
+    dispatch(setLoading());
   };
 };
 export const resetPassword = (values, navigation, mode) => {
