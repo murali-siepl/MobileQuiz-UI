@@ -1,18 +1,18 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
 import { DrawerHomeLabel } from "./DrawerLabel";
-import { DrawerCustomLabel } from "./DrawerCustomLabel";
-import EditProfile from "./../screens/DrawerScreens/EditProfile";
+// import { DrawerCustomLabel } from "./DrawerCustomLabel";
+// import EditProfile from "./../screens/DrawerScreens/EditProfile";
 // import Profile from "./../screens/DrawerScreens/Profile";
-import {
-  AntDesign,
-  Entypo,
-  Feather,
-  Ionicons,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
-import GameRules from "./../screens/DrawerScreens/GameRules";
-import CustomarCare from "./../screens/DrawerScreens/CustomarCare";
+// import {
+//   AntDesign,
+//   Entypo,
+//   Feather,
+//   Ionicons,
+//   MaterialCommunityIcons,
+// } from "@expo/vector-icons";
+// import GameRules from "./../screens/DrawerScreens/GameRules";
+// import CustomarCare from "./../screens/DrawerScreens/CustomarCare";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -21,13 +21,14 @@ import {
 } from "@react-navigation/drawer";
 import MainStack from "./stacks/MainStack";
 import LeadboardStack from "./stacks/LeadboardStack";
-import MyProfile from "./stacks/MyProfile";
+// import MyProfile from "./stacks/MyProfile";
 import SettingsStack from "./stacks/SettingsStack";
-import SubscriptionStack from "./stacks/SubscriptionStack";
+// import SubscriptionStack from "./stacks/SubscriptionStack";
 import helpFaqStack from "./stacks/HelpFaqStack";
 import RateusStack from "./stacks/RateusStack";
 import AboutStack from "./stacks/AboutStack";
 import ProfileStack from "./stacks/ProfileStack";
+import FeedbackStack from "./stacks/FeedbackStack";
 import { useDispatch } from "react-redux";
 import { logout } from "./../store/actions/Authenticate";
 
@@ -177,7 +178,21 @@ const DrawerStack = (props, navigation) => {
           ),
         }}
       />
-      <DrawerStackNavigator.Screen
+       <DrawerStackNavigator.Screen
+        name="FeedBack"
+        component={FeedbackStack}
+        options={{
+          title: "FeedBack",
+          drawerIcon: (config) => (
+            <Image
+              source={require('../assets/images/left-menu/settings.png')}
+              fadeDuration={0}
+              style={{ width: 25, height: 25 }}
+            />
+          ),
+        }}
+      />
+      {/* <DrawerStackNavigator.Screen
         name="Subscription"
         component={SubscriptionStack}
         options={{
@@ -190,7 +205,7 @@ const DrawerStack = (props, navigation) => {
             />
           ),
         }}
-      />
+      /> */}
       <DrawerStackNavigator.Screen
         name="FaqAndContact"
         component={helpFaqStack}

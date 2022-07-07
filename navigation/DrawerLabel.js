@@ -59,8 +59,8 @@ export const DrawerHomeLabel = (props) => {
           containerStyle={styles.avatarContainer}
         />
         <Text style={{ ...styles.title }}>Hello! Guestuser12</Text>
-        <Text style={{ ...styles.name }}>USERNAME: guestuser12</Text>
-        <Text style={{ ...styles.name }}>{name}Name</Text>
+        {/* <Text style={{ ...styles.name }}>USERNAME: guestuser12</Text>
+        <Text style={{ ...styles.name }}>{name}Name</Text> */}
 
       </View>
 
