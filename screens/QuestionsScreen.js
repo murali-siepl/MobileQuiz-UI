@@ -2,16 +2,60 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 
 import { dummyQuestions } from "./../dummy-data/questions";
+import axios from 'axios';
 import Question from "./../components/DashboardComponents/questions/Question";
 import Color from "../constants/Color";
 import { questions, userQuestion } from "../store/actions/Question";
 import { useDispatch, useSelector } from "react-redux";
 import Auth from '../helpers/routes';
 
+const baseUrl = 'http://23.102.128.226:5000/api';
 const answersList = [];
 const QuestionsScreen = (props) => {
+<<<<<<< HEAD
+
+  const [QuizQuesObj, setQuizQuesObj] = useState([]);
+  const [QuizQuesLen, setQuizQuesLen] = useState(0);
+  const [QuizQues, setQuizQues] = useState([]);
+
+  useEffect(() => {
+    getQuestionApi();
+  }, [])
+
+  const getQuestionApi = async () => {
+    try {
+      const configurationObject = {
+        method: 'get',
+        url: `${baseUrl}/quizzes/getQuizQ`,
+      }
+      const response = await axios(configurationObject);
+      if (response) {
+        console.log("dummy--------------------", props.route.params.subject);
+        console.log("rrrrrrrrrrrrrrrrrr========", response.data.results.createdQuiz);
+        if(response){
+          const Questions = response?.data?.results?.createdQuiz.map((e)=>{
+            if(props.route.params.subject.toLowerCase() === e?.title.toLowerCase()){
+              console.log("eeeeeeeeeee", e);
+              return e;
+            }
+          })
+          setQuizQuesObj(Questions)
+          setQuizQues(Questions.questions);
+          console.log("Questions.questions.lengthQuestions.questions.length", Questions.questions.length);
+          setQuizQuesLen(Questions.questions.length)
+        }
+      }
+    } catch (err) {
+      console.log("error", err);
+    }
+  }
+
+  // console.log('propspropspropspropspropspropsprops', props);
+
+=======
   const dispatch = useDispatch();
     const { name } = useSelector((state) => state.auth);
+>>>>>>> 19fa2e92c1832aadf03e7817c2c049cd9d7ecda6
   const [index, setIndex] = useState(0);
   const [show, setShow] = useState(true);
   const [result, setResult] = useState([]);
@@ -45,7 +89,11 @@ const QuestionsScreen = (props) => {
   }, [index]);
 
 
+<<<<<<< HEAD
+  console.log("Quizzzzzzzzzzzz", QuizQuesLen);
+=======
 
+>>>>>>> 19fa2e92c1832aadf03e7817c2c049cd9d7ecda6
 
   return (
     <View style={styles.container}>
