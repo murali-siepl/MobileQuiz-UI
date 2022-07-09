@@ -76,7 +76,7 @@ export const BackToHome = (props) => (
       >
         {props.next ? (
           <>
-            {"Next "}
+            {props.back ? "Back  " : "Next  "}
             <Image
               source={require("../../assets/images/Common/rightArrow.png")}
               style={{ width: 12, height: 12 }}

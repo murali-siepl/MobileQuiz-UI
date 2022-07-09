@@ -43,9 +43,20 @@ const userFeedback: any = async (params: any) => {
 };
 
 
+const userQuestions: any = async () => {
+  const res = await api.userQuestions().catch((e) => {
+    return { data: null, error: e };
+  });
+  const val: any = res ? res.data : null;
+
+  return { data: val ? val.data : null, error: res.error };
+};
+
+
 export default {
   login,
   signup,
   forgetPassword,
   userFeedback,
+  userQuestions,
 };
