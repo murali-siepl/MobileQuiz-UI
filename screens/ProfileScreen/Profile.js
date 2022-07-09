@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from "react-redux";
 import {
   FlatList,
   StyleSheet,
@@ -17,6 +18,7 @@ import CustomButton from "../../components/shared/Button";
 // import Dropdown from "../../components/shared/Dropdown";
 
 const Profile = ({ navigation }) => {
+  const { name } = useSelector((state) => state.auth);
   const data = [
     {
       id: 1,
@@ -123,7 +125,7 @@ const Profile = ({ navigation }) => {
           </View>
         </View>
         <View style={styles.profileDetails}>
-          <Text style={styles.profileName}>Aditi Gupta</Text>
+          <Text style={styles.profileName}>{name ? name : "Mohan"}</Text>
           <View>
             <View style={styles.row}>
               <Text style={styles.textWhite}>98976 53425</Text>

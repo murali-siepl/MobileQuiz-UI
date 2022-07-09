@@ -217,7 +217,7 @@ const DrawerStack = (props, navigation) => {
           title: "FeedBack",
           drawerIcon: (config) => (
             <Image
-              source={require('../assets/images/left-menu/settings.png')}
+              source={require('../assets/images/left-menu/feedback_icon.png')}
               fadeDuration={0}
               style={{ width: 25, height: 25 }}
             />
