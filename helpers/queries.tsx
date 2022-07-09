@@ -82,10 +82,16 @@ const userFeedback = (params) =>
     return webfox.post(`userFeedback`, params);
   });
 
+  const userQuestions = () =>
+  exec(() => {
+    return webfox.get(`quizzes/getQuizQByCategory/Maths`);
+  });
+
 export default {
   logError,
   login,
   signup,
   forgetPassword,
   userFeedback,
+  userQuestions,
 };

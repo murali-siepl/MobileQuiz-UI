@@ -16,21 +16,31 @@ const Instructions = (props) => {
             ...styles.scrollView,
           }}
         >
-          <Heading style={styles.heading}>Instructions</Heading>
+          <Heading style={styles.heading}>Game Instructions </Heading>
           <Text style={styles.text}>
-            It is a logn established fact that a reader will be distracted by
-            the fresuele content of a page when looking at its layout. The oint
-            of using Lorem Ipsum is that it has a more-or less normal
-            distribution of letters, as opposed to using 'Content here, content
-            here', making it look like readable English.
+            1.This game consist of three type of questions :{`\n`}
+
+            A) Single correct answer  multiple choice questions.{`\n`}
+            B) More the one correct answers multiple choice questions.{`\n`}
+            C) True and False type questions.{`\n`}
+
           </Text>
           <Text style={styles.text}>
-            Many desktop publishing packages and web page editors now use Lorem
-            Ipsum as their default model text, and a search for 'lorem ipsum'
-            will uncover many web sites still in their infancy. Various versions
-            have evolved over the years, sometimes by accident, sometimes on
-            purpose (injected humour and the like).
+          2. You will have only 30 sec to answer questions after that it will switch to next questions . Also it will be marked as unanswered and you will get Zero point. 
           </Text>
+
+
+          <Text style={styles.text}>
+          3. You can skip a questions without giving an answer. But zero point will be add to your points. 
+          </Text>
+
+          <Text style={styles.text}>
+          4. You will get +1 point for every correct answer  and For every incorrect answer you will - 1.{`\n`} {`\n`}
+          5. You can't go previous question once you moved ahead.           
+          </Text>
+          
+     
+      
 
           <CustomButton
             touchWidth="100%"

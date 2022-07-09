@@ -5,10 +5,14 @@ import { dummyQuestions } from "./../dummy-data/questions";
 import axios from 'axios';
 import Question from "./../components/DashboardComponents/questions/Question";
 import Color from "../constants/Color";
+import { questions, userQuestion } from "../store/actions/Question";
+import { useDispatch, useSelector } from "react-redux";
+import Auth from '../helpers/routes';
 
 const baseUrl = 'http://23.102.128.226:5000/api';
 const answersList = [];
 const QuestionsScreen = (props) => {
+<<<<<<< HEAD
 
   const [QuizQuesObj, setQuizQuesObj] = useState([]);
   const [QuizQuesLen, setQuizQuesLen] = useState(0);
@@ -48,8 +52,13 @@ const QuestionsScreen = (props) => {
 
   // console.log('propspropspropspropspropspropsprops', props);
 
+=======
+  const dispatch = useDispatch();
+    const { name } = useSelector((state) => state.auth);
+>>>>>>> 19fa2e92c1832aadf03e7817c2c049cd9d7ecda6
   const [index, setIndex] = useState(0);
   const [show, setShow] = useState(true);
+  const [result, setResult] = useState([]);
 
   const nextQuestion = (data) => {
     if (index > dummyQuestions.length - 1) {
@@ -64,11 +73,27 @@ const QuestionsScreen = (props) => {
     setShow(false);
   };
   useEffect(() => {
+     dispatch(userQuestion());
+        
+    // Auth.userQuestions().then(({ data, error }) => {
+    //   if (error) {
+    //     ErrorModal(error || "Error");
+    //     console.log("error: " + JSON.stringify(error));
+        
+    //   } else {
+    //     console.log("data: " + JSON.stringify(data));
+    //     setResult(data.results.createdQuiz[0].questions)
+    //   }
+    // });
     setShow(true);
   }, [index]);
 
 
+<<<<<<< HEAD
   console.log("Quizzzzzzzzzzzz", QuizQuesLen);
+=======
+
+>>>>>>> 19fa2e92c1832aadf03e7817c2c049cd9d7ecda6
 
   return (
     <View style={styles.container}>
