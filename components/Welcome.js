@@ -9,22 +9,18 @@ import FastImage from 'react-native-fast-image';
 
 const result = [
     {
-        title: "asdfadsf 1", paragraph: "It is a logn established fact that a reader will be distracted by\
-    the fresuele content of a page when looking at its layout. The oint\
-    of using Lorem Ipsum is that it has a more-or less normal\
-    distribution of letters, as opposed to using 'Content here, content\
-    here', making it look like readable English.",
+        title: "QUARTS MOBILE", paragraph: `QUARTS MOBILE is the latest knowledge-based fun learning and gaming app in India containing number of questions from different branches of studies, languages and exciting formats on the platform. QUARTS MOBILE is only available for people who are above 18 years of age and upto the age of 25 years. the interactive entertainment platform in India. Launched in early 2022, the Company provides a platform to students play quiz games and earn rewards. Users can enjoy personalized and interactive quiz gameplay experiences. The platform is available in different languages such as English, Hindi and etc., with over many registered users. The QUARTS MOBILE platform facilitates over many micro-transactions per month across a portfolio`,
         img: require("../assets/images/welcome-img.png")
     },
     {
-        title: "asdfadsf 2", paragraph: `Many desktop publishing packages and web page editors now use Lorem
-    Ipsum as their default model text, and a search for 'lorem ipsum'
-    will uncover many web sites still in their infancy. Various versions
-    have evolved over the years, sometimes by accident, sometimes on
-    purpose (injected humour and the like).`
+        title: "QUARTS MOBILE", paragraph: `QUARTS MOBILE is focused on building an enthusiastic community of quiz gamers and quiz gaming influencers across the world. The Company envisions a future where the platform can deliver a fun learning culturally relevant and enjoyable experience in the Indian gaming ecosystem and in the other countries as well, through a unique micro- transaction led monetization model.`
     },
     {
-        title: "asdfadsf 3", paragraph: "asdfsafd afdsfs fsf adfs a sfasdfsadf",
+        title: "QUARTS MOBILE", paragraph: `All the games and formats offered on QUARTS MOBILE are those that involve preponderance of skill. QUARTS MOBILE is an absolutely safe and secure quiz gaming platform which ensures that all the quiz games on the platform are fair. Laden with a real time and secure deposits and withdrawals ecosystem, we partner with trusted payment partners such as PayTM, Google Pay, PhonePe, BHIM etc. We also have enhanced levels of fraud detection mechanisms to restrict fraudulent play and/or players thereby making QUARTS MOBILE a fair and safe platform.`,
+        img: require("../assets/images/welcome-img.png")
+    },
+    {
+        title: "QUARTS MOBILE", paragraph: `The QUARTS MOBILE app is available for both Android and iOS users. Android users can download the app from the Download Button on this page, while iOS users can download the app directly from the Apple App Store.`,
         img: require("../assets/images/welcome-img.png")
     },
 ];
@@ -123,10 +119,12 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 14,
         lineHeight: 22,
-        marginBottom: 20,
+        // marginBottom: 20,
         color: Colors.textColor,
         fontFamily: "roboto",
         alignSelf: "flex-start",
+        textAlign: 'justify',
+        
     },
     textImg: {
         fontSize: 20,

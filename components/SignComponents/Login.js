@@ -43,6 +43,7 @@ const Login = (props) => {
             autoComplete="email"
             label="Email"
             touched={touched.email}
+            
           />
           <View style={styles.password}>
             <Input

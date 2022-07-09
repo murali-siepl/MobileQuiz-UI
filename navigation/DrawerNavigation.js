@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Linking } from "react-native";
 import { DrawerHomeLabel } from "./DrawerLabel";
 import { DrawerCustomLabel } from "./DrawerCustomLabel";
 import EditProfile from "./../screens/DrawerScreens/EditProfile";
@@ -75,6 +75,38 @@ const DrawerStack = (props, navigation) => {
       drawerContent={(props) => (
         <DrawerContentScrollView {...props}>
           <DrawerItemList {...props} />
+          <DrawerItem
+            label="Rate us"
+            labelStyle={{
+              color: "white",
+              fontWeight: "bold",
+              fontSize: 16,
+            }}
+            style={{
+              backgroundColor: "#23313C",
+              marginBottom: 10,
+              borderColor: "#2E4150",
+              borderWidth: 2,
+              borderRadius: 8,
+              marginLeft: 10,
+              marginRight: 10,
+              width: "85%",
+              alignSelf: "center",
+            }}
+            icon={(config) => (
+              <Image
+                source={require('../assets/images/left-menu/rateus.png')}
+                fadeDuration={0}
+                style={{ width: 25, height: 25 }}
+              />
+            )}
+            onPress={() => {
+              // dispatch(logout());
+              Linking.openURL(
+                'https://play.google.com/store/apps/details?id=com.android.chrome',
+              );
+            }}
+          />
           <DrawerItem
             label="Logout"
             labelStyle={{
@@ -219,7 +251,7 @@ const DrawerStack = (props, navigation) => {
           ),
         }}
       />
-      <DrawerStackNavigator.Screen
+      {/* <DrawerStackNavigator.Screen
         name="Rateus"
         component={RateusStack}
         options={{
@@ -232,7 +264,7 @@ const DrawerStack = (props, navigation) => {
             />
           ),
         }}
-      />
+      /> */}
     </DrawerStackNavigator.Navigator>
   );
 };

@@ -68,13 +68,17 @@ export const forgetPassword = (values, navigation, mobile) => {
   return async (dispatch) => {
     dispatch(setLoading());
 
-    const requestOptions = Headers(
-      mobile ? { type: "mobile", mobile: values.phone } : values
-    );
+    // const requestOptions = Headers(
+    //   mobile ? { type: "mobile", mobile: values.phone } : values
+    // );
 
-    const params = requestOptions;
+    // console.log("values",values)
+
+    const params = values;
 
     Auth.forgetPassword(params).then(({ data, error }) => {
+
+      console.log("data",data)
       if (error) {
         dispatch(setLoading());
         console.log("error: " + JSON.stringify(error));
