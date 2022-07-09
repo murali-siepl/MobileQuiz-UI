@@ -6,6 +6,8 @@ import Timer from "./../../shared/Timer";
 import Colors from "./../../../constants/Color";
 
 const Question = (props) => {
+
+  // console.log("Questions-------", props.question);
   const [selectedOption, setSelectedOption] = useState(null);
 
   useEffect(() => {
