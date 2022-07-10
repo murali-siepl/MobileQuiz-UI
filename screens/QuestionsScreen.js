@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Alert } from "react-native";
 
 import { dummyQuestions } from "./../dummy-data/questions";
 import Question from "./../components/DashboardComponents/questions/Question";
+import QuestionReducer from "./../store/reducers/Question"
 import Color from "../constants/Color";
 import { questions, userQuestion } from "../store/actions/Question";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,57 +11,98 @@ import Auth from '../helpers/routes';
 
 const answersList = [];
 const QuestionsScreen = (props) => {
+
+  console.log("propspropspropsprops", props.route.params.subject);
+
+
   const dispatch = useDispatch();
-    const { name } = useSelector((state) => state.auth);
+  const { name } = useSelector((state) => state.auth);
   const [index, setIndex] = useState(0);
   const [show, setShow] = useState(true);
   const [result, setResult] = useState([]);
 
+  const [quesTitle, setQuesTitle] = useState('');
+  const [ansTitle, setAnsTitle] = useState('');
+  const [optionTitle, setOptionTitle] = useState([]);
+  const [lenTitle, setLenTitle] = useState(0);
+
   const nextQuestion = (data) => {
-    if (index > dummyQuestions.length - 1) {
+    // if (index > dummyQuestions.length - 1) {
+    //   return;
+    // }
+    // answersList.push(data);
+    // if (index === dummyQuestions.length - 1) {
+    //   props.navigation.replace("Result", { answers: answersList });
+    //   return;
+    // }
+    if (index > quesData?.questions?.results?.createdQuiz[0]?.questions.length - 1) {
       return;
     }
     answersList.push(data);
-    if (index === dummyQuestions.length - 1) {
+    if (index === quesData?.questions?.results?.createdQuiz[0]?.questions.length - 1) {
       props.navigation.replace("Result", { answers: answersList });
       return;
     }
     setIndex((prev) => prev + 1);
     setShow(false);
   };
-  useEffect(() => {
-     dispatch(userQuestion());
-        
-    // Auth.userQuestions().then(({ data, error }) => {
-    //   if (error) {
-    //     ErrorModal(error || "Error");
-    //     console.log("error: " + JSON.stringify(error));
-        
-    //   } else {
-    //     console.log("data: " + JSON.stringify(data));
-    //     setResult(data.results.createdQuiz[0].questions)
-    //   }
-    // });
-    setShow(true);
-  }, [index]);
+
+  const quesData = useSelector((state) => state.ques);
+  useEffect(async () => {
+    if (props.route.params.subject) {
+      dispatch(userQuestion(props.route.params.subject));
+      setShow(true);
+    }
+  }, [props.route.params.subject]);
+
+  useEffect(async () => {
+    let temp = await quesData?.questions?.results?.createdQuiz[0]?.questions[index].options.map((e) => {
+      console.log(e.isCorrect)
+      if (e.isCorrect == true) {
+        return e.text;
+      }
+
+    })
+    let ans = await temp.map((e) => {
+      if (e != undefined) {
+        ans = e;
+      }
+    })
+    setAnsTitle(ans);
+  }, [index])
+
+  console.log("qqqqqqqqqqqqqqqqqqqqqqqqqqqq", quesData?.questions?.results?.createdQuiz[0]?.questions[0].title);
+  console.log("oooooooooooooooooooooooooooo", quesData?.questions?.results?.createdQuiz[0]?.questions[0].options);
 
 
 
+  console.log("+++++++++++++++++++++++", quesData?.questions?.results?.createdQuiz.length);
 
   return (
     <View style={styles.container}>
       <View style={styles.percent40}></View>
       <View style={styles.percent60}></View>
       <View style={styles.questionContainer}>
-        <Question
-          index={index}
-          options={dummyQuestions[index].options}
-          question={dummyQuestions[index].question}
-          nextQuestion={nextQuestion}
-          show={show}
-          answer={dummyQuestions[index].answer}
-          totalQuestions={dummyQuestions.length}
-        />
+        {
+          quesData?.questions?.results?.createdQuiz.length == 0 ?
+          Alert.alert(
+            "No Data",
+            "No Data in the Api",
+            [
+              { text: "OK", onPress: () => console.log("OK Pressed") }
+            ]
+          )
+            :
+            <Question
+              index={index}
+              options={quesData?.questions?.results?.createdQuiz[0]?.questions[index].options}
+              question={quesData?.questions?.results?.createdQuiz[0]?.questions[index].title}
+              nextQuestion={nextQuestion}
+              show={show}
+              answer={ansTitle}
+              totalQuestions={quesData?.questions?.results?.createdQuiz[0]?.questions.length}
+            />
+        }
       </View>
     </View>
   );

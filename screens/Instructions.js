@@ -45,7 +45,7 @@ const Instructions = (props) => {
           <CustomButton
             touchWidth="100%"
             onPress={() => {
-              props.navigation.navigate("Questions");
+              props.navigation.navigate("Questions", {subject : props.route.params.subject});
             }}
           >
             Start

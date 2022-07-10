@@ -6,6 +6,13 @@ import Timer from "./../../shared/Timer";
 import Colors from "./../../../constants/Color";
 
 const Question = (props) => {
+
+  console.log("props", props.options);
+
+  // return (
+  //   <></>
+  // )
+
   const [selectedOption, setSelectedOption] = useState(null);
 
   useEffect(() => {
@@ -56,26 +63,26 @@ const Question = (props) => {
               key={i}
               style={
                 selectedOption === props.answer &&
-                opt === props.answer &&
+                opt.text === props.answer &&
                 styles.correct
               }
               styleWrong={
-                selectedOption === opt && opt !== props.answer && styles.wrong
+                selectedOption === opt.text && opt.text !== props.answer && styles.wrong
               }
               styleCorrect={
-                selectedOption && opt === props.answer && styles.correct
+                selectedOption && opt.text === props.answer && styles.correct
               }
               selectedOption={selectedOption}
-              styleText={selectedOption === opt && styles.selectedText}
+              styleText={selectedOption === opt.text && styles.selectedText}
               styledTextCorrect={
-                selectedOption && opt === props.answer && styles.selectedText
+                selectedOption && opt.text === props.answer && styles.selectedText
               }
               index={i}
               onPress={() => {
-                setOption(opt);
+                setOption(opt.text);
               }}
             >
-              {opt}
+              {opt.text}
             </Option>
           ))}
         </View>

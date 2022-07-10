@@ -6,8 +6,10 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import ReduxThunk from "redux-thunk";
 import { Provider } from "react-redux";
 import Authenticate from "./store/reducers/Authenticate";
+import Questions from "./store/reducers/Question";
 const rootReducer = combineReducers({
   auth: Authenticate,
+  ques: Questions
 });
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 

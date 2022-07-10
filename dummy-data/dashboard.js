@@ -1,13 +1,13 @@
 export const myQuiz = [
   {
     color: "#B42B51",
-    subject: "GK",
+    subject: "Gk",
     number: 1,
     img: require("../assets/images/dashboard-img/d-img-2.png"),
   },
   {
     color: "#B5FFD9",
-    subject: "Sport",
+    subject: "Sports",
     number: 2,
     img: require("../assets/images/dashboard-img/d-img-5.png"),
   },

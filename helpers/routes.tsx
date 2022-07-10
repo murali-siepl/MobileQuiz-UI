@@ -43,8 +43,8 @@ const userFeedback: any = async (params: any) => {
 };
 
 
-const userQuestions: any = async () => {
-  const res = await api.userQuestions().catch((e) => {
+const userQuestions: any = async (subject:any) => {
+  const res = await api.userQuestions(subject).catch((e) => {
     return { data: null, error: e };
   });
   const val: any = res ? res.data : null;
