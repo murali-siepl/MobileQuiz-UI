@@ -1,7 +1,7 @@
 export const myQuiz = [
   {
     color: "#B42B51",
-    subject: "Gk",
+    subject: "G.K",
     number: 1,
     img: require("../assets/images/dashboard-img/d-img-2.png"),
   },
@@ -38,13 +38,13 @@ export const myQuiz = [
   },
   {
     color: "#001E6C",
-    subject: "Arts and Literature",
+    subject: "Art",
     number: 7,
     img: require("../assets/images/dashboard-img/d-img-3.png"),
   },
   {
     color: "#7C83FD",
-    subject: "Nature and Wildlife",
+    subject: "Literatures",
     number: 8,
     img: require("../assets/images/dashboard-img/d-img-3.png"),
   },

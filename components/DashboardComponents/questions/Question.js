@@ -14,10 +14,15 @@ const Question = (props) => {
   // )
 
   const [selectedOption, setSelectedOption] = useState(null);
+  const [answer,setAnswer] = useState("");
 
   useEffect(() => {
     setSelectedOption(null);
   }, []);
+
+  useEffect(() => {
+    setAnswer(props.options.find(e=>e.isCorrect).text)
+  }, [props]);
 
   const setOption = (opt) => {
     setSelectedOption(opt);
@@ -43,7 +48,7 @@ const Question = (props) => {
     <View style={styles.container}>
       <View>
         <View style={styles.timer}>
-          {props.show && <Timer duration={30} nextQuestion={next} />}
+          {props.show && <Timer duration={30} nextQuestion={next} key={props.index} />}
         </View>
         <Text style={styles.totalQuestios}>
           Question {props.index + 1} / {props.totalQuestions}
@@ -62,20 +67,20 @@ const Question = (props) => {
             <Option
               key={i}
               style={
-                selectedOption === props.answer &&
-                opt.text === props.answer &&
+                selectedOption === answer &&
+                opt.text === answer &&
                 styles.correct
               }
               styleWrong={
-                selectedOption === opt.text && opt.text !== props.answer && styles.wrong
+                selectedOption === opt.text && opt.text !== answer && styles.wrong
               }
               styleCorrect={
-                selectedOption && opt.text === props.answer && styles.correct
+                selectedOption && opt.text === answer && styles.correct
               }
               selectedOption={selectedOption}
               styleText={selectedOption === opt.text && styles.selectedText}
               styledTextCorrect={
-                selectedOption && opt.text === props.answer && styles.selectedText
+                selectedOption && opt.text === answer && styles.selectedText
               }
               index={i}
               onPress={() => {

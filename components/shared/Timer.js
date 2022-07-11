@@ -6,6 +6,7 @@ export default function Timer(props) {
   const [isPlaying, setIsPlaying] = React.useState(true);
   return (
     <CountdownCircleTimer
+      key={props.key}
       isPlaying={isPlaying}
       duration={props.duration}
       colors={[

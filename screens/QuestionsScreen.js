@@ -44,39 +44,35 @@ const QuestionsScreen = (props) => {
       return;
     }
     setIndex((prev) => prev + 1);
-    setShow(false);
+    // setShow(false);
   };
 
   const quesData = useSelector((state) => state.ques);
-  useEffect(async () => {
-    if (props.route.params.subject) {
-      dispatch(userQuestion(props.route.params.subject));
-      setShow(true);
+  // useEffect(async () => {
+  //   if (props.route.params.subject) {
+  //     dispatch(userQuestion(props.route.params.subject));
+  //     setShow(true);
+  //   }
+  // }, [props.route.params.subject]);
+
+  useEffect(() => {
+    async function testfunction() {
+      let temp = await quesData?.questions?.results?.createdQuiz[0]?.questions[index].options.map((e) => {
+        console.log(e.isCorrect)
+        if (e.isCorrect == true) {
+          return e.text;
+        }
+  
+      })
+      let ans = await temp.map((e) => {
+        if (e != undefined) {
+          ans = e;
+        }
+      })
+      setAnsTitle(ans);
     }
-  }, [props.route.params.subject]);
-
-  useEffect(async () => {
-    let temp = await quesData?.questions?.results?.createdQuiz[0]?.questions[index].options.map((e) => {
-      console.log(e.isCorrect)
-      if (e.isCorrect == true) {
-        return e.text;
-      }
-
-    })
-    let ans = await temp.map((e) => {
-      if (e != undefined) {
-        ans = e;
-      }
-    })
-    setAnsTitle(ans);
+    testfunction()
   }, [index])
-
-  console.log("qqqqqqqqqqqqqqqqqqqqqqqqqqqq", quesData?.questions?.results?.createdQuiz[0]?.questions[0].title);
-  console.log("oooooooooooooooooooooooooooo", quesData?.questions?.results?.createdQuiz[0]?.questions[0].options);
-
-
-
-  console.log("+++++++++++++++++++++++", quesData?.questions?.results?.createdQuiz.length);
 
   return (
     <View style={styles.container}>
