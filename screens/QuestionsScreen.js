@@ -9,7 +9,7 @@ import { questions, userQuestion } from "../store/actions/Question";
 import { useDispatch, useSelector } from "react-redux";
 import Auth from '../helpers/routes';
 
-const answersList = [];
+let answersList = [];
 const QuestionsScreen = (props) => {
 
   console.log("propspropspropsprops", props.route.params.subject);
@@ -46,6 +46,10 @@ const QuestionsScreen = (props) => {
     setIndex((prev) => prev + 1);
     // setShow(false);
   };
+
+  useEffect(()=>{
+    answersList = [];
+  }, [props.route.params.subject])
 
   const quesData = useSelector((state) => state.ques);
   // useEffect(async () => {

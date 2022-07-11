@@ -9,10 +9,6 @@ const Question = (props) => {
 
   console.log("props", props.options);
 
-  // return (
-  //   <></>
-  // )
-
   const [selectedOption, setSelectedOption] = useState(null);
   const [answer,setAnswer] = useState("");
 
