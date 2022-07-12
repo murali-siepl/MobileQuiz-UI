@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import CustomButton from "./../../shared/Button";
 import Option from "./Option";
@@ -8,10 +8,11 @@ import Colors from "./../../../constants/Color";
 const Question = (props) => {
 
   console.log("props", props.options);
+  const timerRef = useRef();
 
   const [selectedOption, setSelectedOption] = useState(null);
   const [answer,setAnswer] = useState("");
-
+  
   useEffect(() => {
     setSelectedOption(null);
   }, []);
@@ -24,18 +25,22 @@ const Question = (props) => {
     setSelectedOption(opt);
   };
   const skipQuestion = () => {
+    let time = timerRef.current.getAlert();
     props.nextQuestion({
       skip: true,
       selectedOption,
       notAnswered: false,
+      timeTaken: time
     });
   };
 
   const next = () => {
+    let time = timerRef.current.getAlert();
     props.nextQuestion({
       skip: false,
       selectedOption,
       notAnswered: selectedOption ? false : true,
+      timeTaken:time
     });
     setSelectedOption(null);
   };
@@ -44,7 +49,7 @@ const Question = (props) => {
     <View style={styles.container}>
       <View>
         <View style={styles.timer}>
-          {props.show && <Timer duration={30} nextQuestion={next} key={props.index} />}
+          {props.show && <Timer duration={30} nextQuestion={next} index={props.index} ref={timerRef} />}
         </View>
         <Text style={styles.totalQuestios}>
           Question {props.index + 1} / {props.totalQuestions}
