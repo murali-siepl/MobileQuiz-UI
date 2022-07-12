@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
 import {
   FlatList,
@@ -16,9 +16,28 @@ import Color from "../../constants/Color";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomButton from "../../components/shared/Button";
 // import Dropdown from "../../components/shared/Dropdown";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Profile = ({ navigation }) => {
-  const { name } = useSelector((state) => state.auth);
+
+  const [userStorageInfo, setUserStorageInfo] = useState([]);
+  const [location, setUserLocation] = useState('');
+
+  useEffect(()=>{
+    getLocation();
+  },[])
+
+  const getLocation = async () => {
+    const getUserLoc = await AsyncStorage.getItem("userLocation");
+    const userLocation = JSON.parse(getUserLoc);
+    setUserLocation(userLocation.location);
+
+    // const getUserStorageData = await AsyncStorage.getItem("userData");
+    // const userStorageData = JSON.stringify(getUserStorageData);
+    // setUserStorageInfo(userStorageData);
+  }
+
+  const userData = useSelector((state) => state.auth);
   const data = [
     {
       id: 1,
@@ -72,7 +91,7 @@ const Profile = ({ navigation }) => {
         fadeDuration={0}
         style={styles.scrollBg}
       />
-      <Text style={styles.itemText}>{name}</Text>
+      <Text style={styles.itemText}>{userData.name}</Text>
 
     </View>
   );
@@ -93,6 +112,7 @@ const Profile = ({ navigation }) => {
       setImage(result.uri);
     }
   };
+
 
   return (
     <ScrollView style={styles.container}>
@@ -125,16 +145,16 @@ const Profile = ({ navigation }) => {
           </View>
         </View>
         <View style={styles.profileDetails}>
-          <Text style={styles.profileName}>{name ? name : "Mohan"}</Text>
+          <Text style={styles.profileName}>{userData?.name ? userData.name : "User"}</Text>
           <View>
             <View style={styles.row}>
-              <Text style={styles.textWhite}>98976 53425</Text>
+              <Text style={styles.textWhite}>{location}</Text>
               {/* <View style={styles.verified}>
                 <Text style={styles.textGreen}>VERIFIED</Text>
               </View> */}
             </View>
             <View style={styles.row}>
-              <Text style={styles.textWhite}>aditigupta@gmail.com</Text>
+              <Text style={styles.textWhite}>{userData?.email ? userData.email : 'abc@email.com'}</Text>
               {/* <View style={styles.verified}>
                 <Text style={styles.textGreen}>VERIFIED</Text>
               </View> */}

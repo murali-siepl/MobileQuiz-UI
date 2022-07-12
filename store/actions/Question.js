@@ -8,7 +8,6 @@ import { config } from "./../../helpers/api";
 import { QUESTION } from "../constants/Authenticate";
 
 export const questions = (questions) => {
-    console.log("->>>>>>>>>>>>>>>>>>>>>>>", questions);
     return { type: QUESTION, questions };
   };
 
@@ -22,7 +21,7 @@ export const userQuestion = (subject) => {
       } else {
         console.log("data: " + JSON.stringify(data));
         // return data;
-      dispatch(questions(data));
+        dispatch(questions(data));
       }
     });
   };
