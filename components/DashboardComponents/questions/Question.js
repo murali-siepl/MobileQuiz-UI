@@ -32,6 +32,7 @@ const Question = (props) => {
       notAnswered: false,
       timeTaken: time
     });
+    setSelectedOption(null);
   };
 
   const next = () => {
