@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from "react-redux";
 import {
   FlatList,
   StyleSheet,
@@ -17,6 +18,7 @@ import CustomButton from "../../components/shared/Button";
 // import Dropdown from "../../components/shared/Dropdown";
 
 const Profile = ({ navigation }) => {
+  const { name } = useSelector((state) => state.auth);
   const data = [
     {
       id: 1,
@@ -123,26 +125,26 @@ const Profile = ({ navigation }) => {
           </View>
         </View>
         <View style={styles.profileDetails}>
-          <Text style={styles.profileName}>Aditi Gupta</Text>
+          <Text style={styles.profileName}>{name ? name : "Mohan"}</Text>
           <View>
             <View style={styles.row}>
               <Text style={styles.textWhite}>98976 53425</Text>
-              <View style={styles.verified}>
+              {/* <View style={styles.verified}>
                 <Text style={styles.textGreen}>VERIFIED</Text>
-              </View>
+              </View> */}
             </View>
             <View style={styles.row}>
               <Text style={styles.textWhite}>aditigupta@gmail.com</Text>
-              <View style={styles.verified}>
+              {/* <View style={styles.verified}>
                 <Text style={styles.textGreen}>VERIFIED</Text>
-              </View>
+              </View> */}
             </View>
           </View>
         </View>
       </View>
       {/* profile */}
 
-      <Text style={styles.myPurchases}>My Purchases</Text>
+      <Text style={styles.myPurchases}>My Purchase</Text>
 
       {/* ScrollView */}
       <SafeAreaView style={styles.MainContainer}>
@@ -188,7 +190,7 @@ const Profile = ({ navigation }) => {
             style={styles.arrowDown}
           />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.myPaymentProfile} onPress={() => {
+        {/* <TouchableOpacity style={styles.myPaymentProfile} onPress={() => {
           // props.data.navigation.navigate("");
           console.log("button pressed")
         }}>
@@ -205,7 +207,7 @@ const Profile = ({ navigation }) => {
             fadeDuration={0}
             style={styles.arrowUp}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       {/* mydetails container */}
 
@@ -305,7 +307,7 @@ const Profile = ({ navigation }) => {
             style={styles.fingerPrint}
           />
           <Text style={styles.myPrivacy}>
-            My Privay
+            My Privacy
           </Text>
           <Image
             source={require('../../assets/images/arrow-right.png')}

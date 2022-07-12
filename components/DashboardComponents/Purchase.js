@@ -1,5 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import {
   FlatList,
   StyleSheet,
@@ -11,6 +12,7 @@ import {
 } from "react-native";
 import { purchase } from "../../dummy-data/dashboard";
 import Color from "../../constants/Color";
+
 
 const renderItem = (itemData, navigation) => (
   <TouchableNativeFeedback onPress={() => navigation.navigate("Leadboard")}>
@@ -26,7 +28,8 @@ const renderItem = (itemData, navigation) => (
   </TouchableNativeFeedback>
 );
 
-const Purchase = ({ navigation }) => {
+const Purchase = (props) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
        <View style={styles.noPurchase}>
@@ -37,7 +40,7 @@ const Purchase = ({ navigation }) => {
        renderItem={(itemData) => renderItem(itemData, navigation)}
     <> */}
     </View>
-     <TouchableOpacity style={styles.subsButton}  onPress={() => {
+     {/* <TouchableOpacity style={styles.subsButton}  onPress={() => {
               // props.data.navigation.navigate("");
               console.log("button pressed")
             }}>
@@ -54,9 +57,27 @@ const Purchase = ({ navigation }) => {
               fadeDuration={0}
               style={{ width: 9.26, height: 16.2, alignSelf:'center', marginRight:16 }}
             />
+     </TouchableOpacity> */}
+     <TouchableOpacity style={styles.subsButton} 
+      onPress={() => {
+        navigation.navigate("Subscription");
+      }}
+      >
+     <Image
+              source={require('../../assets/images/Iconmaterial-subscriptions.png')}
+              fadeDuration={0}
+              style={{ width: 11.4, height: 11.4, alignSelf:'center', marginLeft:16, }}
+            />
+     <Text style={styles.subscriptions}>
+             Subscription
+     </Text>
+     <Image
+              source={require('../../assets/images/arrow-right.png')}
+              fadeDuration={0}
+              style={{ width: 9.26, height: 16.2, alignSelf:'center', marginRight:16 }}
+            />
      </TouchableOpacity>
     </View>
-
   );
 };
 
