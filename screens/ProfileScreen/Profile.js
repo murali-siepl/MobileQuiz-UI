@@ -15,10 +15,42 @@ import * as ImagePicker from 'expo-image-picker';
 import Color from "../../constants/Color";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomButton from "../../components/shared/Button";
+import Accordion from "react-native-collapsible/Accordion";
+
 // import Dropdown from "../../components/shared/Dropdown";
 
 const Profile = ({ navigation }) => {
   const { name } = useSelector((state) => state.auth);
+
+  const SECTIONS = [
+    {
+      id: "1",
+      name: "Rewards",
+      img: "",
+      img: require("../../assets/images/profile/trophy-outline.png"),
+      content: "Sorry this screen is under construction",
+    }
+  ]
+  const MYDETAILS = [
+    {
+      id: "1",
+      name: "My Details",
+      img: "",
+      img: require("../../assets/images/profile/user.png"),
+      content: "Sorry this screen is under construction",
+    }
+  ]
+
+ const PAYSECTIONS = [
+    {
+      id: "1",
+      name: "My Payment Profile",
+      img: "",
+      img: require("../../assets/images/profile/card-outline.png"),
+      content: "Sorry this screen is under construction",
+    }
+  ]
+
   const data = [
     {
       id: 1,
@@ -63,6 +95,34 @@ const Profile = ({ navigation }) => {
 
   ];
 
+  const [activeSections, setActiveSections] = useState([]);
+  const _renderHeader = (section) => {
+    return (
+      <View style={styles.header}>
+        <Image style={styles.pImg} source={section.img} />
+        <View style={styles.nameAndPts}>
+          <Text style={styles.headerText}>{section.name}</Text>
+        </View>
+        <Image
+          style={styles.arrowDown}
+          source={require("../../assets/images/arrow-right.png")}
+        />
+      </View>
+    );
+  };
+
+  const _renderContent = (section) => {
+    return (
+      <View style={styles.content}>
+        <Text style={styles.contentText}>{section.content}</Text>
+      </View>
+    );
+  };
+
+  const _updateSections = (activeSections) => {
+    setActiveSections(activeSections);
+  };
+
   const ItemRender = ({ name, bgImage }) => (
     <View
       style={styles.horizontalBox}
@@ -77,6 +137,69 @@ const Profile = ({ navigation }) => {
     </View>
   );
 
+  ////////////my Details accordion///////////
+
+  const [myActiveSections, setMyactiveSections] = useState([]);
+  const _myRenderHeader = (section) => {
+    return (
+      <View style={styles.myheader}>
+        <Image style={styles.mypImg} source={section.img} />
+        <View style={styles.nameAndPts}>
+          <Text style={styles.myheaderText}>{section.name}</Text>
+        </View>
+        <Image
+          style={styles.arrowDown}
+          source={require("../../assets/images/arrow-right.png")}
+        />
+      </View>
+    );
+  };
+
+  const _myRenderContent = (section) => {
+    return (
+      <View style={styles.mycontent}>
+        <Text style={styles.contentText}>{section.content}</Text>
+      </View>
+    );
+  };
+
+  const _myUpdateSections = (myActiveSections) => {
+    setMyactiveSections(myActiveSections);
+  };
+
+  //////////////mydeatils accordion//////////////
+
+    ////////////my payment accordion///////////
+
+    const [payActiveSections, setPayActiveSections] = useState([]);
+    const _payrenderHeader = (section) => {
+      return (
+        <View style={styles.myheader}>
+          <Image style={styles.mypImg} source={section.img} />
+          <View style={styles.nameAndPts}>
+            <Text style={styles.myheaderText}>{section.name}</Text>
+          </View>
+          <Image
+            style={styles.arrowDown}
+            source={require("../../assets/images/arrow-right.png")}
+          />
+        </View>
+      );
+    };
+  
+    const _payrenderContent = (section) => {
+      return (
+        <View style={styles.mycontent}>
+          <Text style={styles.contentText}>{section.content}</Text>
+        </View>
+      );
+    };
+  
+    const _payupdateSections = (payActiveSections) => {
+      setPayActiveSections(payActiveSections);
+    };
+  
+    //////////////my payment accordion//////////////
   const [image, setImage] = useState(null);
 
   const pickImage = async () => {
@@ -172,7 +295,7 @@ const Profile = ({ navigation }) => {
 
       {/* mydetails container */}
       <View style={styles.detailsContainer}>
-        <TouchableOpacity style={styles.myDetails} onPress={() => {
+        {/* <TouchableOpacity style={styles.myDetails} onPress={() => {
           // props.data.navigation.navigate("");
           console.log("button pressed")
         }}>
@@ -189,7 +312,18 @@ const Profile = ({ navigation }) => {
             fadeDuration={0}
             style={styles.arrowDown}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+
+        <View style={styles.myDetails}>
+          <Accordion
+            style={styles.accordion}
+            sections={MYDETAILS}
+            activeSections={myActiveSections}
+            renderHeader={_myRenderHeader}
+            renderContent={_myRenderContent}
+            onChange={_myUpdateSections}
+          />
+        </View>
         {/* <TouchableOpacity style={styles.myPaymentProfile} onPress={() => {
           // props.data.navigation.navigate("");
           console.log("button pressed")
@@ -208,11 +342,21 @@ const Profile = ({ navigation }) => {
             style={styles.arrowUp}
           />
         </TouchableOpacity> */}
+        {/* <View styles={styles.accord}>
+          <Accordion
+            style={styles.accordion}
+            sections={PAYSECTIONS}
+            activeSections={payActiveSections}
+            renderHeader={_payrenderHeader}
+            renderContent={_payrenderContent}
+            onChange={_payupdateSections}
+          />
+        </View> */}
       </View>
       {/* mydetails container */}
 
       {/* visa */}
-      <View style={styles.visaView}>
+      {/* <View style={styles.visaView}>
         <Image
           source={require('../../assets/images/profile/rectangle147009.png')}
           fadeDuration={0}
@@ -234,11 +378,11 @@ const Profile = ({ navigation }) => {
             style={styles.deleteVisa}
           />
         </TouchableOpacity>
-      </View>
+      </View> */}
       {/* visa */}
 
       {/* upi */}
-      <View style={styles.upiView}>
+      {/* <View style={styles.upiView}>
         <Image
           source={require('../../assets/images/profile/rectangle147009.png')}
           fadeDuration={0}
@@ -261,7 +405,7 @@ const Profile = ({ navigation }) => {
             style={styles.delete}
           />
         </TouchableOpacity>
-      </View>
+      </View> */}
       {/* upi*/}
 
       <View style={styles.addBtn}>
@@ -278,7 +422,7 @@ const Profile = ({ navigation }) => {
 
       {/* rewards container */}
       <View style={styles.detailsContainer}>
-        <TouchableOpacity style={styles.rewards} onPress={() => {
+        {/* <TouchableOpacity style={styles.rewards} onPress={() => {
           // props.data.navigation.navigate("");
           console.log("button pressed")
         }}>
@@ -295,7 +439,7 @@ const Profile = ({ navigation }) => {
             fadeDuration={0}
             style={styles.arrowDown}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         {/* ////////////////////My privacy///////////////////  */}
         {/* <TouchableOpacity style={styles.myPaymentProfile} onPress={() => {
           // props.data.navigation.navigate("");
@@ -316,8 +460,20 @@ const Profile = ({ navigation }) => {
           />
         </TouchableOpacity> */}
         {/* ////////////////////My privacy///////////////////  */}
+        <View styles={styles.accord}>
+          <Accordion
+            style={styles.accordion}
+            sections={SECTIONS}
+            activeSections={activeSections}
+            renderHeader={_renderHeader}
+            renderContent={_renderContent}
+            onChange={_updateSections}
+          />
+        </View>
       </View>
       {/* rewards container */}
+
+      {/* ///////////////// ACCORDION/////////////////////// */}
 
     </ScrollView>
   );
@@ -327,7 +483,7 @@ export default Profile;
 export const ProfilenavigationOptions = (navData) => {
   return {
     headerTitle: "Profile",
-    headerLeft: () => {},
+    headerLeft: () => { },
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
@@ -409,7 +565,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: Color.lightGrey,
-    width: 324,
+    width: '100%',
     height: 63,
     marginTop: 120
   },
@@ -454,7 +610,8 @@ const styles = StyleSheet.create({
   },
   addBtn: {
     alignSelf: 'center',
-    marginBottom:-30
+    marginBottom: -30,
+    marginTop:10
   },
   addButton: {
     width: 284.7,
@@ -589,7 +746,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#1A232A',
     height: '100%',
-    paddingTop:30
+    paddingTop: 30
   },
   noPruchaseText: {
     color: Color.textColor,
@@ -672,5 +829,68 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-  }
+  },
+  accordion: {
+    width: "100%",
+    margin: 0,
+    padding: 0,
+  },
+  myheader: {
+    width:'85%',
+    height: 60,
+    backgroundColor: Color.lightGrey,
+    borderColor: "#23313C",
+    justifyContent: 'space-between',
+    alignItems: "center",
+    flexDirection: "row"
+  },
+  header: {
+    height: 60,
+    backgroundColor: Color.lightGrey,
+    borderColor: "#23313C",
+    justifyContent: 'space-between',
+    alignItems: "center",
+    flexDirection: "row"
+  },
+  headerText: {
+    fontSize: 14,
+    color: "white",
+    marginLeft: -105
+  },
+  myheaderText: {
+    fontSize: 14,
+    color: "white",
+    marginLeft: -110
+  },
+  pImg: {
+    marginLeft: 15,
+  },
+  mypImg:{
+    marginLeft: 15,
+    width:24,
+    height:24
+  },
+  content: {
+    padding: 20,
+    backgroundColor: "#263e50",
+    color: "white",
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderWidth: 1,
+    borderColor: "#23313C",
+  },
+  mycontent: {
+    width:'86%',
+    padding: 20,
+    backgroundColor: "#263e50",
+    color: "white",
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderWidth: 1,
+    borderColor: "#23313C",
+  },
+  contentText: {
+    color: "#fff",
+    textAlign: 'center'
+  },
 });
