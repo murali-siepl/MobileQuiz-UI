@@ -1,11 +1,15 @@
 import React, { useEffect, useState,useRef } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import CustomButton from "./../../shared/Button";
+import {ExitCustomButton} from "./../../shared/Button";
 import Option from "./Option";
 import Timer from "./../../shared/Timer";
 import Colors from "./../../../constants/Color";
+import { useNavigation } from '@react-navigation/native';
 
 const Question = (props) => {
+
+  const navigation = useNavigation();
 
   console.log("props", props.options);
   const timerRef = useRef();
@@ -45,6 +49,10 @@ const Question = (props) => {
     });
     setSelectedOption(null);
   };
+
+  const handleExit = () => {
+    navigation.navigate('Dashboard')
+  }
 
   return (
     <View style={styles.container}>
@@ -94,12 +102,15 @@ const Question = (props) => {
           ))}
         </View>
         <View style={styles.buttons}>
-          <CustomButton touchWidth="40%" mh={5} onPress={skipQuestion}>
+          <ExitCustomButton touchWidth="40%" mh={5} onPress={skipQuestion}>
             Skip
-          </CustomButton>
-          <CustomButton touchWidth="40%" mh={5} onPress={next}>
+          </ExitCustomButton>
+          <ExitCustomButton touchWidth="40%" mh={5} onPress={handleExit}>
+            Exit
+          </ExitCustomButton>
+          <ExitCustomButton touchWidth="40%" mh={5} onPress={next}>
             Next
-          </CustomButton>
+          </ExitCustomButton>
         </View>
       </ScrollView>
     </View>
