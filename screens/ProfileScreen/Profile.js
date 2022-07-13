@@ -17,8 +17,6 @@ import { ScrollView } from "react-native-gesture-handler";
 import CustomButton from "../../components/shared/Button";
 import Accordion from "react-native-collapsible/Accordion";
 
-// import Dropdown from "../../components/shared/Dropdown";
-
 const Profile = ({ navigation }) => {
   const { name } = useSelector((state) => state.auth);
 
@@ -47,7 +45,6 @@ const Profile = ({ navigation }) => {
       name: "My Payment Profile",
       img: "",
       img: require("../../assets/images/profile/card-outline.png"),
-      // content: [_myPaymentProfile],
     }
   ]
 
@@ -246,14 +243,6 @@ const _payrenderHeader = (section) => {
   );
 };
 
-// const _payrenderContent = (section) => {
-//   return (
-//     <View style={styles.paycontent}>
-//       <Text style={styles.contentText}>{section.content}</Text>
-//     </View>
-//   );
-// };
-
 const _payupdateSections = (payActiveSections) => {
   setPayActiveSections(payActiveSections);
 };
@@ -354,24 +343,6 @@ return (
 
     {/* mydetails container */}
     <View style={styles.detailsContainers}>
-      {/* <TouchableOpacity style={styles.myDetails} onPress={() => {
-          // props.data.navigation.navigate("");
-          console.log("button pressed")
-        }}>
-          <Image
-            source={require('../../assets/images/profile/user.png')}
-            fadeDuration={0}
-            style={styles.userImage}
-          />
-          <Text style={styles.myDetailsText}>
-            My Details
-          </Text>
-          <Image
-            source={require('../../assets/images/arrow-right.png')}
-            fadeDuration={0}
-            style={styles.arrowDown}
-          />
-        </TouchableOpacity> */}
 
       <View style={styles.myDetails}>
         <Accordion
@@ -383,24 +354,7 @@ return (
           onChange={_myUpdateSections}
         />
       </View>
-      {/* <TouchableOpacity style={styles.myPaymentProfile} onPress={() => {
-          // props.data.navigation.navigate("");
-          console.log("button pressed")
-        }}>
-          <Image
-            source={require('../../assets/images/profile/card-outline.png')}
-            fadeDuration={0}
-            style={styles.card}
-          />
-          <Text style={styles.myPaymentText}>
-            My Payment Profile
-          </Text>
-          <Image
-            source={require('../../assets/images/arrow-right.png')}
-            fadeDuration={0}
-            style={styles.arrowUp}
-          />
-        </TouchableOpacity> */}
+      
       <View styles={styles.accord}>
         <Accordion
           style={styles.accordion}
@@ -856,7 +810,6 @@ const styles = StyleSheet.create({
     height: 63,
     borderWidth: 1,
     borderColor: Color.darkGray,
-    // marginTop: 25,
     marginBottom: 10
   },
   upiView: {
@@ -979,8 +932,6 @@ const styles = StyleSheet.create({
   paycontent: {
     width: '100%',
     height:'auto',
-    // position:'absolute',
-    // zIndex:2000,
     padding: 20,
     backgroundColor: "#263e50",
     color: "white",
