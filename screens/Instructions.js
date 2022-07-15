@@ -26,12 +26,12 @@ const Instructions = (props) => {
 
           </Text>
           <Text style={styles.text}>
-          2. You will have only 30 sec to answer questions after that it will switch to next questions . Also it will be marked as unanswered and you will get Zero point. 
+          2. You will have only 30 sec to answer questions after that it will automatically switch to next questions .Also it will be marked as unanswered and you will get Zero point. 
           </Text>
 
 
           <Text style={styles.text}>
-          3. You can skip a questions without giving an answer. But zero point will be add to your points. 
+          3. You can skip a questions without giving an answer. But zero point will be add to your total score. 
           </Text>
 
           <Text style={styles.text}>
