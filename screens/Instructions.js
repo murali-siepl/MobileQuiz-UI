@@ -35,7 +35,7 @@ const Instructions = (props) => {
           </Text>
 
           <Text style={styles.text}>
-          4. You will get +1 point for every correct answer  and For every incorrect answer you will - 1.{`\n`} {`\n`}
+          4. You will get +1 point for every correct answer.
           5. You can't go previous question once you moved ahead.           
           </Text>
           
