@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from "react-redux";
 import {
   FlatList,
   StyleSheet,
@@ -14,9 +15,39 @@ import * as ImagePicker from 'expo-image-picker';
 import Color from "../../constants/Color";
 import { ScrollView } from "react-native-gesture-handler";
 import CustomButton from "../../components/shared/Button";
-// import Dropdown from "../../components/shared/Dropdown";
+import Accordion from "react-native-collapsible/Accordion";
 
 const Profile = ({ navigation }) => {
+  const { name } = useSelector((state) => state.auth);
+
+  const SECTIONS = [
+    {
+      id: "1",
+      name: "Rewards",
+      img: "",
+      img: require("../../assets/images/profile/trophy-outline.png"),
+      content: "Sorry this screen is under construction",
+    }
+  ]
+  const MYDETAILS = [
+    {
+      id: "1",
+      name: "My Details",
+      img: "",
+      img: require("../../assets/images/profile/user.png"),
+      content: "Sorry this screen is under construction",
+    }
+  ]
+
+  const PAYSECTIONS = [
+    {
+      id: "1",
+      name: "My Payment Profile",
+      img: "",
+      img: require("../../assets/images/profile/card-outline.png"),
+    }
+  ]
+
   const data = [
     {
       id: 1,
@@ -61,156 +92,284 @@ const Profile = ({ navigation }) => {
 
   ];
 
-  const ItemRender = ({ name, bgImage }) => (
-    <View
-      style={styles.horizontalBox}
-    >
-      <Image
-        source={bgImage}
-        fadeDuration={0}
-        style={styles.scrollBg}
-      />
-      <Text style={styles.itemText}>{name}</Text>
+  const _myPaymentProfile = () => {
+    return (
+      <View style={styles.paycontent}>
+        {/* visa */}
+        < View style={styles.visaView} >
+          <Image
+            source={require('../../assets/images/profile/rectangle147009.png')}
+            fadeDuration={0}
+            style={styles.rect}
+          />
+          <Image
+            source={require('../../assets/images/profile/iconpayment-visa-electron.png')}
+            fadeDuration={0}
+            style={styles.visa}
+          />
+          <Text style={styles.visaNum}>
+            1100-112-0088
+          </Text>
+          <TouchableOpacity
+            onPress={() => { }}>
+            <Image
+              source={require('../../assets/images/profile/iconmaterial-delete.png')}
+              fadeDuration={0}
+              style={styles.deleteVisa}
+            />
+          </TouchableOpacity>
+        </View >
+        {/* visa */}
 
+        {/* upi */}
+        <View style={styles.upiView}>
+          <Image
+            source={require('../../assets/images/profile/rectangle147009.png')}
+            fadeDuration={0}
+            style={styles.rect}
+          />
+          <Image
+            source={require('../../assets/images/profile/UPI.png')}
+            fadeDuration={0}
+            style={styles.upi}
+          />
+          <Text style={styles.phonepeText}>
+            Phone Pe
+          </Text>
+          <TouchableOpacity
+            style={styles.delete}
+            onPress={() => { }}>
+            <Image
+              source={require('../../assets/images/profile/iconmaterial-delete.png')}
+              fadeDuration={0}
+              style={styles.delete}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+////////* upi*////////
+    );
+  }
+
+const [activeSections, setActiveSections] = useState([]);
+const _renderHeader = (section) => {
+  return (
+    <View style={styles.header}>
+      <Image style={styles.pImg} source={section.img} />
+      <View style={styles.nameAndPts}>
+        <Text style={styles.headerText}>{section.name}</Text>
+      </View>
+      <Image
+        style={styles.arrowDown}
+        source={require("../../assets/images/arrow-right.png")}
+      />
     </View>
   );
+};
 
-  const [image, setImage] = useState(null);
-
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    console.log(result);
-
-    if (!result.cancelled) {
-      setImage(result.uri);
-    }
-  };
-
+const _renderContent = (section) => {
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.content}>
+      <Text style={styles.contentText}>{section.content}</Text>
+    </View>
+  );
+};
 
-      {/* profile */}
-      <View style={styles.profileMainContainer}>
-        <View style={styles.profileContainer}>
-          {image &&
+const _updateSections = (activeSections) => {
+  setActiveSections(activeSections);
+};
+
+const ItemRender = ({ name, bgImage }) => (
+  <View
+    style={styles.horizontalBox}
+  >
+    <Image
+      source={bgImage}
+      fadeDuration={0}
+      style={styles.scrollBg}
+    />
+    <Text style={styles.itemText}>{name}</Text>
+
+  </View>
+);
+
+////////////my Details accordion///////////
+
+const [myActiveSections, setMyactiveSections] = useState([]);
+const _myRenderHeader = (section) => {
+  return (
+    <View style={styles.myheader}>
+      <Image style={styles.mypImg} source={section.img} />
+      <View style={styles.nameAndPts}>
+        <Text style={styles.myheaderText}>{section.name}</Text>
+      </View>
+      <Image
+        style={styles.arrowDown}
+        source={require("../../assets/images/arrow-right.png")}
+      />
+    </View>
+  );
+};
+
+const _myRenderContent = (section) => {
+  return (
+    <View style={styles.mycontent}>
+      <Text style={styles.contentText}>{section.content}</Text>
+    </View>
+  );
+};
+
+const _myUpdateSections = (myActiveSections) => {
+  setMyactiveSections(myActiveSections);
+};
+
+//////////////mydeatils accordion//////////////
+
+////////////my payment accordion///////////
+
+const [payActiveSections, setPayActiveSections] = useState([]);
+const _payrenderHeader = (section) => {
+  return (
+    <View style={styles.payheader}>
+      <Image style={styles.paypImg} source={section.img} />
+      <View style={styles.nameAndPts}>
+        <Text style={styles.myheaderText}>{section.name}</Text>
+      </View>
+      <Image
+        style={styles.arrowDown}
+        source={require("../../assets/images/arrow-right.png")}
+      />
+    </View>
+  );
+};
+
+const _payupdateSections = (payActiveSections) => {
+  setPayActiveSections(payActiveSections);
+};
+
+//////////////my payment accordion//////////////
+const [image, setImage] = useState(null);
+
+const pickImage = async () => {
+  let result = await ImagePicker.launchImageLibraryAsync({
+    mediaTypes: ImagePicker.MediaTypeOptions.All,
+    allowsEditing: true,
+    aspect: [4, 3],
+    quality: 1,
+  });
+
+  console.log(result);
+
+  if (!result.cancelled) {
+    setImage(result.uri);
+  }
+};
+
+return (
+  <ScrollView style={styles.container}>
+
+    {/* profile */}
+    <View style={styles.profileMainContainer}>
+      <View style={styles.profileContainer}>
+        {image &&
+          <Image
+            source={{ uri: image }}
+            fadeDuration={0}
+            style={styles.profileImage}
+          />
+        }
+        {!image &&
+          <Image
+            source={require('../../assets/images/profile/noProfilePhoto.png')}
+            fadeDuration={0}
+            style={styles.noProfileImage}
+          />
+        }
+        <View style={styles.editProfileBg}>
+          <TouchableOpacity onPress={pickImage}>
             <Image
-              source={{ uri: image }}
+              source={require('../../assets/images/profile/iconfeather-camera.png')}
               fadeDuration={0}
-              style={styles.profileImage}
+              style={styles.editProfile}
             />
-          }
-          {!image &&
-            <Image
-              source={require('../../assets/images/profile/noProfilePhoto.png')}
-              fadeDuration={0}
-              style={styles.noProfileImage}
-            />
-          }
-          <View style={styles.editProfileBg}>
-            <TouchableOpacity onPress={pickImage}>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.profileDetails}>
+        <Text style={styles.profileName}>{name ? name : "Mohan"}</Text>
+        <View>
+          <View style={styles.row}>
+            <Text style={styles.textWhite}>98976 53425</Text>
+            {/* <View style={styles.verified}>
+                <Text style={styles.textGreen}>VERIFIED</Text>
+              </View> */}
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.textWhite}>aditigupta@gmail.com</Text>
+            {/* <View style={styles.verified}>
+                <Text style={styles.textGreen}>VERIFIED</Text>
+              </View> */}
+          </View>
+        </View>
+      </View>
+    </View>
+    {/* profile */}
+
+    <Text style={styles.myPurchases}>My Purchase</Text>
+
+    {/* ScrollView */}
+    <SafeAreaView style={styles.MainContainer}>
+      <FlatList
+        data={data}
+        renderItem={({ item }) =>
+          <>
+            <ItemRender name={item.name} bgImage={item.bg} />
+
+            {item.id !== 1 ?
               <Image
-                source={require('../../assets/images/profile/iconfeather-camera.png')}
+                source={require('../../assets/images/profile/sub-image.png')}
                 fadeDuration={0}
-                style={styles.editProfile}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.profileDetails}>
-          <Text style={styles.profileName}>Aditi Gupta</Text>
-          <View>
-            <View style={styles.row}>
-              <Text style={styles.textWhite}>98976 53425</Text>
-              <View style={styles.verified}>
-                <Text style={styles.textGreen}>VERIFIED</Text>
-              </View>
-            </View>
-            <View style={styles.row}>
-              <Text style={styles.textWhite}>aditigupta@gmail.com</Text>
-              <View style={styles.verified}>
-                <Text style={styles.textGreen}>VERIFIED</Text>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
-      {/* profile */}
+                style={styles.scrollIcon}
+              /> : null}
+          </>
+        }
+        keyExtractor={item => item.id}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+      />
 
-      <Text style={styles.myPurchases}>My Purchases</Text>
+    </SafeAreaView>
+    {/* ScrollView */}
 
-      {/* ScrollView */}
-      <SafeAreaView style={styles.MainContainer}>
-        <FlatList
-          data={data}
-          renderItem={({ item }) =>
-            <>
-              <ItemRender name={item.name} bgImage={item.bg} />
+    {/* mydetails container */}
+    <View style={styles.detailsContainers}>
 
-              {item.id !== 1 ?
-                <Image
-                  source={require('../../assets/images/profile/sub-image.png')}
-                  fadeDuration={0}
-                  style={styles.scrollIcon}
-                /> : null}
-            </>
-          }
-          keyExtractor={item => item.id}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
+      <View style={styles.myDetails}>
+        <Accordion
+          style={styles.accordion}
+          sections={MYDETAILS}
+          activeSections={myActiveSections}
+          renderHeader={_myRenderHeader}
+          renderContent={_myRenderContent}
+          onChange={_myUpdateSections}
         />
-
-      </SafeAreaView>
-      {/* ScrollView */}
-
-      {/* mydetails container */}
-      <View style={styles.detailsContainer}>
-        <TouchableOpacity style={styles.myDetails} onPress={() => {
-          // props.data.navigation.navigate("");
-          console.log("button pressed")
-        }}>
-          <Image
-            source={require('../../assets/images/profile/user.png')}
-            fadeDuration={0}
-            style={styles.userImage}
-          />
-          <Text style={styles.myDetailsText}>
-            My Details
-          </Text>
-          <Image
-            source={require('../../assets/images/arrow-right.png')}
-            fadeDuration={0}
-            style={styles.arrowDown}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.myPaymentProfile} onPress={() => {
-          // props.data.navigation.navigate("");
-          console.log("button pressed")
-        }}>
-          <Image
-            source={require('../../assets/images/profile/card-outline.png')}
-            fadeDuration={0}
-            style={styles.card}
-          />
-          <Text style={styles.myPaymentText}>
-            My Payment Profile
-          </Text>
-          <Image
-            source={require('../../assets/images/arrow-right.png')}
-            fadeDuration={0}
-            style={styles.arrowUp}
-          />
-        </TouchableOpacity>
       </View>
-      {/* mydetails container */}
+      
+      <View styles={styles.accord}>
+        <Accordion
+          style={styles.accordion}
+          sections={PAYSECTIONS}
+          activeSections={payActiveSections}
+          renderHeader={_payrenderHeader}
+          renderContent={_myPaymentProfile}
+          onChange={_payupdateSections}
+        />
+      </View>
+    </View>
+    {/* mydetails container */}
 
-      {/* visa */}
-      <View style={styles.visaView}>
+    {/* visa */}
+    {/* <View style={styles.visaView}>
         <Image
           source={require('../../assets/images/profile/rectangle147009.png')}
           fadeDuration={0}
@@ -232,11 +391,11 @@ const Profile = ({ navigation }) => {
             style={styles.deleteVisa}
           />
         </TouchableOpacity>
-      </View>
-      {/* visa */}
+      </View> */}
+    {/* visa */}
 
-      {/* upi */}
-      <View style={styles.upiView}>
+    {/* upi */}
+    {/* <View style={styles.upiView}>
         <Image
           source={require('../../assets/images/profile/rectangle147009.png')}
           fadeDuration={0}
@@ -259,10 +418,10 @@ const Profile = ({ navigation }) => {
             style={styles.delete}
           />
         </TouchableOpacity>
-      </View>
-      {/* upi*/}
+      </View> */}
+    {/* upi*/}
 
-      <View style={styles.addBtn}>
+    <View style={styles.addBtn}>
         <CustomButton
           // touchWidth="100%"
           style={styles.addButton}
@@ -274,9 +433,9 @@ const Profile = ({ navigation }) => {
       </View>
 
 
-      {/* rewards container */}
-      <View style={styles.detailsContainer}>
-        <TouchableOpacity style={styles.rewards} onPress={() => {
+    {/* rewards container */}
+    <View style={styles.detailsContainer}>
+      {/* <TouchableOpacity style={styles.rewards} onPress={() => {
           // props.data.navigation.navigate("");
           console.log("button pressed")
         }}>
@@ -293,9 +452,9 @@ const Profile = ({ navigation }) => {
             fadeDuration={0}
             style={styles.arrowDown}
           />
-        </TouchableOpacity>
-        {/* ////////////////////My privacy///////////////////  */}
-        {/* <TouchableOpacity style={styles.myPaymentProfile} onPress={() => {
+        </TouchableOpacity> */}
+      {/* ////////////////////My privacy///////////////////  */}
+      {/* <TouchableOpacity style={styles.myPaymentProfile} onPress={() => {
           // props.data.navigation.navigate("");
           console.log("button pressed")
         }}>
@@ -305,7 +464,7 @@ const Profile = ({ navigation }) => {
             style={styles.fingerPrint}
           />
           <Text style={styles.myPrivacy}>
-            My Privay
+            My Privacy
           </Text>
           <Image
             source={require('../../assets/images/arrow-right.png')}
@@ -313,19 +472,34 @@ const Profile = ({ navigation }) => {
             style={styles.arrowDown}
           />
         </TouchableOpacity> */}
-        {/* ////////////////////My privacy///////////////////  */}
+      {/* ////////////////////My privacy///////////////////  */}
+      <View styles={styles.accord}>
+        <Accordion
+          style={styles.accordion}
+          sections={SECTIONS}
+          activeSections={activeSections}
+          renderHeader={_renderHeader}
+          renderContent={_renderContent}
+          onChange={_updateSections}
+        />
       </View>
-      {/* rewards container */}
+    </View>
 
-    </ScrollView>
-  );
+
+    {/* rewards container */}
+
+
+    {/* ///////////////// ACCORDION/////////////////////// */}
+
+  </ScrollView>
+);
 };
 
 export default Profile;
 export const ProfilenavigationOptions = (navData) => {
   return {
     headerTitle: "Profile",
-    headerLeft: () => {},
+    headerLeft: () => { },
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
@@ -391,8 +565,8 @@ const styles = StyleSheet.create({
     transform: [{ rotate: '-90deg' }]
   },
   arrowDown: {
-    width: 9.26,
-    height: 16.2,
+    // width: 9.26,
+    // height: 16.2,
     alignSelf: 'center',
     marginRight: 16,
     transform: [{ rotate: '90deg' }]
@@ -407,9 +581,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: Color.lightGrey,
-    width: 324,
-    height: 63,
-    marginTop: 120
+    width: '100%',
+    height: 'auto',
+    marginTop: 120,
   },
   rewards: {
     flexDirection: 'row',
@@ -452,7 +626,9 @@ const styles = StyleSheet.create({
   },
   addBtn: {
     alignSelf: 'center',
-    marginBottom:-30
+    marginBottom: -30,
+    marginTop: 30,
+    position:'relative'
   },
   addButton: {
     width: 284.7,
@@ -575,6 +751,15 @@ const styles = StyleSheet.create({
     position: 'relative',
     zIndex: -1000
   },
+  detailsContainers: {
+    alignSelf: "center",
+    width: 323,
+    height: 'auto',
+    backgroundColor: Color.lightGrey,
+    marginTop: 60,
+    position: 'relative',
+    zIndex: -1000
+  },
   rewardContainer: {
     alignSelf: "center",
     width: 323,
@@ -586,8 +771,9 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: '#1A232A',
-    height: '100%',
-    paddingTop:30
+    height: 'auto',
+    paddingTop: 30,
+    paddingBottom:100
   },
   noPruchaseText: {
     color: Color.textColor,
@@ -624,7 +810,6 @@ const styles = StyleSheet.create({
     height: 63,
     borderWidth: 1,
     borderColor: Color.darkGray,
-    marginTop: 25,
     marginBottom: 10
   },
   upiView: {
@@ -670,5 +855,93 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-  }
+  },
+  accordion: {
+    width: "100%",
+    margin: 0,
+    padding: 0,
+  },
+  myheader: {
+    width: '85%',
+    height: 60,
+    backgroundColor: Color.lightGrey,
+    borderColor: "#23313C",
+    justifyContent: 'space-between',
+    alignItems: "center",
+    flexDirection: "row"
+  },
+  payheader: {
+    width: '100%',
+    height: 60,
+    backgroundColor: Color.lightGrey,
+    borderColor: "#23313C",
+    justifyContent: 'space-between',
+    alignItems: "center",
+    flexDirection: "row"
+  },
+  header: {
+    height: 60,
+    backgroundColor: Color.lightGrey,
+    borderColor: "#23313C",
+    justifyContent: 'space-between',
+    alignItems: "center",
+    flexDirection: "row"
+  },
+  headerText: {
+    fontSize: 14,
+    color: "white",
+    marginLeft: -105
+  },
+  myheaderText: {
+    fontSize: 14,
+    color: "white",
+    marginLeft:-110
+  },
+  pImg: {
+    marginLeft: 15,
+  },
+  mypImg: {
+    marginLeft: 15,
+    width: 24,
+    height: 24
+  },
+  paypImg: {
+    marginLeft: 15,
+    width: 24,
+    height: 18
+  },
+  content: {
+    padding: 20,
+    backgroundColor: "#263e50",
+    color: "white",
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderWidth: 1,
+    borderColor: "#23313C",
+  },
+  mycontent: {
+    width: '85%',
+    padding: 20,
+    backgroundColor: "#263e50",
+    color: "white",
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderWidth: 1,
+    borderColor: "#23313C",
+  },
+  paycontent: {
+    width: '100%',
+    height:'auto',
+    padding: 20,
+    backgroundColor: "#263e50",
+    color: "white",
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderWidth: 1,
+    borderColor: "#23313C",
+  },
+  contentText: {
+    color: "#fff",
+    textAlign: 'center'
+  },
 });
