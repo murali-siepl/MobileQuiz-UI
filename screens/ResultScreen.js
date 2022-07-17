@@ -12,7 +12,9 @@ const ResultScreen = (props) => {
   let skip = 0;
   let notAnswered = 0;
   let answered = 0;
+  let time = 0;
   answers.forEach((ans) => {
+    time += ans.timeTaken
     if (ans.skip) {
       skip += 1;
     } else if (ans.notAnswered) {
@@ -31,9 +33,9 @@ const ResultScreen = (props) => {
         <View style={styles.result}>
           <DisplayItem label="Total No. Of Questions :" text={answers.length} />
           <DisplayItem label="Total No. Answered :" text={answered} />
-          <DisplayItem label="Total No.Unanswered :" text={skip} />
-          <DisplayItem label="Total No. Skiped :" text={notAnswered} />
-          <DisplayItem label="Total Time Taken :" text="3.15Sec" />
+          <DisplayItem label="Total No.Unanswered :" text={notAnswered} />
+          <DisplayItem label="Total No. Skiped :" text={skip} />
+          <DisplayItem label="Total Time Taken :" text={Math.floor(time / 60) + ":" + (time - Math.floor(time / 60) * 60)} />
 
           <CustomButton
             touchWidth="100%"

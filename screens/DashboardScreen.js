@@ -41,14 +41,14 @@ const DashboardScreen = (props) => {
               />
             </View>
           </View>
-          <TouchableHighlight
+          {/* <TouchableHighlight
             onPress={() => navigation.navigate("Feedback")}
           >
             <Image
               style={styles.imgQuiz}
               source={require("../assets/images/quiz.png")}
             />
-          </TouchableHighlight>
+          </TouchableHighlight> */}
         </View>
       </View>
 

@@ -38,6 +38,40 @@ const CustomButton = (props) => {
 
 export default CustomButton;
 
+export const ExitCustomButton = (props) => {
+  return (
+    <TouchableOpacity
+      onPress={props.onPress}
+      activeOpacity={0.6}
+      disabled={props.disabled}
+      style={{
+        width:"30%",
+        alignItems: "center",
+        marginHorizontal: props.mh,
+        marginVertical: props.mv,
+      }}
+    >
+      <View
+        style={{
+          ...styles.container,
+          backgroundColor: props.disabled ? Color.textColor : Color.darkGreen,
+          ...props.style,
+        }}
+      >
+        <Text
+          style={{
+            ...styles.button,
+            ...props.button,
+            color: props.disabled ? Color.borderColor : "black",
+          }}
+        >
+          {props.children}
+        </Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
+
 export const BackToHome = (props) => (
   <TouchableOpacity
     onPress={() => {

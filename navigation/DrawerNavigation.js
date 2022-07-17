@@ -1,18 +1,18 @@
-import React from "react";
+import React, {useState} from "react";
 import { View, Text, Image, Linking } from "react-native";
 import { DrawerHomeLabel } from "./DrawerLabel";
-import { DrawerCustomLabel } from "./DrawerCustomLabel";
-import EditProfile from "./../screens/DrawerScreens/EditProfile";
+// import { DrawerCustomLabel } from "./DrawerCustomLabel";
+// import EditProfile from "./../screens/DrawerScreens/EditProfile";
 // import Profile from "./../screens/DrawerScreens/Profile";
-import {
-  AntDesign,
-  Entypo,
-  Feather,
-  Ionicons,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
-import GameRules from "./../screens/DrawerScreens/GameRules";
-import CustomarCare from "./../screens/DrawerScreens/CustomarCare";
+// import {
+//   AntDesign,
+//   Entypo,
+//   Feather,
+//   Ionicons,
+//   MaterialCommunityIcons,
+// } from "@expo/vector-icons";
+// import GameRules from "./../screens/DrawerScreens/GameRules";
+// import CustomarCare from "./../screens/DrawerScreens/CustomarCare";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -21,15 +21,17 @@ import {
 } from "@react-navigation/drawer";
 import MainStack from "./stacks/MainStack";
 import LeadboardStack from "./stacks/LeadboardStack";
-import MyProfile from "./stacks/MyProfile";
+// import MyProfile from "./stacks/MyProfile";
 import SettingsStack from "./stacks/SettingsStack";
-import SubscriptionStack from "./stacks/SubscriptionStack";
+// import SubscriptionStack from "./stacks/SubscriptionStack";
 import helpFaqStack from "./stacks/HelpFaqStack";
 import RateusStack from "./stacks/RateusStack";
 import AboutStack from "./stacks/AboutStack";
 import ProfileStack from "./stacks/ProfileStack";
+import FeedbackStack from "./stacks/FeedbackStack";
 import { useDispatch } from "react-redux";
 import { logout } from "./../store/actions/Authenticate";
+import ModalScreen from "../screens/views/modalScreen";;
 
 
 const drawerDefaultStyles = {
@@ -64,152 +66,183 @@ const drawerDefaultStyles = {
 const DrawerStackNavigator = createDrawerNavigator();
 
 const DrawerStack = (props, navigation) => {
+  const [modal, setModal] = useState(false);
   const dispatch = useDispatch();
+
+
+  const handleModal = () => {
+    setModal(true);
+  }
+  
+  const handleExitButton = () => {
+    setModal(false);
+    dispatch(logout());
+  }
+  
+  const handleModalOnly = () => {
+    setModal(false);
+  }
+
   return (
-    <DrawerStackNavigator.Navigator
-      drawerContentOptions={{
-        activeTintColor: '#e91e63',
-        itemStyle: { marginVertical: 5 },
-      }}
-      screenOptions={drawerDefaultStyles}
-      drawerContent={(props) => (
-        <DrawerContentScrollView {...props}>
-          <DrawerItemList {...props} />
-          <DrawerItem
-            label="Rate us"
-            labelStyle={{
-              color: "white",
-              fontWeight: "bold",
-              fontSize: 16,
-            }}
-            style={{
-              backgroundColor: "#23313C",
+    <>
+      <DrawerStackNavigator.Navigator
+        drawerContentOptions={{
+          activeTintColor: '#e91e63',
+          itemStyle: { marginVertical: 5 },
+        }}
+        screenOptions={drawerDefaultStyles}
+        drawerContent={(props) => (
+          <DrawerContentScrollView {...props}>
+            <DrawerItemList {...props} />
+            <DrawerItem
+              label="Rate us"
+              labelStyle={{
+                color: "white",
+                fontWeight: "bold",
+                fontSize: 16,
+              }}
+              style={{
+                backgroundColor: "#23313C",
+                marginBottom: 10,
+                borderColor: "#2E4150",
+                borderWidth: 2,
+                borderRadius: 8,
+                marginLeft: 10,
+                marginRight: 10,
+                width: "85%",
+                alignSelf: "center",
+              }}
+              icon={(config) => (
+                <Image
+                  source={require('../assets/images/left-menu/rateus.png')}
+                  fadeDuration={0}
+                  style={{ width: 25, height: 25 }}
+                />
+              )}
+              onPress={() => {
+                // dispatch(logout());
+                Linking.openURL(
+                  'https://play.google.com/store/apps/details?id=com.android.chrome',
+                );
+              }}
+            />
+            <DrawerItem
+              label="Logout"
+              labelStyle={{
+                color: "white",
+                fontWeight: "bold",
+                fontSize: 16,
+              }}
+              style={{
+                backgroundColor: "#23313C",
+                marginBottom: 10,
+                borderColor: "#2E4150",
+                borderWidth: 2,
+                borderRadius: 8,
+                marginLeft: 10,
+                marginRight: 10,
+                width: "85%",
+                alignSelf: "center",
+              }}
+              icon={(config) => (
+                <Image
+                  source={require('../assets/images/left-menu/logout.png')}
+                  fadeDuration={0}
+                  style={{ width: 25, height: 25 }}
+                />
+              )}
+              onPress={() => {
+                handleModal();
+              }}
+            />
+          </DrawerContentScrollView>
+        )}
+      >
+        <DrawerStackNavigator.Screen
+          name="Home"
+          component={MainStack}
+          options={{
+            headerLeft: () =>
+              <NavigationDrawerStructure
+                navigationProps={navigation}
+              />,
+            drawerItemStyle: {
+              backgroundColor: "#89FB41",
+              padding: 0,
+              margin: 0,
               marginBottom: 10,
-              borderColor: "#2E4150",
-              borderWidth: 2,
-              borderRadius: 8,
-              marginLeft: 10,
-              marginRight: 10,
-              width: "85%",
+              width: "100%",
               alignSelf: "center",
-            }}
-            icon={(config) => (
+              borderRadius: 0,
+            },
+            drawerLabel: DrawerHomeLabel,
+          }}
+        />
+        <DrawerStackNavigator.Screen
+          name="MyProfile"
+          component={ProfileStack}
+          options={{
+            title: "My Profile",
+            headerLeft: () =>
+              <NavigationDrawerStructure
+                navigationProps={navigation}
+              />,
+            drawerIcon: (config) => (
               <Image
-                source={require('../assets/images/left-menu/rateus.png')}
+                source={require('../assets/images/left-menu/profile.png')}
                 fadeDuration={0}
                 style={{ width: 25, height: 25 }}
               />
-            )}
-            onPress={() => {
-              // dispatch(logout());
-              Linking.openURL(
-                'https://play.google.com/store/apps/details?id=com.android.chrome',
-              );
-            }}
-          />
-          <DrawerItem
-            label="Logout"
-            labelStyle={{
-              color: "white",
-              fontWeight: "bold",
-              fontSize: 16,
-            }}
-            style={{
-              backgroundColor: "#23313C",
-              marginBottom: 10,
-              borderColor: "#2E4150",
-              borderWidth: 2,
-              borderRadius: 8,
-              marginLeft: 10,
-              marginRight: 10,
-              width: "85%",
-              alignSelf: "center",
-            }}
-            icon={(config) => (
+            ),
+          }}
+        />
+        <DrawerStackNavigator.Screen
+          name="Leadboard"
+          component={LeadboardStack}
+          options={{
+            title: "Ranking",
+            headerLeft: () =>
+              <NavigationDrawerStructure
+                navigationProps={navigation}
+              />,
+            drawerIcon: (config) => (
               <Image
-                source={require('../assets/images/left-menu/logout.png')}
+                source={require('../assets/images/left-menu/lb.png')}
                 fadeDuration={0}
                 style={{ width: 25, height: 25 }}
               />
-            )}
-            onPress={() => {
-              dispatch(logout());
-            }}
-          />
-        </DrawerContentScrollView>
-      )}
-    >
-      <DrawerStackNavigator.Screen
-        name="Home"
-        component={MainStack}
-        options={{
-          headerLeft: () =>
-            <NavigationDrawerStructure
-              navigationProps={navigation}
-            />,
-          drawerItemStyle: {
-            backgroundColor: "#89FB41",
-            padding: 0,
-            margin: 0,
-            marginBottom: 10,
-            width: "100%",
-            alignSelf: "center",
-            borderRadius: 0,
-          },
-          drawerLabel: DrawerHomeLabel,
-        }}
-      />
-      <DrawerStackNavigator.Screen
-        name="MyProfile"
-        component={ProfileStack}
-        options={{
-          title: "My Profile",
-          headerLeft: () =>
-            <NavigationDrawerStructure
-              navigationProps={navigation}
-            />,
-          drawerIcon: (config) => (
-            <Image
-              source={require('../assets/images/left-menu/profile.png')}
-              fadeDuration={0}
-              style={{ width: 25, height: 25 }}
-            />
-          ),
-        }}
-      />
-      <DrawerStackNavigator.Screen
-        name="Leadboard"
-        component={LeadboardStack}
-        options={{
-          title: "Ranking",
-          headerLeft: () =>
-            <NavigationDrawerStructure
-              navigationProps={navigation}
-            />,
-          drawerIcon: (config) => (
-            <Image
-              source={require('../assets/images/left-menu/lb.png')}
-              fadeDuration={0}
-              style={{ width: 25, height: 25 }}
-            />
-          ),
-        }}
-      />
-      <DrawerStackNavigator.Screen
-        name="Settings"
-        component={SettingsStack}
-        options={{
-          title: "Settings",
-          drawerIcon: (config) => (
-            <Image
-              source={require('../assets/images/left-menu/settings.png')}
-              fadeDuration={0}
-              style={{ width: 25, height: 25 }}
-            />
-          ),
-        }}
-      />
-      <DrawerStackNavigator.Screen
+            ),
+          }}
+        />
+        <DrawerStackNavigator.Screen
+          name="Settings"
+          component={SettingsStack}
+          options={{
+            title: "Settings",
+            drawerIcon: (config) => (
+              <Image
+                source={require('../assets/images/left-menu/settings.png')}
+                fadeDuration={0}
+                style={{ width: 25, height: 25 }}
+              />
+            ),
+          }}
+        />
+        <DrawerStackNavigator.Screen
+          name="FeedBack"
+          component={FeedbackStack}
+          options={{
+            title: "FeedBack",
+            drawerIcon: (config) => (
+              <Image
+                source={require('../assets/images/left-menu/feedback_icon.png')}
+                fadeDuration={0}
+                style={{ width: 25, height: 25 }}
+              />
+            ),
+          }}
+        />
+        {/* <DrawerStackNavigator.Screen
         name="Subscription"
         component={SubscriptionStack}
         options={{
@@ -222,36 +255,36 @@ const DrawerStack = (props, navigation) => {
             />
           ),
         }}
-      />
-      <DrawerStackNavigator.Screen
-        name="FaqAndContact"
-        component={helpFaqStack}
-        options={{
-          title: "Help & FAQ",
-          drawerIcon: (config) => (
-            <Image
-              source={require('../assets/images/left-menu/help-faq.png')}
-              fadeDuration={0}
-              style={{ width: 25, height: 25 }}
-            />
-          ),
-        }}
-      />
-      <DrawerStackNavigator.Screen
-        name="Aboutus"
-        component={AboutStack}
-        options={{
-          title: "About us",
-          drawerIcon: (config) => (
-            <Image
-              source={require('../assets/images/left-menu/about.png')}
-              fadeDuration={0}
-              style={{ width: 25, height: 25 }}
-            />
-          ),
-        }}
-      />
-      {/* <DrawerStackNavigator.Screen
+      /> */}
+        <DrawerStackNavigator.Screen
+          name="FaqAndContact"
+          component={helpFaqStack}
+          options={{
+            title: "Help & FAQ",
+            drawerIcon: (config) => (
+              <Image
+                source={require('../assets/images/left-menu/help-faq.png')}
+                fadeDuration={0}
+                style={{ width: 25, height: 25 }}
+              />
+            ),
+          }}
+        />
+        <DrawerStackNavigator.Screen
+          name="Aboutus"
+          component={AboutStack}
+          options={{
+            title: "About us",
+            drawerIcon: (config) => (
+              <Image
+                source={require('../assets/images/left-menu/about.png')}
+                fadeDuration={0}
+                style={{ width: 25, height: 25 }}
+              />
+            ),
+          }}
+        />
+        {/* <DrawerStackNavigator.Screen
         name="Rateus"
         component={RateusStack}
         options={{
@@ -265,7 +298,11 @@ const DrawerStack = (props, navigation) => {
           ),
         }}
       /> */}
-    </DrawerStackNavigator.Navigator>
+      </DrawerStackNavigator.Navigator>
+      {
+        modal && <ModalScreen handleExit={handleExitButton} handleModalOnly={handleModalOnly} />
+      }
+    </>
   );
 };
 export default DrawerStack;

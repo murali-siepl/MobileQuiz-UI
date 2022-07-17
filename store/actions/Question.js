@@ -11,20 +11,18 @@ export const questions = (questions) => {
     return { type: QUESTION, questions };
   };
 
-export const userQuestion = (values, token) => {
+export const userQuestion = (subject) => {
   return async (dispatch) => {
-   
-    
-    Auth.userQuestions().then(({ data, error }) => {
+    Auth.userQuestions(subject).then(({ data, error }) => {
       if (error) {
         ErrorModal(error || "Error");
         console.log("error: " + JSON.stringify(error));
         return error;
       } else {
         console.log("data: " + JSON.stringify(data));
-        return data;
+        // return data;
+        dispatch(questions(data));
       }
     });
-
   };
 };

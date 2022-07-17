@@ -14,11 +14,13 @@ import {
   const Question = (state = intialState, action) => {
     switch (action.type) {
       case SET_LOADING:
+        console.log("-----------------", action);
         return {
           ...state,
           loading: !state.loading,
         };
       case QUESTION:
+        console.log("-----------------------------------------------------------------", action);
         return {
           ...state,
           questions: action.questions,

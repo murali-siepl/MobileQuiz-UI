@@ -82,9 +82,13 @@ const userFeedback = (params) =>
     return webfox.post(`userFeedback`, params);
   });
 
-  const userQuestions = () =>
+  const userQuestions = (subject:any) =>
   exec(() => {
-    return webfox.get(`quizzes/getQuizQByCategory/Maths`);
+    console.log("subjectsubject", subject);
+    if(subject === "Social Studies"){
+      subject = "Social";            
+    }
+    return webfox.get(`quizzes/getQuizQByCategory/${subject}`);
   });
 
 export default {

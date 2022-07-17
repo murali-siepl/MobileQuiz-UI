@@ -1,11 +1,20 @@
-import * as React from "react";
+import React,{forwardRef,useImperativeHandle} from "react";
 import { StyleSheet, Animated, Button } from "react-native";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 
-export default function Timer(props) {
+const Timer = forwardRef((props,ref) => {
   const [isPlaying, setIsPlaying] = React.useState(true);
+  const [remaintime, setRemainTime] = React.useState(0);
+
+  useImperativeHandle(ref, () => ({
+    getAlert() {
+      return 30-remaintime;
+    }
+  }));
+
   return (
     <CountdownCircleTimer
+      key={props.index}
       isPlaying={isPlaying}
       duration={props.duration}
       colors={[
@@ -23,15 +32,19 @@ export default function Timer(props) {
       size={40}
       strokeWidth={6}
     >
-      {({ remainingTime, animatedColor }) => (
+      {({ remainingTime, animatedColor }) => {
+        setRemainTime(remainingTime);
+        return(
         <Animated.Text
           style={{ color: animatedColor, fontSize: 15, fontWeight: "bold" }}
         >
           {remainingTime}
         </Animated.Text>
-      )}
+      )}}
     </CountdownCircleTimer>
   );
-}
+});
 
 const styles = StyleSheet.create({});
+
+export default Timer;

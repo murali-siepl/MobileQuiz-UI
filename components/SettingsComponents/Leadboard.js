@@ -15,84 +15,84 @@ import CustomHeaderButton from "./../shared/CustomHeaderButton";
 const SECTIONS = [
   {
     id: "1",
-    name: "First",
+    name: "Ashish Gupta",
     img: "",
-    pts: "11",
-    img: require("../../assets/images/ava.png"),
+    pts: "1500",
+    img: require("../../assets/images/Ellipse_17.png"),
     content: "Lorem ipsum...",
   },
   {
     id: "2",
-    name: "Second",
+    name: "Aastha Sharma",
     img: "",
-    pts: "22",
+    pts: "1000",
     img: require("../../assets/images/ava.png"),
     content: "Lorem ipsum...",
   },
   {
-    id: "1",
-    name: "First",
+    id: "3",
+    name: "Sid Malhotra",
     img: "",
-    pts: "11",
-    img: require("../../assets/images/ava.png"),
+    pts: "700",
+    img: require("../../assets/images/Ellipse_20.png"),
     content: "Lorem ipsum...",
   },
   {
-    id: "2",
-    name: "Second",
+    id: "4",
+    name: "Rahul Mahi",
     img: "",
-    pts: "22",
-    img: require("../../assets/images/ava.png"),
+    pts: "500",
+    img: require("../../assets/images/Ellipse_21.png"),
     content: "Lorem ipsum...",
   },
   {
-    id: "1",
-    name: "First",
+    id: "5",
+    name: "Anjali Paul",
     img: "",
-    pts: "11",
-    img: require("../../assets/images/ava.png"),
+    pts: "400",
+    img: require("../../assets/images/Ellipse_22.png"),
     content: "Lorem ipsum...",
   },
   {
-    id: "2",
-    name: "Second",
+    id: "6",
+    name: "Ashishi Gupta",
     img: "",
-    pts: "22",
-    img: require("../../assets/images/ava.png"),
+    pts: "200",
+    img: require("../../assets/images/Ellipse_23.png"),
     content: "Lorem ipsum...",
   },
-  {
-    id: "1",
-    name: "First",
-    img: "",
-    pts: "11",
-    img: require("../../assets/images/ava.png"),
-    content: "Lorem ipsum...",
-  },
-  {
-    id: "2",
-    name: "Second",
-    img: "",
-    pts: "22",
-    img: require("../../assets/images/ava.png"),
-    content: "Lorem ipsum...",
-  },
-  {
-    id: "1",
-    name: "First",
-    img: "",
-    pts: "11",
-    img: require("../../assets/images/ava.png"),
-    content: "Lorem ipsum...",
-  },
-  {
-    id: "2",
-    name: "Second",
-    img: "",
-    pts: "22",
-    img: require("../../assets/images/ava.png"),
-    content: "Lorem ipsum...",
-  },
+  // {
+  //   id: "7",
+  //   name: "First",
+  //   img: "",
+  //   pts: "11",
+  //   img: require("../../assets/images/ava.png"),
+  //   content: "Lorem ipsum...",
+  // },
+  // {
+  //   id: "8",
+  //   name: "Second",
+  //   img: "",
+  //   pts: "22",
+  //   img: require("../../assets/images/ava.png"),
+  //   content: "Lorem ipsum...",
+  // },
+  // {
+  //   id: "9",
+  //   name: "First",
+  //   img: "",
+  //   pts: "11",
+  //   img: require("../../assets/images/ava.png"),
+  //   content: "Lorem ipsum...",
+  // },
+  // {
+  //   id: "10",
+  //   name: "Second",
+  //   img: "",
+  //   pts: "22",
+  //   img: require("../../assets/images/ava.png"),
+  //   content: "Lorem ipsum...",
+  // },
 ];
 
 const Leadboard = ({ navigation }) => {
@@ -142,7 +142,7 @@ const Leadboard = ({ navigation }) => {
               source={require("../../assets/images/leaderBoard/rankBackground.png")}
               style={styles.background}
             >
-              <View style={styles.cards}>
+              {/* <View style={styles.cards}>
                 <Text style={styles.card}>Today</Text>
                 <Text
                   style={{
@@ -154,7 +154,7 @@ const Leadboard = ({ navigation }) => {
                 >
                   Average
                 </Text>
-              </View>
+              </View> */}
               <View style={styles.ranking}>
                 <View style={styles.rankingContainer}>
                   <View style={styles.rankingDetails}>
@@ -162,8 +162,8 @@ const Leadboard = ({ navigation }) => {
                       style={styles.rankingAvatar}
                       source={require("../../assets/images/ava.png")}
                     />
-                    <Text style={styles.rankingName}>Aasta</Text>
-                    <Text style={styles.rankingPoints}>1000pts</Text>
+                    <Text style={styles.rankingName}>Aastha</Text>
+                    <Text style={styles.rankingPoints}>1000 pts</Text>
                   </View>
                   <Image
                     source={require("../../assets/images/leaderBoard/rank2.png")}
@@ -173,10 +173,10 @@ const Leadboard = ({ navigation }) => {
                   <View style={styles.rankingDetails}>
                     <Image
                       style={styles.rankingAvatar}
-                      source={require("../../assets/images/ava.png")}
+                      source={require("../../assets/images/Ellipse_20.png")}
                     />
-                    <Text style={styles.rankingName}>Aasta</Text>
-                    <Text style={styles.rankingPoints}>1000pts</Text>
+                    <Text style={styles.rankingName}>Ashish</Text>
+                    <Text style={styles.rankingPoints}>1500 pts</Text>
                   </View>
                   <Image
                     source={require("../../assets/images/leaderBoard/rank1.png")}
@@ -186,10 +186,10 @@ const Leadboard = ({ navigation }) => {
                   <View style={styles.rankingDetails}>
                     <Image
                       style={styles.rankingAvatar}
-                      source={require("../../assets/images/ava.png")}
+                      source={require("../../assets/images/Ellipse_17.png")}
                     />
-                    <Text style={styles.rankingName}>Aasta</Text>
-                    <Text style={styles.rankingPoints}>1000pts</Text>
+                    <Text style={styles.rankingName}>Sid</Text>
+                    <Text style={styles.rankingPoints}>700 pts</Text>
                   </View>
                   <Image
                     source={require("../../assets/images/leaderBoard/rank3.png")}

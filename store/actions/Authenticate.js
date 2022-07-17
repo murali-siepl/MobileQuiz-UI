@@ -21,6 +21,7 @@ export const setLoading = () => {
 
 export const logout = () => {
   AsyncStorage.removeItem("userData");
+  AsyncStorage.removeItem("userLocation")
   return { type: LOGOUT };
 };
 
@@ -41,6 +42,7 @@ export const signInOrUp = (values, path) => {
           console.log("data: " + JSON.stringify(data));
           if(data.code == 200){
             saveDataToStorage(data.results.token);
+            saveLocationToStorage(data.results.location);
           }
           const { token, userId, email, name } = data.results;
           dispatch(authenticate(token, userId, email, name));
@@ -56,6 +58,7 @@ export const signInOrUp = (values, path) => {
           dispatch(setLoading());
           const { token, userId, email, name } = data;
           saveDataToStorage(userId, email, name);
+          saveLocationToStorage(params.location);
           dispatch(authenticate(token, userId, email, name));
           SuccessModal("SignIn is successful, Please login");
         }
@@ -142,3 +145,12 @@ const saveDataToStorage = async (token, userId, email, name) => {
     })
   );
 };
+
+const saveLocationToStorage = async (location) => {
+  await AsyncStorage.setItem(
+    "userLocation",
+    JSON.stringify({
+      location
+    })
+  )
+}

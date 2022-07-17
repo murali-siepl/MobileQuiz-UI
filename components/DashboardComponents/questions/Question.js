@@ -1,42 +1,76 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import CustomButton from "./../../shared/Button";
+import {ExitCustomButton} from "./../../shared/Button";
 import Option from "./Option";
 import Timer from "./../../shared/Timer";
 import Colors from "./../../../constants/Color";
+import { useNavigation } from '@react-navigation/native';
+import ModalScreen from "../../../screens/views/modalScreen";
 
 const Question = (props) => {
-  const [selectedOption, setSelectedOption] = useState(null);
 
+  const navigation = useNavigation();
+
+  console.log("props", props.options);
+  const timerRef = useRef();
+
+  const [modal, setModal] = useState(false);
+
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [answer,setAnswer] = useState("");
+  
   useEffect(() => {
     setSelectedOption(null);
   }, []);
+
+  useEffect(() => {
+    setAnswer(props.options.find(e=>e.isCorrect).text)
+  }, [props]);
 
   const setOption = (opt) => {
     setSelectedOption(opt);
   };
   const skipQuestion = () => {
+    let time = timerRef.current.getAlert();
     props.nextQuestion({
       skip: true,
       selectedOption,
       notAnswered: false,
+      timeTaken: time
     });
+    setSelectedOption(null);
   };
 
   const next = () => {
+    let time = timerRef.current.getAlert();
     props.nextQuestion({
       skip: false,
       selectedOption,
       notAnswered: selectedOption ? false : true,
+      timeTaken:time
     });
     setSelectedOption(null);
   };
+
+  const handleModal = () => {
+    setModal(true);
+  }
+
+  const handleExitButton = () => {
+    setModal(false);
+    navigation.navigate('Dashboard');
+  }
+
+  const handleModalOnly= () => {
+    setModal(false);
+  }
 
   return (
     <View style={styles.container}>
       <View>
         <View style={styles.timer}>
-          {props.show && <Timer duration={30} nextQuestion={next} />}
+          {props.show && <Timer duration={30} nextQuestion={next} index={props.index} ref={timerRef} />}
         </View>
         <Text style={styles.totalQuestios}>
           Question {props.index + 1} / {props.totalQuestions}
@@ -55,39 +89,45 @@ const Question = (props) => {
             <Option
               key={i}
               style={
-                selectedOption === props.answer &&
-                opt === props.answer &&
+                selectedOption === answer &&
+                opt.text === answer &&
                 styles.correct
               }
               styleWrong={
-                selectedOption === opt && opt !== props.answer && styles.wrong
+                selectedOption === opt.text && opt.text !== answer && styles.wrong
               }
               styleCorrect={
-                selectedOption && opt === props.answer && styles.correct
+                selectedOption && opt.text === answer && styles.correct
               }
               selectedOption={selectedOption}
-              styleText={selectedOption === opt && styles.selectedText}
+              styleText={selectedOption === opt.text && styles.selectedText}
               styledTextCorrect={
-                selectedOption && opt === props.answer && styles.selectedText
+                selectedOption && opt.text === answer && styles.selectedText
               }
               index={i}
               onPress={() => {
-                setOption(opt);
+                setOption(opt.text);
               }}
             >
-              {opt}
+              {opt.text}
             </Option>
           ))}
         </View>
         <View style={styles.buttons}>
-          <CustomButton touchWidth="40%" mh={5} onPress={skipQuestion}>
+          <ExitCustomButton touchWidth="40%" mh={5} onPress={skipQuestion}>
             Skip
-          </CustomButton>
-          <CustomButton touchWidth="40%" mh={5} onPress={next}>
+          </ExitCustomButton>
+          <ExitCustomButton touchWidth="40%" mh={5} onPress={handleModal}>
+            Exit
+          </ExitCustomButton>
+          <ExitCustomButton touchWidth="40%" mh={5} onPress={next}>
             Next
-          </CustomButton>
+          </ExitCustomButton>
         </View>
       </ScrollView>
+      {
+        modal && <ModalScreen handleExit = {handleExitButton} handleModalOnly= {handleModalOnly}/>
+      }
     </View>
   );
 };

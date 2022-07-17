@@ -3,15 +3,19 @@ import React from "react";
 import { StyleSheet, Text, TouchableNativeFeedback, View, Image, ImageBackground } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { myQuiz } from "../../dummy-data/dashboard";
+import { useDispatch, useSelector } from "react-redux";
+import { userQuestion } from "../../store/actions/Question";
 
 const MyQuiz = (props) => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const renderItem = ({ item }) => (
     <TouchableNativeFeedback
       onPress={() => {
         navigation.navigate("Instructions", {
           subject: item.subject,
         });
+        dispatch(userQuestion(item.subject));
         // navigation.navigate("Result", {
         //   subject: item.subject,
         // });

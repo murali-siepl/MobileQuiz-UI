@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
 });
 
 export const DrawerHomeLabel = (props) => {
-  const { name } = useSelector((state) => state.auth);
+  const userData = useSelector((state) => state.auth);
   const navigation = useNavigation();
   return (
     <LinearGradient
@@ -58,9 +58,9 @@ export const DrawerHomeLabel = (props) => {
           }}
           containerStyle={styles.avatarContainer}
         />
-        <Text style={{ ...styles.title }}>Hello! Guestuser12</Text>
-        <Text style={{ ...styles.name }}>USERNAME: guestuser12</Text>
-        <Text style={{ ...styles.name }}>{name}Name</Text>
+        <Text style={{ ...styles.title }}>{`Hello! ${userData?.name ? userData.name : 'User'}`}</Text>
+        {/* <Text style={{ ...styles.name }}>USERNAME: guestuser12</Text>
+        <Text style={{ ...styles.name }}>{name}Name</Text> */}
 
       </View>
 
