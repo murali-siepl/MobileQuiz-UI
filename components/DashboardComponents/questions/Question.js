@@ -6,6 +6,7 @@ import Option from "./Option";
 import Timer from "./../../shared/Timer";
 import Colors from "./../../../constants/Color";
 import { useNavigation } from '@react-navigation/native';
+import ModalScreen from "../../../screens/views/modalScreen";
 
 const Question = (props) => {
 
@@ -13,6 +14,8 @@ const Question = (props) => {
 
   console.log("props", props.options);
   const timerRef = useRef();
+
+  const [modal, setModal] = useState(false);
 
   const [selectedOption, setSelectedOption] = useState(null);
   const [answer,setAnswer] = useState("");
@@ -50,8 +53,17 @@ const Question = (props) => {
     setSelectedOption(null);
   };
 
-  const handleExit = () => {
-    navigation.navigate('Dashboard')
+  const handleModal = () => {
+    setModal(true);
+  }
+
+  const handleExitButton = () => {
+    setModal(false);
+    navigation.navigate('Dashboard');
+  }
+
+  const handleModalOnly= () => {
+    setModal(false);
   }
 
   return (
@@ -105,7 +117,7 @@ const Question = (props) => {
           <ExitCustomButton touchWidth="40%" mh={5} onPress={skipQuestion}>
             Skip
           </ExitCustomButton>
-          <ExitCustomButton touchWidth="40%" mh={5} onPress={handleExit}>
+          <ExitCustomButton touchWidth="40%" mh={5} onPress={handleModal}>
             Exit
           </ExitCustomButton>
           <ExitCustomButton touchWidth="40%" mh={5} onPress={next}>
@@ -113,6 +125,9 @@ const Question = (props) => {
           </ExitCustomButton>
         </View>
       </ScrollView>
+      {
+        modal && <ModalScreen handleExit = {handleExitButton} handleModalOnly= {handleModalOnly}/>
+      }
     </View>
   );
 };
