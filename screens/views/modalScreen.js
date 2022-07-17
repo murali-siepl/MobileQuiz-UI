@@ -89,8 +89,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         marginTop: 100,
         backgroundColor:'#23313C',
-        // backgroundColor: 'rgba(0,0,0,0.5)',
-        // backgroundColor:'transparent'
     },
     modalView: {
         margin: 20,
